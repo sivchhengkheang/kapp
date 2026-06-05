@@ -1,12 +1,19 @@
-import Navbar from "../component/Navbar";
+"use client";
+
+import Navbar from "../components/utils/Navbar";
 import Image from "next/image";
 import cover from "../../public/cover.png";
-import GameCard from "../components/GameCard";
-import { Game, GAMES } from "../constants";
+import GameCard from "../components/utils/GameCard";
+import { Game, PRODUCT_DATA } from "../constants";
+import { Footer } from "../components/utils/footer";
+import Link from "next/link";
 import { Button } from "../components/ui/button";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { TransitionLink } from "../components/utils/TransitionLink";
 
-export default function Home() {
-  const games: Game[] = GAMES;
+export default function Home({ gameDetail }: any) {
+  const games: Game[] = PRODUCT_DATA;
 
   return (
     <main className="min-h-screen w-full bg-slate-100 text-slate-900 dark:bg-slate-950 dark:text-slate-100">
@@ -68,14 +75,18 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
               {games.map((game) => (
-                <GameCard key={game.id} game={game} />
+                <Link key={game.id} href={`/${game.id}`}>
+                  <GameCard key={game.id} game={game} />
+                </Link>
               ))}
             </div>
           </section>
         </div>
       </div>
+
+      <Footer />
     </main>
   );
 }
