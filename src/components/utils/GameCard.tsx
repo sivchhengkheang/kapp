@@ -8,13 +8,13 @@ export default function GameCard({ game }: { game: Game }) {
   const normalizedSrc = imageSrc.startsWith("/") ? imageSrc : `/${imageSrc}`;
 
   return (
-    <MagicCard className="group overflow-hidden rounded-[1.75rem] border border-slate-200/60 bg-white/80  shadow-xl shadow-slate-900/10 transition hover:-translate-y-1 hover:border-cyan-300 hover:shadow-cyan-300/20 dark:border-slate-800 dark:bg-slate-950/80 dark:shadow-slate-950/30">
-      <div className="overflow-hidden rounded-[1.75rem] bg-slate-950/5">
+    <MagicCard className="group overflow-hidden rounded-lg border border-slate-200/60 bg-white/80  shadow-xl shadow-slate-900/10 transition hover:-translate-y-1 hover:border-cyan-300 hover:shadow-cyan-300/20 dark:border-slate-800 dark:bg-slate-950/80 dark:shadow-slate-950/30">
+      <div className="overflow-hidden rounded-lg bg-slate-950/5">
         <div className=" aspect-4/3 w-full overflow-hidden">
           <img
             src={game.thumbnail}
             alt={game.title}
-            className=" h-full w-full object-fill px-4 pt-4 transition duration-500 group-hover:scale-105"
+            className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
           />
         </div>
         <div className="px-5 pb-5 pt-2 text-left">

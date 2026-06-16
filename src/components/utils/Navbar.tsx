@@ -1,14 +1,42 @@
 import Link from "next/link";
 import { TransitionLink } from "./TransitionLink";
+import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 
 export default function Navbar() {
+  const [isMounted, setIsMounted] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const pathname = usePathname();
+
+  useEffect(() => {
+    setIsMounted(true);
+
+    const handleScroll = () => {
+      if (window.scrollY > 0) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    }
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    }
+  }, []);
+
+
+  useEffect(() => {
+    document.documentElement.classList.remove('overflow-hidden', 'h-screen');
+    document.body.classList.remove('overflow-hidden', 'h-screen');
+  }, [pathname]);
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-slate-200/70 bg-white/95 px-4 py-4 backdrop-blur-xl shadow-sm shadow-slate-950/5 dark:border-slate-700/70 dark:bg-slate-950/95">
-      <div className="fixed h-fit top-0 w-full max-w-full inset-0 px-16 py-2 flex justify-between gap-10 z-100 bg-background">
+    <header className={`fixed top-0  w-full m-auto inset-x-0 z-50 bg-slate-50/90 backdrop-blur-2xl`}>
+      <div className="max-w-7xl m-auto inset-x-0 flex items-center justify-between  py-2 px-3`">
         <div className="flex gap-2 justify-center items-center text-black">
-          <TransitionLink href={"/"} className="font-bold text-3xl">
+          <Link href={"/#"} className="font-bold text-3xl">
             Kapp
-          </TransitionLink>
+          </Link>
         </div>
 
         <div className="flex items-center gap-3">
