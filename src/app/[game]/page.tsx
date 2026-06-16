@@ -80,10 +80,9 @@ export default function GameDetail() {
     <div className=" min-h-screen w-full bg-slate-100 text-slate-900 dark:bg-slate-950 dark:text-slate-100 flex flex-col scrollbar-none overflow-y-auto ">
       <div className="mt-14 pt-14 shrink-0 rounded-xl">
 
-        {/* <div > */}
+
         <Navbar />
-        {/* </div> */}
-        {/* <div className=" relative "> */}
+
         <div className=" relative w-full h-full">
           {/* <div className="absolute top-24 left-0 w-full h-fit bg-primary-blue/80">
           <a
@@ -93,7 +92,7 @@ export default function GameDetail() {
             <ArrowLeft className="w-4 h-4 transition-transform duration-300  hover:-translate-x-1" />
             <span className="font-bold">Back</span>
           </a>
-        </div> */}
+          </div> */}
           <div className="container flex flex-col mx-auto max-w-7xl gap-5">
             <section className="max-w-full overflow-hidden rounded-xl h-fit bg-gray-400">
               <Image
@@ -307,14 +306,14 @@ export default function GameDetail() {
         <div className="fixed inset-0 w-full h-screen z-51 overflow-hidden">
           <div className="absolute inset-0 w-full h-screen z-52 flex flex-col items-center justify-center bg-slate-100 pt-14   ">
             <Navbar />
-            {showButton && (
+            {/* {showButton && (
               <button
                 onClick={() => setShowIfram(false)}
                 className=" absolute top-1 left-5 p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-full transition-colors duration-200 focus:outline-none focus:ring-1 focus:ring-primary shadow-lg shadow-slate-300 border border-slate-300"
               >
                 <X className="w-4 h-4 transition-transform duration-300 hover:rotate-90 text-primary" />
               </button>
-            )}
+            )} */}
             <iframe
               src={iframeUrl}
               title={product?.title}
