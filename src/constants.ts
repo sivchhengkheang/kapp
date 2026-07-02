@@ -126,11 +126,11 @@ export const PRODUCT_DATA: Game[] = [
         color: "bg-sky-100 text-sky-800",
       },
       {
-        text: "Math",
+        text: "Typing",
         color: "bg-purple-100 text-purple-800",
       },
       {
-        text: "Developer Tools",
+        text: "Math Skills",
         color: "bg-amber-100 text-amber-800",
       },
     ],
@@ -195,7 +195,7 @@ export const PRODUCT_DATA: Game[] = [
         color: "bg-orange-100 text-orange-800",
       },
       {
-        text: "Developer Tools",
+        text: "Mouse Skills",
         color: "bg-amber-100 text-amber-800",
       },
     ],
@@ -255,11 +255,11 @@ export const PRODUCT_DATA: Game[] = [
         color: "bg-blue-100 text-blue-800",
       },
       {
-        text: "Puzzle",
+        text: "Coding",
         color: "bg-cyan-100 text-cyan-800",
       },
       {
-        text: "Developer Tools",
+        text: "Logic Skills",
         color: "bg-amber-100 text-amber-800",
       },
     ],
@@ -323,7 +323,7 @@ export const PRODUCT_DATA: Game[] = [
         color: "bg-rose-100 text-rose-800",
       },
       {
-        text: "Developer Tools",
+        text: "Mouse Skills",
         color: "bg-amber-100 text-amber-800",
       },
     ],
@@ -388,7 +388,7 @@ export const PRODUCT_DATA: Game[] = [
         color: "bg-emerald-100 text-emerald-800",
       },
       {
-        text: "Developer Tools",
+        text: "Thinking Skills",
         color: "bg-amber-100 text-amber-800",
       },
     ],
@@ -453,7 +453,7 @@ export const PRODUCT_DATA: Game[] = [
         color: "bg-purple-100 text-purple-800",
       },
       {
-        text: "Developer Tools",
+        text: "Typing Skills",  
         color: "bg-amber-100 text-amber-800",
       },
     ],

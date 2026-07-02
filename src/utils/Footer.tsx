@@ -5,7 +5,9 @@ import {
   FaTelegramPlane,
   FaInstagram,
 } from "react-icons/fa";
-import { ExternalLink, Heart } from "lucide-react";
+import { Heart } from "lucide-react";
+import { HoverCard, HoverCardContent, HoverCardTrigger } from "../../components/ui/hover-card";
+import { Button } from "@/components/ui/button";
 export function Footer() {
   const contact = [
     {
@@ -38,27 +40,18 @@ export function Footer() {
               <img src="/koompi-footer.png" alt="koompi" width={100} height={100} />
             </a>
             for next generation of builders.</span>
-          <div className="flex gap-2">
-            {contact.map((item) => (
-              <a
-                key={item.name}
-                href={item.link}
-                target="_blank"
-                className="hover:shadow-2xl hover:shadow-cyan-100 hover:scale-110"
-              >
-                <img src={item.icon} alt="icon" className="size-6" />
-              </a>
-            ))}
-          </div>
         </div>
-        <div className=" group ">
-          <a href="https://github.com/sivchhengkheang" target="_blank" className="flex gap-1 ">
-            Sivchheng Kheang{" "}
-            <ExternalLink
-              size={12}
-              className="font-bold group-hover:scale-110  "
-            />
-          </a>
+        <div className="flex gap-2">
+          {contact.map((item) => (
+            <a
+              key={item.name}
+              href={item.link}
+              target="_blank"
+              className="hover:shadow-2xl hover:shadow-cyan-100 hover:scale-110"
+            >
+              <img src={item.icon} alt="icon" className="size-6" />
+            </a>
+          ))}
         </div>
       </div>
     </footer>

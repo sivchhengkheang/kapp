@@ -1,17 +1,18 @@
 "use client";
 
-import Navbar from "@/src/components/utils/Navbar";
-import SlideShow from "@/src/components/utils/SlideShow";
+import Navbar from "@/src/utils/Navbar";
+import SlideShow from "@/src/utils/SlideShow";
 import { PRODUCT_DATA } from "@/src/constants";
 import Image from "next/image";
 import { useParams, useRouter } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useContext } from "react";
 import { ArrowLeft, Download, ExternalLink, Link, Play, X } from "lucide-react";
 import windows from "@/public/windows-icon.svg";
 import linux from "@/public/linux-icon.svg";
+import { AuthContext } from "@/src/context/AuthContext";
 
-import DownloadButton from "@/src/components/utils/DownloadButton";
-import { Footer } from "@/src/components/utils/Footer";
+import DownloadButton from "@/src/utils/DownloadButton";
+import { Footer } from "@/src/utils/Footer";
 
 export default function GameDetail() {
   const [showIfram, setShowIfram] = useState(false);
@@ -27,6 +28,8 @@ export default function GameDetail() {
   const [showButton, setShowButton] = useState(false);
   const router = useRouter();
   const linkRef = useRef<HTMLAnchorElement>(null);
+  const iframeRef = useRef<HTMLIFrameElement>(null);
+  const { user, token } = useContext(AuthContext);
 
   useEffect(() => {
     // Prevent TypeError from MetaMask/Web3 scripts trying to access window.ethereum
@@ -44,6 +47,35 @@ export default function GameDetail() {
 
     return () => clearTimeout(timer);
   }, []);
+
+  // Cross-Origin Handshake Engine
+  useEffect(() => {
+    const handleFrameLoad = () => {
+      if (iframeRef.current && token && user && iframeUrl) {
+        const payload = {
+          source: 'kapp-studio-portal',
+          action: 'SYNC_AUTH_SESSION',
+          user: { id: user.id, username: user.username },
+          token: token
+        };
+        try {
+          const origin = new URL(iframeUrl).origin;
+          iframeRef.current.contentWindow?.postMessage(payload, origin);
+        } catch (e) {
+          // Fallback if URL is invalid
+          iframeRef.current.contentWindow?.postMessage(payload, "*");
+        }
+      }
+    };
+
+    const frame = iframeRef.current;
+    if (frame) {
+      frame.addEventListener('load', handleFrameLoad);
+    }
+    return () => {
+      if (frame) frame.removeEventListener('load', handleFrameLoad);
+    };
+  }, [token, user, iframeUrl]);
 
   useEffect(() => {
     if (showIfram) {
@@ -78,7 +110,7 @@ export default function GameDetail() {
 
   return (
     <div className=" min-h-screen w-full bg-slate-100 text-slate-900 dark:bg-slate-950 dark:text-slate-100 flex flex-col scrollbar-none overflow-y-auto ">
-      <div className="mt-14 pt-14 shrink-0 rounded-xl">
+      <div className="mt-14 pt-5 shrink-0 rounded-xl">
 
 
         <Navbar />
@@ -100,20 +132,21 @@ export default function GameDetail() {
                 alt="cover"
                 width={1280}
                 height={300}
-                className="w-full h-full object-contain"
-              ></Image>
+                className="w-full h-full object-contain z-50 "
+              />
             </section>
             <section className="max-w-full gap-5 flex flex-col pb-5 ">
-              <div className=" w-full overflow-hidden rounded-lg bg-gray-40">
-                <div className="p-5 w-full h-full bg-primary-foreground grid grid-cols-5 gap-5 items-center justify-center shadow-lg shadow-slate-300/60 dark:shadow-slate-900/60 rounded-lg">
-                  {/* left side */}
-                  <div className="col-span-3 h-full w-full flex flex-col gap-2  ">
-                    <div className="w-full flex items-start gap-2 left-0">
+              <div className="w-full overflow-hidden rounded-2xl border border-slate-200/60 bg-white shadow-xl shadow-slate-200/40 dark:border-slate-800 dark:bg-slate-950 dark:shadow-slate-900/40">
+                <div className="flex flex-col md:flex-row p-6 md:p-8 gap-8 items-start md:items-center justify-between">
+                  {/* Left Side: Info */}
+                  <div className="flex-1 flex flex-col items-start gap-5">
+                    {/* Tags */}
+                    <div className="flex flex-wrap items-center gap-2">
                       {types?.map(
                         (type: { text: string; color: string }, idx: number) => (
                           <span
                             key={idx}
-                            className={`px-3 py-1 rounded-sm text-xs font-medium ${type.color}`}
+                            className={`px-3 py-1.5 rounded-md text-xs font-bold uppercase tracking-wider ${type.color} ring-1 ring-inset ring-slate-900/5 dark:ring-white/10`}
                           >
                             {type.text}
                           </span>
@@ -121,41 +154,37 @@ export default function GameDetail() {
                       )}
                     </div>
 
-                    <div className="w-full gap-2 flex items-start flex-col right-0 space-x-1">
-                      <div className="">
-                        <h3 className="font-bold text-lg tracking-wider">
-                          {product?.title}
-                        </h3>
-                        <p className="text-sm text-slate-600">
-                          {product?.description}
-                        </p>
-                      </div>
-                      <button
-                        onClick={() => setShowIfram(!showIfram)}
-                        className={`flex items-center gap-2 text-center px-7 py-3 font-semibold text-lg rounded-lg tracking-widest transition-colors duration-200 ${product?.brandColor ?? "bg-slate-800 hover:bg-slate-700 text-white"}`}
-                      >
-                        <Play className="w-4 h-4" /> Play Now
-                      </button>
-                      {/* <button
-                        onClick={() => setShowIfram(!showIfram)}
-                        className="flex text-center px-7 py-2 font-extrabold text-lg  text-muted bg-primary-blue rounded-lg tracking-widest"
-                      >
-                        <span className="flex items-center gap-2">
-                          <Play className="w-4 h-4" />
-                          Play now
-                        </span>
-                      </button> */}
+                    {/* Title & Description */}
+                    <div className="space-y-3">
+                      <h3 className="text-2xl md:text-4xl font-black tracking-tight text-slate-900 dark:text-white">
+                        {product?.title}
+                      </h3>
+                      <p className="text-base md:text-md text-slate-600 dark:text-slate-400 leading-relaxed max-w-3xl">
+                        {product?.description}
+                      </p>
                     </div>
-                  </div>
-                  <div className="col-span-1" />
 
-                  {/* right side */}
-                  <div className=" relative col-span-1 flex  h-full w-full  justify-center items-center m-auto">
-                    <div className="absolute w-fit h-full text-center justify-end items-end m-auto">
-                      <h1 className="text-5xl font-bold ">{product?.rate}</h1>
-                      <span className="text-xs">{product?.starRate}</span>
-                      <p className="text-xs">User Rating</p>
+                    {/* Action Button */}
+                    <button
+                      onClick={() => setShowIfram(!showIfram)}
+                      className={`group flex items-center gap-2.5 px-8 py-3.5 font-bold text-lg rounded-xl tracking-wide transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] shadow-md hover:shadow-lg ${product?.brandColor ?? "bg-slate-900 hover:bg-slate-800 text-white dark:bg-white dark:text-slate-900 dark:hover:bg-slate-100"}`}
+                    >
+                      <Play className="w-5 h-5 fill-current" />
+                      Play Now
+                    </button>
+                  </div>
+
+                  {/* Right Side: Rating */}
+                  <div className="shrink-0 flex flex-col items-center justify-center bg-slate-50 dark:bg-slate-900/50 rounded-2xl p-6 min-w-[180px] border border-slate-100 dark:border-slate-800/50">
+                    <h1 className="text-6xl font-black text-slate-900 dark:text-white tracking-tighter drop-shadow-sm">
+                      {product?.rate}
+                    </h1>
+                    <div className="mt-3 text-lg tracking-widest text-amber-400 drop-shadow-sm">
+                      {product?.starRate}
                     </div>
+                    <p className="mt-2 text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest">
+                      User Rating
+                    </p>
                   </div>
                 </div>
               </div>
@@ -315,9 +344,10 @@ export default function GameDetail() {
               </button>
             )} */}
             <iframe
+              ref={iframeRef}
               src={iframeUrl}
               title={product?.title}
-              className=" w-full h-full rounded-xl shadow-2xl shadow-slate-500 "
+              className=" w-full h-full rounded-xl rounded-b-none shadow-2xl shadow-slate-500 "
               allowFullScreen
               sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-fullscreen "
               onError={() => {/* suppress cross-origin iframe errors */ }}
