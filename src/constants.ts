@@ -1,3 +1,5 @@
+export type Difficulty = "Easy" | "Medium" | "Hard";
+
 export interface Game {
   id: string;
   title: string;
@@ -9,8 +11,16 @@ export interface Game {
   insider: string;
   thumbnail: string;
   category: string;
+  /** Emoji icon for the category, e.g. "💻" */
+  categoryIcon: string;
   rate: string;
   starRate: string;
+  /** Difficulty badge */
+  difficulty: Difficulty;
+  /** Formatted play count, e.g. "12.5K" */
+  plays: string;
+  /** Average session time, e.g. "5 min" */
+  avgTime: string;
   /** Tailwind bg + text classes for the brand accent button, e.g. "bg-blue-600 text-white hover:bg-blue-700" */
   brandColor: string;
   type: any;
@@ -42,16 +52,20 @@ export const PRODUCT_DATA: Game[] = [
     title: "Typing Code",
     subTitle: "Master programming syntax and boost your coding speed.",
     description:
-      "Level up your developer skills with this fast-paced typing challenge! Choose a programming language, type real code snippets accurately to keep your streak alive, and build the muscle memory needed to code faster.",
+      "Write code faster. 60-second challenges to master Python syntax.",
     iframeUrl: "https://typing-code-game.vercel.app",
     appImageUrl:
       "https://drive.google.com/file/d/1l1rA29APscP38-PhAwd84miuwOQCI2-K/view?usp=sharing",
     cover: "game-cover/cover/typing-code-cover.png",
     insider: "game-cover/insider-game/inside-typing-code.png",
     thumbnail: "game-cover/typing-code.png",
-    category: "typing",
+    category: "Coding",
+    categoryIcon: "💻",
     rate: "4.7",
     starRate: "⭐⭐⭐⭐",
+    difficulty: "Medium",
+    plays: "18.3K",
+    avgTime: "8 min",
     brandColor: "bg-violet-600 hover:bg-violet-700 text-white",
     type: [
       {
@@ -105,16 +119,20 @@ export const PRODUCT_DATA: Game[] = [
     title: "Typing Math",
     subTitle: "Solve fast — type the answer before time runs out!",
     description:
-      "The ultimate typing challenge for math lovers! Calculate the answers quickly and type them flawlessly to survive as long as you can.",
+      "Sharpen your mental math. 3-minute dynamic challenges to improve calculation speed and accuracy.",
     iframeUrl: "https://typing-math-game.vercel.app/",
     appImageUrl:
       "https://drive.google.com/file/d/1crkVv9NvpqEmCwA10r-k2Bwr6ouEcj_-/view?usp=sharing",
     insider: "game-cover/insider-game/inside-typing-math.png",
     cover: "game-cover/cover/typing-math-cover.png",
     thumbnail: "game-cover/typing-math.png",
-    category: "typing",
+    category: "Math",
+    categoryIcon: "🔢",
     rate: "3.4",
     starRate: "⭐⭐⭐⭐",
+    difficulty: "Easy",
+    plays: "9.1K",
+    avgTime: "5 min",
     brandColor: "bg-sky-500 hover:bg-sky-600 text-white",
     type: [
       {
@@ -169,7 +187,7 @@ export const PRODUCT_DATA: Game[] = [
     subTitle:
       "Take flight and test your reflexes in this endless catching challenge.",
     description:
-      "Take to the skies in this fast-paced arcade game! Steer your agile dragon to swoop up falling objects and dodge danger. Keep your reaction time sharp to rack up points—how long can you survive before time runs out?",
+      "Improve your reflexes. 5-minute sessions to master mouse accuracy, tracking, and hand-eye coordination.",
     iframeUrl: "https://dragon-drop-iota.vercel.app/",
     appImageUrl:
       "https://drive.google.com/file/d/1DHNe44e70h0XjSHZemLClLWw0A2l88uh/view?usp=sharing",
@@ -177,9 +195,13 @@ export const PRODUCT_DATA: Game[] = [
     cover: "game-cover/cover/dragon-drop-cover.png",
 
     thumbnail: "game-cover/dragon-drop.png",
-    category: "mouse",
+    category: "Mouse Skills",
+    categoryIcon: "🐉",
     rate: "3.4",
     starRate: "⭐⭐⭐⭐",
+    difficulty: "Medium",
+    plays: "14.7K",
+    avgTime: "6 min",
     brandColor: "bg-orange-500 hover:bg-orange-600 text-white",
     type: [
       {
@@ -234,16 +256,20 @@ export const PRODUCT_DATA: Game[] = [
     subTitle:
       "Outsmart intricate obstacles and guide your clever robot to victory.",
     description:
-      "Dive into an immersive adventure where logic is your greatest tool. Navigate your robot through complex, action-packed puzzles. Plan your moves carefully, outmaneuver tricky obstacles, and push your strategic thinking to the limit!",
+      "Boost strategic thinking. 10-minute sessions to master logic and problem-solving.",
     iframeUrl: "https://robot-brainiac.vercel.app/",
     appImageUrl:
       "https://drive.google.com/file/d/1fnc-RCf242B9dC5a516VlFERCZ_HVJzi/view?usp=sharing",
     insider: "game-cover/insider-game/inside-robot-obstacle.png",
     cover: "game-cover/cover/robot-obstacle-cover.png",
     thumbnail: "game-cover/robot-obstacle.png",
-    category: "Action",
+    category: "Logic",
+    categoryIcon: "🤖",
     rate: "3.4",
     starRate: "⭐⭐⭐⭐",
+    difficulty: "Hard",
+    plays: "11.2K",
+    avgTime: "10 min",
     brandColor: "bg-cyan-600 hover:bg-cyan-700 text-white",
     type: [
       {
@@ -298,16 +324,20 @@ export const PRODUCT_DATA: Game[] = [
     subTitle:
       "Master your computer controls by guiding a daring mouse through tricky mazes.",
     description:
-      "A fun and engaging way to build essential desktop skills! Take control of a clever mouse and weave your way through a series of interactive puzzles. Perfect for testing your reflexes while improving your hand-eye coordination and precision.",
+      "Improve hand-eye coordination. 7-minute sessions to master basic desktop navigation and precision.",
     iframeUrl: "https://master-mouse-v1-1-0.vercel.app/",
     appImageUrl:
       "https://drive.google.com/file/d/1lwv8tyf_UsuwLATV6OxoJW1Tewy9GLEg/view?usp=drive_link",
     insider: "game-cover/insider-game/inside-master-mouse.png",
     cover: "game-cover/cover/master-mouse-cover.png",
     thumbnail: "game-cover/master-mouse.png",
-    category: "mouse",
+    category: "Mouse Skills",
+    categoryIcon: "🖱️",
     rate: "3.4",
     starRate: "⭐⭐⭐⭐",
+    difficulty: "Easy",
+    plays: "8.4K",
+    avgTime: "7 min",
     brandColor: "bg-rose-500 hover:bg-rose-600 text-white",
     type: [
       {
@@ -362,17 +392,20 @@ export const PRODUCT_DATA: Game[] = [
     subTitle:
       "Master basic computer skills by connecting numbers to solve puzzles.",
     description:
-      "An engaging, student-friendly puzzle game designed to build essential mouse control! Guide your cursor to strategically connect numbers, carve a path through intricate mazes, and develop precise hand-eye coordination while solving fun challenges.",
+      "Build essential mouse control. 8-minute puzzle challenges to improve tracking and focus.",
     iframeUrl: "https://link-number.vercel.app/",
     appImageUrl:
       "https://drive.google.com/file/d/162FfIfjRK249uDLKwHkaBS-JfbwFXwZI/view?usp=sharing",
     thumbnail: "game-cover/link-number.png",
     insider: "game-cover/insider-game/inside-link-number.png",
     cover: "game-cover/cover/link-number-cover.png",
-
-    category: "puzzle",
+    category: "Puzzle",
+    categoryIcon: "🧩",
     rate: "3.4",
     starRate: "⭐⭐⭐⭐",
+    difficulty: "Medium",
+    plays: "7.8K",
+    avgTime: "8 min",
     brandColor: "bg-emerald-600 hover:bg-emerald-700 text-white",
     type: [
       {
@@ -427,17 +460,20 @@ export const PRODUCT_DATA: Game[] = [
     subTitle:
       "Improve your typing speed and accuracy with real-world keyboard practice.",
     description:
-      "An engaging, student-friendly typing game designed to build essential keyboard skills! Practice typing real words and sentences, track your words-per-minute progress, and develop precise finger placement while completing fun and rewarding challenges.",
+      "Master keyboard typing. 6-minute practice sessions to boost your words-per-minute and accuracy.",
     iframeUrl: "https://koompi-typing.vercel.app/",
     appImageUrl:
       "https://drive.google.com/file/d/162FfIfjRK249uDLKwHkaBS-JfbwFXwZI/view?usp=sharing",
     thumbnail: "game-cover/koompi-typing.png",
     insider: "game-cover/insider-game/inside-koompi-typing.png",
     cover: "game-cover/cover/koompi-typing-cover.png",
-
-    category: "typing",
+    category: "Typing",
+    categoryIcon: "⌨️",
     rate: "4.2",
     starRate: "⭐⭐⭐⭐",
+    difficulty: "Easy",
+    plays: "21.6K",
+    avgTime: "6 min",
     brandColor: "bg-blue-600 hover:bg-blue-700 text-white",
     type: [
       {
@@ -453,7 +489,7 @@ export const PRODUCT_DATA: Game[] = [
         color: "bg-purple-100 text-purple-800",
       },
       {
-        text: "Typing Skills",  
+        text: "Typing Skills",
         color: "bg-amber-100 text-amber-800",
       },
     ],
