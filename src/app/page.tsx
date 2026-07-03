@@ -1,98 +1,179 @@
 "use client";
 
-import GameCard from "../utils/GameCard";
-import { Game, PRODUCT_DATA } from "../constants";
-import { Footer } from "../utils/Footer";
-import Link from "next/link";
+import { useState, useEffect, useMemo } from "react";
 import dynamic from "next/dynamic";
-import SlideShow from "../utils/SlideShow";
-import CommingCard from "../utils/CommingCard";
+import { Game, PRODUCT_DATA, Difficulty } from "../constants";
+import { Footer } from "../utils/Footer";
+import GameCard from "../utils/GameCard";
+import { GameCardSkeleton } from "../utils/GameCardSkeleton";
+import HeroSection from "../utils/HeroSection";
+import ComingSoonSection from "../utils/ComingSoonSection";
+import FAQSection from "../utils/FAQSection";
+import { AnimatedSection } from "../utils/AnimatedSection";
 
-export default function Home({ gameDetail }: any) {
-  const games: Game[] = PRODUCT_DATA;
-  const Navbar = dynamic(() => import("../utils/Navbar"), {
-    ssr: false,
-  });
+const Navbar = dynamic(() => import("../utils/Navbar"), { ssr: false });
+
+export default function Home() {
+  const [isClientLoaded, setIsClientLoaded] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [difficultyFilter, setDifficultyFilter] = useState<Difficulty | "All">("All");
+  const [ratingFilter, setRatingFilter] = useState(false); // true = 4.5+ only
+
+  // Simulate loading skeletons on initial mount
+  useEffect(() => {
+    const timer = setTimeout(() => setIsClientLoaded(true), 600);
+    return () => clearTimeout(timer);
+  }, []);
+
+  const filteredGames = useMemo(() => {
+    return PRODUCT_DATA.filter((game) => {
+      // Search
+      if (searchQuery) {
+        const query = searchQuery.toLowerCase();
+        if (!game.title.toLowerCase().includes(query) && !game.category.toLowerCase().includes(query)) {
+          return false;
+        }
+      }
+      // Difficulty
+      if (difficultyFilter !== "All" && game.difficulty !== difficultyFilter) {
+        return false;
+      }
+      // Rating
+      if (ratingFilter && parseFloat(game.rate) < 4.5) {
+        return false;
+      }
+      return true;
+    });
+  }, [searchQuery, difficultyFilter, ratingFilter]);
 
   return (
-    <main className="min-h-screen w-full bg-slate-100 text-slate-900 dark:bg-slate-950 dark:text-slate-100 ">
+    <main className="min-h-screen w-full bg-[var(--gray-50)] dark:bg-[var(--gray-950)] text-gray-900 dark:text-gray-50">
       <Navbar />
-      <div className="mt-14 pt-5 shrink-0 rounded-xl">
-        <div className="container mx-auto max-w-7xl pb-24">
-          <section className="relative flex h-[500px] lg:h-[550px] w-full items-center overflow-hidden rounded-3xl bg-slate-950 shadow-2xl shadow-cyan-900/10 ring-1 ring-white/10">
-            {/* Background Slideshow & Overlays */}
-            <div className="absolute inset-0 z-0">
-              <SlideShow />
-              {/* Stronger gradient overlay to blend slideshow and ensure text readability */}
-              <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/90 to-slate-900/20" />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent md:hidden" />
+
+      {/* ══ 1. HERO — page-load, immediate ══════════════════ */}
+      <AnimatedSection mode="page-load" delay={0}>
+        <HeroSection />
+      </AnimatedSection>
+
+      {/* ══ 2. FEATURED GAMES — scroll-triggered ════════════ */}
+      <section
+        id="games-section"
+        aria-labelledby="games-heading"
+        className="mx-auto max-w-[1200px] px-5 sm:px-6 scroll-mt-20 py-[90px]"
+      >
+        {/* Section header — its own scroll-reveal */}
+        <AnimatedSection className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <p className="mb-1.5 text-[11px] font-bold uppercase tracking-[0.2em] text-indigo-500 dark:text-indigo-400">
+              Game Library
+            </p>
+            <h2
+              id="games-heading"
+              className="text-4xl font-black tracking-tight text-gray-900 dark:text-white"
+            >
+              Featured Games
+            </h2>
+            <p className="mt-2 text-sm text-gray-500 dark:text-gray-400 font-medium">
+              Choose your first game to begin.
+            </p>
+          </div>
+        </AnimatedSection>
+
+        {/* ── Toolbar (Search & Filters) ── */}
+        <AnimatedSection className="mb-10 flex flex-col sm:flex-row items-center gap-4 bg-white/50 dark:bg-gray-900/50 p-4 rounded-2xl border border-gray-200 dark:border-white/10 backdrop-blur-sm">
+          {/* Search */}
+          <div className="relative w-full sm:max-w-xs">
+            <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+            </svg>
+            <input
+              type="text"
+              placeholder="Search games..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 pl-9 pr-4 py-2.5 text-sm outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 transition-all dark:text-white"
+            />
+          </div>
+
+          <div className="flex w-full sm:w-auto items-center gap-3 overflow-x-auto no-scrollbar sm:ml-auto">
+            {/* Difficulty Toggle */}
+            <select
+              value={difficultyFilter}
+              onChange={(e) => setDifficultyFilter(e.target.value as Difficulty | "All")}
+              className="rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 px-3 py-2.5 text-sm outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 transition-all dark:text-white cursor-pointer"
+            >
+              <option value="All">All Difficulties</option>
+              <option value="Easy">Easy</option>
+              <option value="Medium">Medium</option>
+              <option value="Hard">Hard</option>
+            </select>
+
+            {/* Rating Toggle */}
+            <label className="flex items-center gap-2 cursor-pointer bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 px-3 py-2.5 rounded-xl transition-all hover:bg-gray-50 dark:hover:bg-gray-700">
+              <input
+                type="checkbox"
+                checked={ratingFilter}
+                onChange={(e) => setRatingFilter(e.target.checked)}
+                className="w-4 h-4 rounded text-indigo-600 focus:ring-indigo-500 cursor-pointer"
+              />
+              <span className="text-sm font-medium whitespace-nowrap dark:text-white">4.5+ ⭐</span>
+            </label>
+          </div>
+        </AnimatedSection>
+
+        {/* ── Cards Grid ── */}
+        <div className="grid grid-cols-1 justify-items-center gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 min-h-[400px]">
+          {!isClientLoaded ? (
+            /* Loading skeletons (simulate network/render time) */
+            Array.from({ length: 3 }).map((_, i) => (
+              <GameCardSkeleton key={i} />
+            ))
+          ) : filteredGames.length > 0 ? (
+            filteredGames.map((game, i) => (
+              <GameCard key={game.id} game={game} index={i} />
+            ))
+          ) : (
+            /* Empty state */
+            <div className="col-span-full py-20 text-center flex flex-col items-center">
+              <svg className="w-16 h-16 text-gray-300 dark:text-gray-700 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+              </svg>
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white">No games found</h3>
+              <p className="text-gray-500 mt-2">Try adjusting your filters or search term.</p>
+              <button
+                onClick={() => {
+                  setSearchQuery("");
+                  setDifficultyFilter("All");
+                  setRatingFilter(false);
+                }}
+                className="mt-6 text-indigo-600 font-semibold hover:underline"
+              >
+                Clear all filters
+              </button>
             </div>
-
-            {/* Content Container */}
-            <div className="relative z-10 flex w-full max-w-3xl flex-col items-start px-6 sm:px-12 lg:px-16">
-              <div className="inline-flex items-center gap-2.5 rounded-full border border-cyan-500/30 bg-cyan-500/10 px-4 py-1.5 mb-6 backdrop-blur-sm">
-                <span className="relative flex h-2.5 w-2.5">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-cyan-500"></span>
-                </span>
-                <span className="text-xs font-bold uppercase tracking-[0.2em] text-cyan-300">
-                  Discover new learning games
-                </span>
-              </div>
-
-              <h1 className="text-4xl font-black leading-[1.1] tracking-tight text-transparent bg-clip-text bg-gradient-to-br from-white via-white to-slate-400 sm:text-5xl lg:text-6xl">
-                KOOMPI App makes learning feel like play.
-              </h1>
-
-              <p className="mt-6 max-w-xl text-base md:text-lg leading-relaxed text-slate-300">
-                Browse curated games, sharpen your skills, and jump into a playful experience designed for learners and creators.
-              </p>
-
-              <div className="mt-10 flex flex-col sm:flex-row items-center gap-4">
-                <button
-                  onClick={() => {
-                    document.getElementById('games-section')?.scrollIntoView({ behavior: 'smooth' });
-                  }}
-                  className="group flex w-full sm:w-auto items-center justify-center gap-2 rounded-xl bg-cyan-500 px-8 py-3.5 font-bold text-slate-950 transition-all hover:bg-cyan-400 hover:shadow-[0_0_20px_rgba(6,182,212,0.4)] hover:scale-[1.02] active:scale-[0.98]"
-                >
-                  Explore Games
-                  <svg className="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                  </svg>
-                </button>
-              </div>
-            </div>
-          </section>
-
-          <section id="games-section" className="mt-16 scroll-mt-24">
-            <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-              <div>
-                <h2 className=" text-4xl font-black tracking-tight text-slate-900 dark:text-white">
-                  KOOMPI App
-                </h2>
-                <p className="mt-2 text-sm uppercase tracking-[0.10em] text-slate-500 dark:text-slate-400">
-                  Curated learning games
-                </p>
-              </div>
-              <p className="max-w-xl text-sm leading-6 text-slate-600 dark:text-slate-400">
-                Each game is hand-picked to help you learn faster while having
-                fun. Tap a card to see more details.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-              {games.map((game) => (
-                <GameCard key={game.id} game={game} />
-              ))}
-              <CommingCard />
-            </div>
-          </section>
+          )}
         </div>
+      </section>
 
-        <div className="w-full">
-          <Footer />
-        </div>
+      {/* Visual separator */}
+      <div className="mx-auto max-w-[1200px] px-5 sm:px-6">
+        <div className="h-px bg-gradient-to-r from-transparent via-gray-200 dark:via-white/[0.08] to-transparent" />
       </div>
+
+      {/* ══ 3. COMING SOON — scroll-triggered ═══════════════ */}
+      <AnimatedSection>
+        <ComingSoonSection />
+      </AnimatedSection>
+
+      {/* ══ 4. FAQ — scroll-triggered ════════════════════════ */}
+      <AnimatedSection>
+        <FAQSection />
+      </AnimatedSection>
+
+      {/* ══ 5. FOOTER ════════════════════════════════════════ */}
+      <AnimatedSection>
+        <Footer />
+      </AnimatedSection>
     </main>
   );
 }
