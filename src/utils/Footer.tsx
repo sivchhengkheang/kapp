@@ -30,7 +30,7 @@ const FOOTER_COLS = [
   {
     heading: "Resources",
     links: [
-      { label: "Browse All",     href: "/#games-section", external: false },
+      { label: "Start Learning", href: "/#games-section", external: false },
       { label: "How It Works",   href: "/about",          external: false },
       { label: "Leaderboard",    href: "/leaderboard",    external: false },
       { label: "Privacy Policy", href: "#",               external: false },
@@ -89,7 +89,7 @@ export function Footer() {
                   target="_blank"
                   rel="noreferrer"
                   aria-label={`KOOMPI on ${label}`}
-                  className="flex h-9 w-9 items-center justify-center rounded-xl border border-gray-200 dark:border-white/10 bg-white dark:bg-white/[0.04] text-gray-500 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400 hover:border-indigo-200 dark:hover:border-indigo-500/40 hover:bg-indigo-50 dark:hover:bg-indigo-500/10 transition-all duration-200 hover:scale-105"
+                  className="flex h-11 w-11 items-center justify-center rounded-xl border border-gray-200 dark:border-white/10 bg-white dark:bg-white/[0.04] text-gray-500 dark:text-gray-400 hover:text-primary dark:hover:text-primary-400 hover:border-primary-200 dark:hover:border-primary-500/40 hover:bg-primary-50 dark:hover:bg-primary-500/10 transition-all duration-200 hover:scale-105"
                 >
                   <Icon size={14} />
                 </a>
@@ -111,7 +111,7 @@ export function Footer() {
                         href={href}
                         target="_blank"
                         rel="noreferrer"
-                        className="flex items-center gap-1 text-sm text-gray-600 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-150"
+                        className="flex items-center gap-1 py-1.5 text-sm text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-primary-400 transition-colors duration-150"
                       >
                         {label}
                         <svg className="w-2.5 h-2.5 opacity-40" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
@@ -121,7 +121,7 @@ export function Footer() {
                     ) : (
                       <Link
                         href={href}
-                        className="text-sm text-gray-600 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-150"
+                        className="inline-block py-1.5 text-sm text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-primary-400 transition-colors duration-150"
                       >
                         {label}
                       </Link>
