@@ -42,7 +42,7 @@ export default function LeaderboardPage() {
           </p>
         </AnimatedSection>
 
-        <AnimatedSection delay={100} className="mx-auto max-w-[900px] px-5 sm:px-6">
+        <AnimatedSection delay={1} className="mx-auto max-w-[900px] px-5 sm:px-6">
           {/* Controls */}
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-8">
             <div className="flex bg-gray-200/50 dark:bg-gray-800 p-1.5 rounded-xl border border-gray-200 dark:border-white/10">

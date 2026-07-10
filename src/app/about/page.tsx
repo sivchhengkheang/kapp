@@ -51,7 +51,7 @@ export default function AboutPage() {
         <section className="mx-auto max-w-[1200px] px-5 sm:px-6 py-16">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {steps.map((step, index) => (
-              <AnimatedSection key={step.id} delay={index * 100} className="relative group p-8 rounded-[2rem] bg-white dark:bg-gray-900 border border-gray-200 dark:border-white/10 shadow-sm hover:shadow-xl transition-all duration-300">
+              <AnimatedSection key={step.id} delay={(index + 1) as 1 | 2 | 3} className="relative group p-8 rounded-[2rem] bg-white dark:bg-gray-900 border border-gray-200 dark:border-white/10 shadow-sm hover:shadow-xl transition-all duration-300">
                 <div className="absolute top-8 right-8 text-6xl font-black text-gray-100 dark:text-white/5 opacity-50 group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-300 pointer-events-none">
                   {step.id}
                 </div>
@@ -68,7 +68,7 @@ export default function AboutPage() {
         </section>
 
         {/* CTA Section */}
-        <AnimatedSection delay={300} className="mx-auto max-w-[1200px] px-5 sm:px-6 py-24 text-center">
+        <AnimatedSection delay={3} className="mx-auto max-w-[1200px] px-5 sm:px-6 py-24 text-center">
           <div className="bg-indigo-600 dark:bg-indigo-500 rounded-[2.5rem] p-12 md:p-20 relative overflow-hidden">
             {/* Background elements */}
             <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/3 w-96 h-96 bg-white/10 rounded-full blur-3xl pointer-events-none" />
