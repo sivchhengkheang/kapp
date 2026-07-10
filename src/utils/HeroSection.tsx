@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 /* ── Mini game-preview cards shown in the right panel ── */
 const PREVIEW_GAMES = [
@@ -55,12 +56,12 @@ function StatPill({
 }) {
   return (
     <div className="flex items-center gap-2">
-      <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-white/10 backdrop-blur-sm text-white">
+      <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-gray-900/5 dark:bg-white/10 backdrop-blur-sm text-gray-700 dark:text-white">
         {icon}
       </span>
       <div className="leading-tight">
-        <p className="text-sm font-bold text-white">{value}</p>
-        <p className="text-[11px] text-white/60">{label}</p>
+        <p className="text-sm font-bold text-gray-900 dark:text-white">{value}</p>
+        <p className="text-[11px] text-gray-500 dark:text-white/60">{label}</p>
       </div>
     </div>
   );
@@ -76,29 +77,32 @@ function PreviewCard({
 }) {
   return (
     <div
-      className="hero-preview-card absolute w-36 sm:w-40 overflow-hidden rounded-2xl bg-gray-900/90 ring-1 ring-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.5)] backdrop-blur-sm"
+      className="hero-preview-card absolute w-36 sm:w-40 overflow-hidden rounded-2xl bg-white/90 dark:bg-gray-900/90 ring-1 ring-gray-900/5 dark:ring-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.5)] backdrop-blur-sm"
       style={style}
     >
       {/* Gradient top bar */}
       <div className={`h-1 w-full bg-gradient-to-r ${game.color}`} />
       {/* Thumbnail */}
-      <div className="aspect-video w-full overflow-hidden">
-        <img
+      <div className="aspect-video w-full overflow-hidden relative">
+        <Image
           src={game.thumbnail}
           alt={game.title}
-          className="h-full w-full object-cover"
+          fill
+          sizes="160px"
+          priority
+          className="object-cover"
         />
       </div>
       {/* Info */}
       <div className="px-3 py-2.5">
-        <p className="text-[11px] font-bold uppercase tracking-wider text-white/40 mb-0.5">
+        <p className="text-[11px] font-bold uppercase tracking-wider text-gray-500 dark:text-white/40 mb-0.5">
           {game.category}
         </p>
-        <p className="text-xs font-semibold text-white leading-snug">
+        <p className="text-xs font-semibold text-gray-900 dark:text-white leading-snug">
           {game.title}
         </p>
         {/* Fake progress bar */}
-        <div className="mt-2 h-1 w-full rounded-full bg-white/10">
+        <div className="mt-2 h-1 w-full rounded-full bg-gray-200 dark:bg-white/10">
           <div
             className={`h-1 rounded-full bg-gradient-to-r ${game.color}`}
             style={{ width: `${game.progress}%` }}
@@ -145,9 +149,7 @@ export default function HeroSection() {
     let t = 0;
     const draw = () => {
       ctx.clearRect(0, 0, w, h);
-      // Dark base
-      ctx.fillStyle = "#0a0a1a";
-      ctx.fillRect(0, 0, w, h);
+      // Let CSS background show through instead of hardcoded dark base
 
       // Draw each orb
       orbs.forEach((orb) => {
@@ -194,7 +196,7 @@ export default function HeroSection() {
 
   return (
     <section
-      className="relative w-full overflow-hidden bg-gray-950"
+      className="relative w-full overflow-hidden bg-transparent"
       style={{ minHeight: "clamp(600px, 100svh, 100svh)" }}
     >
       {/* ── Animated gradient canvas background ── */}
@@ -204,22 +206,7 @@ export default function HeroSection() {
         aria-hidden="true"
       />
 
-      {/* ── Subtle grid overlay ── */}
-      <div
-        className="absolute inset-0 opacity-[0.04]"
-        style={{
-          backgroundImage: `
-            linear-gradient(rgba(255,255,255,0.6) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255,255,255,0.6) 1px, transparent 1px)
-          `,
-          backgroundSize: "64px 64px",
-        }}
-        aria-hidden="true"
-      />
 
-      {/* ── Edge fades ── */}
-      <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-gray-950 to-transparent pointer-events-none" />
-      <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-gray-950/80 to-transparent pointer-events-none" />
 
       {/* ── Main content — centered, min 600px height ── */}
       <div className="relative z-10 mx-auto max-w-[1200px] px-5 sm:px-6 flex flex-col lg:flex-row items-center gap-12 lg:gap-8"
@@ -241,7 +228,7 @@ export default function HeroSection() {
           </div>
 
           {/* ── Headline ── */}
-          <h1 className="text-4xl sm:text-5xl lg:text-[3.6rem] xl:text-[4rem] font-black leading-[1.06] tracking-tight text-white">
+          <h1 className="text-4xl sm:text-5xl lg:text-[3.6rem] xl:text-[4rem] font-black leading-[1.06] tracking-tight text-gray-900 dark:text-white">
             Learn through play.{" "}
             <br className="hidden sm:block" />
             <span className="relative inline-block">
@@ -260,9 +247,9 @@ export default function HeroSection() {
           </h1>
 
           {/* ── Sub-headline with trust metric ── */}
-          <p className="text-base sm:text-lg leading-relaxed text-gray-300 max-w-md lg:max-w-lg">
+          <p className="text-base sm:text-lg leading-relaxed text-gray-600 dark:text-gray-300 max-w-md lg:max-w-lg">
             Trusted by{" "}
-            <span className="font-bold text-white">2.5M+ learners</span>{" "}
+            <span className="font-bold text-gray-900 dark:text-white">2.5M+ learners</span>{" "}
             in 45+ countries to improve their coding, logic, and mouse skills through
             hand-crafted interactive games.
           </p>
@@ -277,11 +264,11 @@ export default function HeroSection() {
                 hero-cta-btn
                 group relative w-full sm:w-auto overflow-hidden
                 flex items-center justify-center gap-2.5
-                rounded-xl bg-indigo-600 px-8 py-4
+                rounded-xl bg-primary px-8 py-4
                 text-sm font-bold text-white
                 shadow-[0_0_0_0_rgba(99,102,241,0)]
                 transition-all duration-300
-                hover:bg-indigo-500
+                hover:bg-primary-400
                 hover:shadow-[0_0_32px_8px_rgba(99,102,241,0.35)]
                 hover:scale-[1.03]
                 active:scale-[0.97]
@@ -314,10 +301,10 @@ export default function HeroSection() {
               id="hero-about-btn"
               className="
                 flex w-full sm:w-auto items-center justify-center gap-1.5
-                rounded-xl border border-white/15 bg-white/6
-                px-7 py-4 text-sm font-semibold text-white/85
+                rounded-xl border border-gray-900/10 bg-gray-900/5 dark:border-white/15 dark:bg-white/6
+                px-7 py-4 text-sm font-semibold text-gray-700 dark:text-white/85
                 backdrop-blur-sm transition-all duration-200
-                hover:bg-white/12 hover:border-white/25 hover:text-white
+                hover:bg-gray-900/10 hover:border-gray-900/20 hover:text-gray-900 dark:hover:bg-white/12 dark:hover:border-white/25 dark:hover:text-white
               "
             >
               About KOOMPI
@@ -338,7 +325,7 @@ export default function HeroSection() {
                 </svg>
               }
             />
-            <div className="w-px h-6 bg-white/15 hidden sm:block" />
+            <div className="w-px h-6 bg-gray-200 dark:bg-white/15 hidden sm:block" />
             <StatPill
               value="7 Games"
               label="Free to play"
@@ -348,7 +335,7 @@ export default function HeroSection() {
                 </svg>
               }
             />
-            <div className="w-px h-6 bg-white/15 hidden sm:block" />
+            <div className="w-px h-6 bg-gray-200 dark:bg-white/15 hidden sm:block" />
             <StatPill
               value="4.6 ★"
               label="Avg. rating"
@@ -374,13 +361,13 @@ export default function HeroSection() {
           </div>
 
           {/* Central "phone / device" mockup */}
-          <div className="relative z-10 w-56 h-[340px] rounded-[2rem] bg-gray-900/80 ring-1 ring-white/15 shadow-[0_24px_80px_rgba(0,0,0,0.6)] backdrop-blur-sm flex flex-col overflow-hidden">
+          <div className="relative z-10 w-56 h-[340px] rounded-[2rem] bg-gray-100/80 dark:bg-gray-900/80 ring-1 ring-gray-900/5 dark:ring-white/15 shadow-[0_24px_80px_rgba(0,0,0,0.6)] backdrop-blur-sm flex flex-col overflow-hidden">
             {/* Notch */}
             <div className="flex justify-center pt-3 pb-1">
-              <div className="w-16 h-1 rounded-full bg-white/20" />
+              <div className="w-16 h-1 rounded-full bg-gray-300 dark:bg-white/20" />
             </div>
             {/* Screen content — rotating game image */}
-            <div className="flex-1 relative overflow-hidden mx-2 mb-2 rounded-[1.5rem] bg-gray-800">
+            <div className="flex-1 relative overflow-hidden mx-2 mb-2 rounded-[1.5rem] bg-gray-200 dark:bg-gray-800">
               <HeroSlide />
             </div>
           </div>
@@ -429,13 +416,13 @@ export default function HeroSection() {
           {PREVIEW_GAMES.map((game) => (
             <div
               key={game.id}
-              className="shrink-0 w-32 overflow-hidden rounded-2xl ring-1 ring-white/10 bg-gray-900/80"
+              className="shrink-0 w-32 overflow-hidden rounded-2xl ring-1 ring-gray-900/5 dark:ring-white/10 bg-white/90 dark:bg-gray-900/80"
             >
               <div className={`h-0.5 bg-gradient-to-r ${game.color}`} />
-              <div className="aspect-video overflow-hidden">
-                <img src={game.thumbnail} alt={game.title} loading="lazy" decoding="async" className="w-full h-full object-cover" />
+              <div className="aspect-video overflow-hidden relative">
+                <Image src={game.thumbnail} alt={game.title} fill sizes="128px" priority className="object-cover" />
               </div>
-              <p className="px-2 py-1.5 text-[10px] font-semibold text-white/70 truncate">{game.title}</p>
+              <p className="px-2 py-1.5 text-[10px] font-semibold text-gray-700 dark:text-white/70 truncate">{game.title}</p>
             </div>
           ))}
         </div>
@@ -443,7 +430,7 @@ export default function HeroSection() {
 
       {/* ── Scroll indicator ── */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-1.5">
-        <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/30">
+        <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400 dark:text-white/30">
           Scroll
         </p>
         <button
@@ -451,8 +438,8 @@ export default function HeroSection() {
           aria-label="Scroll to games"
           className="flex min-h-[44px] min-w-[44px] items-center justify-center group"
         >
-          <span className="flex h-8 w-5 flex-col items-center justify-start rounded-full border border-white/20 pt-1.5 group-hover:border-white/40 transition-colors duration-200">
-            <span className="scroll-dot h-1.5 w-1.5 rounded-full bg-white/70" />
+          <span className="flex h-8 w-5 flex-col items-center justify-start rounded-full border border-gray-300 dark:border-white/20 pt-1.5 group-hover:border-gray-500 dark:group-hover:border-white/40 transition-colors duration-200">
+            <span className="scroll-dot h-1.5 w-1.5 rounded-full bg-gray-400 dark:bg-white/70" />
           </span>
         </button>
       </div>
@@ -524,17 +511,20 @@ function HeroSlide() {
 
   return (
     <>
-      <img
+      <Image
         src={slides[idx].src}
         alt={slides[idx].label}
-        className="absolute inset-0 h-full w-full object-cover transition-opacity duration-400"
+        fill
+        sizes="224px"
+        priority
+        className="object-cover transition-opacity duration-400"
         style={{ opacity: fading ? 0 : 1 }}
       />
       {/* Label pill */}
-      <div className="absolute bottom-2 left-2 right-2 rounded-lg bg-black/50 backdrop-blur-sm px-2.5 py-1.5">
-        <p className="text-[10px] font-bold text-white/90 truncate">{slides[idx].label}</p>
+      <div className="absolute bottom-2 left-2 right-2 rounded-lg bg-white/50 dark:bg-black/50 backdrop-blur-sm px-2.5 py-1.5">
+        <p className="text-[10px] font-bold text-gray-900 dark:text-white/90 truncate">{slides[idx].label}</p>
         {/* Fake XP bar */}
-        <div className="mt-1 h-0.5 w-full rounded-full bg-white/15">
+        <div className="mt-1 h-0.5 w-full rounded-full bg-gray-400 dark:bg-white/15">
           <div
             className="h-0.5 rounded-full bg-indigo-400 transition-all duration-[2800ms] ease-linear"
             style={{ width: fading ? "0%" : "100%" }}

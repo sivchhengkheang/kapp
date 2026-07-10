@@ -94,7 +94,7 @@
   --card-foreground:     var(--gray-900);
   --popover:             #ffffff;
   --popover-foreground:  var(--gray-900);
-  --primary:             var(--primary-600);
+  --primary:             var(--primary-500);
   --primary-foreground:  #ffffff;
   --secondary:           var(--gray-100);
   --secondary-foreground:var(--gray-700);
@@ -403,7 +403,7 @@
 
   /* Primary / indigo button variant */
   .btn-primary {
-    background: var(--primary-600);
+    background: var(--primary-500);
     color: #fff;
     box-shadow: 0 2px 8px rgba(99, 102, 241, 0.22);
     transition:
@@ -412,7 +412,7 @@
       background    var(--duration-base) var(--ease-out-cubic);
   }
   .btn-primary:hover {
-    background: var(--primary-500);
+    background: var(--primary-400);
     transform: translateY(-2px);
     box-shadow:
       0 6px 20px rgba(99, 102, 241, 0.38),

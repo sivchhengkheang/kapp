@@ -137,7 +137,7 @@ export default function FAQSection() {
     <section
       id="faq"
       aria-labelledby="faq-heading"
-      className="w-full bg-[var(--gray-50)] dark:bg-[var(--gray-950)]"
+      className="w-full bg-transparent"
     >
       <div className="mx-auto max-w-[1200px] px-5 sm:px-6 py-[90px]">
 

@@ -39,14 +39,14 @@ function TimeBlock({ value, label }: { value: number; label: string }) {
   const str = String(value).padStart(2, "0");
   return (
     <div className="flex flex-col items-center gap-2">
-      <div className="relative flex h-16 w-16 sm:h-20 sm:w-20 items-center justify-center rounded-2xl bg-white/[0.06] border border-white/10 backdrop-blur-sm overflow-hidden">
+      <div className="relative flex h-16 w-16 sm:h-20 sm:w-20 items-center justify-center rounded-2xl bg-white/80 dark:bg-white/[0.06] border border-gray-200 dark:border-white/10 backdrop-blur-sm overflow-hidden">
         {/* Shimmer line */}
-        <div className="absolute inset-x-0 top-1/2 h-px bg-black/30 dark:bg-black/50 z-10" />
-        <span className="relative z-20 text-2xl sm:text-3xl font-black tabular-nums text-white tracking-tight">
+        <div className="absolute inset-x-0 top-1/2 h-px bg-black/10 dark:bg-black/50 z-10" />
+        <span className="relative z-20 text-2xl sm:text-3xl font-black tabular-nums text-gray-900 dark:text-white tracking-tight">
           {str}
         </span>
       </div>
-      <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-white/40">
+      <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-gray-500 dark:text-white/40">
         {label}
       </span>
     </div>
@@ -84,19 +84,11 @@ export default function ComingSoonSection() {
       aria-labelledby="coming-soon-heading"
     >
       {/* ── Background ── */}
-      <div className="absolute inset-0 bg-gradient-to-br from-gray-950 via-indigo-950/60 to-gray-950" />
+      <div className="absolute inset-0 bg-gradient-to-br from-transparent via-indigo-50/50 to-transparent dark:via-indigo-950/40" />
       {/* Ambient orbs */}
       <div className="absolute left-1/4 top-0 h-80 w-80 -translate-x-1/2 rounded-full bg-indigo-600/20 blur-[100px] pointer-events-none" />
       <div className="absolute right-1/4 bottom-0 h-64 w-64 translate-x-1/2 rounded-full bg-violet-600/15 blur-[80px] pointer-events-none" />
-      {/* Grid */}
-      <div
-        className="absolute inset-0 opacity-[0.03]"
-        style={{
-          backgroundImage: "linear-gradient(rgba(255,255,255,0.8) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.8) 1px,transparent 1px)",
-          backgroundSize: "48px 48px",
-        }}
-        aria-hidden="true"
-      />
+
 
       {/* ── Content ── */}
       <div className="relative z-10 mx-auto max-w-[1200px] px-5 sm:px-6 py-[90px] flex flex-col items-center text-center gap-12">
@@ -116,14 +108,14 @@ export default function ComingSoonSection() {
         <div className="flex flex-col gap-4 max-w-2xl">
           <h2
             id="coming-soon-heading"
-            className="text-4xl sm:text-5xl font-black leading-tight tracking-tight text-white"
+            className="text-4xl sm:text-5xl font-black leading-tight tracking-tight text-gray-900 dark:text-white"
           >
             🚀 Multiplayer Battles{" "}
             <span className="bg-gradient-to-r from-violet-400 to-indigo-400 bg-clip-text text-transparent">
               Coming July 2026
             </span>
           </h2>
-          <p className="text-base sm:text-lg leading-relaxed text-gray-400">
+          <p className="text-base sm:text-lg leading-relaxed text-gray-600 dark:text-gray-400">
             We're crafting new interactive learning experiences. Be the first to
             know when they drop.
           </p>
@@ -132,21 +124,21 @@ export default function ComingSoonSection() {
         {/* ── Countdown ── */}
         <div className="flex items-start gap-3 sm:gap-5">
           <TimeBlock value={days}    label="Days"    />
-          <span className="mt-4 sm:mt-5 text-2xl font-black text-white/30">:</span>
+          <span className="mt-4 sm:mt-5 text-2xl font-black text-gray-300 dark:text-white/30">:</span>
           <TimeBlock value={hours}   label="Hours"   />
-          <span className="mt-4 sm:mt-5 text-2xl font-black text-white/30">:</span>
+          <span className="mt-4 sm:mt-5 text-2xl font-black text-gray-300 dark:text-white/30">:</span>
           <TimeBlock value={minutes} label="Minutes" />
-          <span className="mt-4 sm:mt-5 text-2xl font-black text-white/30">:</span>
+          <span className="mt-4 sm:mt-5 text-2xl font-black text-gray-300 dark:text-white/30">:</span>
           <TimeBlock value={seconds} label="Seconds" />
         </div>
 
         {/* ── Progress bar ── */}
         <div className="w-full max-w-lg flex flex-col gap-2">
           <div className="flex justify-between text-[11px] font-bold uppercase tracking-widest">
-            <span className="text-gray-500">Development progress</span>
-            <span className="text-violet-400">{progress}%</span>
+            <span className="text-gray-600 dark:text-gray-500">Development progress</span>
+            <span className="text-violet-500 dark:text-violet-400">{progress}%</span>
           </div>
-          <div className="h-2.5 w-full overflow-hidden rounded-full bg-white/[0.07]">
+          <div className="h-2.5 w-full overflow-hidden rounded-full bg-gray-200 dark:bg-white/[0.07]">
             <div
               className="h-full rounded-full bg-gradient-to-r from-indigo-500 via-violet-500 to-purple-500 transition-all duration-1000 ease-out relative overflow-hidden"
               style={{ width: `${progress}%` }}
@@ -158,7 +150,7 @@ export default function ComingSoonSection() {
               />
             </div>
           </div>
-          <p className="text-[11px] text-gray-600 text-right">
+          <p className="text-[11px] text-gray-500 dark:text-gray-600 text-right">
             Release target: {LAUNCH_DATE_LABEL}
           </p>
         </div>
@@ -168,12 +160,12 @@ export default function ComingSoonSection() {
           {UPCOMING_FEATURES.map(({ icon, label, desc }) => (
             <div
               key={label}
-              className="flex flex-col items-center gap-3 rounded-2xl border border-white/[0.07] bg-white/[0.03] px-5 py-6 backdrop-blur-sm hover:border-violet-500/25 hover:bg-white/[0.05] transition-all duration-200"
+              className="flex flex-col items-center gap-3 rounded-2xl border border-gray-200 bg-white/50 dark:border-white/[0.07] dark:bg-white/[0.03] px-5 py-6 backdrop-blur-sm hover:border-violet-300 dark:hover:border-violet-500/25 hover:bg-white dark:hover:bg-white/[0.05] transition-all duration-200"
             >
               <span className="text-3xl" aria-hidden="true">{icon}</span>
               <div className="flex flex-col gap-1 text-center">
-                <p className="text-sm font-bold text-white">{label}</p>
-                <p className="text-xs text-gray-500 leading-relaxed">{desc}</p>
+                <p className="text-sm font-bold text-gray-900 dark:text-white">{label}</p>
+                <p className="text-xs text-gray-600 dark:text-gray-500 leading-relaxed">{desc}</p>
               </div>
             </div>
           ))}
@@ -231,8 +223,8 @@ export default function ComingSoonSection() {
               placeholder="your@email.com"
               required
               className="
-                flex-1 w-full rounded-xl border border-white/15 bg-white/[0.06]
-                px-4 py-3 text-sm text-white placeholder-gray-500
+                flex-1 w-full rounded-xl border border-gray-300 bg-white dark:border-white/15 dark:bg-white/[0.06]
+                px-4 py-3 text-sm text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500
                 backdrop-blur-sm outline-none
                 focus:border-violet-500/60 focus:ring-2 focus:ring-violet-500/20
                 transition-all duration-200

@@ -2,7 +2,7 @@
 
 export function GameCardSkeleton() {
   return (
-    <div className="w-full max-w-[320px] rounded-2xl bg-white dark:bg-gray-900 border border-gray-200/60 dark:border-white/[0.07] overflow-hidden flex flex-col h-[400px]">
+    <div className="w-full mx-auto max-w-[400px] sm:max-w-none rounded-2xl bg-white dark:bg-gray-900 border border-border dark:border-white/[0.07] overflow-hidden flex flex-col h-[400px]">
       {/* Cover Skeleton */}
       <div className="relative h-[200px] w-full bg-gray-200 dark:bg-gray-800 animate-pulse" />
       

@@ -2,14 +2,14 @@
 
 import { Game, Difficulty } from "../constants";
 import Link from "next/link";
+import Image from "next/image";
 import { useInView } from "../hooks/useInView";
 
-/* ── Difficulty badge colour map ── */
 const DIFFICULTY_STYLES: Record<
   Difficulty,
   { bg: string; text: string; dot: string }
 > = {
-  Easy:   { bg: "bg-emerald-50 dark:bg-emerald-500/10", text: "text-emerald-700 dark:text-emerald-400", dot: "bg-emerald-500" },
+  Easy:   { bg: "bg-teal-50 dark:bg-teal-500/10", text: "text-teal-700 dark:text-teal-400", dot: "bg-teal-500" },
   Medium: { bg: "bg-amber-50 dark:bg-amber-500/10",     text: "text-amber-700 dark:text-amber-400",   dot: "bg-amber-500"   },
   Hard:   { bg: "bg-rose-50 dark:bg-rose-500/10",       text: "text-rose-700 dark:text-rose-400",     dot: "bg-rose-500"    },
 };
@@ -55,15 +55,14 @@ export default function GameCard({ game, index = 0 }: { game: Game; index?: numb
       href={`/${game.id}`}
       id={`game-card-${game.id}`}
       ref={ref}
-      className={`group block focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 rounded-2xl scroll-reveal ${staggerClass} ${inView ? "in-view" : ""}`}
-      style={{ width: "100%", maxWidth: 320 }}
+      className={`group block focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 rounded-2xl scroll-reveal ${staggerClass} ${inView ? "in-view" : ""} w-full mx-auto max-w-[400px] sm:max-w-none`}
     >
       <article
         className="
           card-hover
           relative flex flex-col overflow-hidden rounded-2xl
           bg-white dark:bg-gray-900
-          border border-gray-200/60 dark:border-white/[0.07]
+          border border-border dark:border-white/[0.07]
           shadow-[0_2px_8px_rgba(0,0,0,0.06)]
           h-full
         "
@@ -71,12 +70,12 @@ export default function GameCard({ game, index = 0 }: { game: Game; index?: numb
       >
         {/* ── COVER IMAGE (200 × 150 px visible area) ─────── */}
         <div className="relative overflow-hidden bg-gray-100 dark:bg-gray-800" style={{ height: 200 }}>
-          <img
+          <Image
             src={src}
             alt={game.title}
-            loading="lazy"
-            decoding="async"
-            className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.07]"
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.07]"
           />
 
           {/* Bottom gradient overlay for readability */}
@@ -90,14 +89,39 @@ export default function GameCard({ game, index = 0 }: { game: Game; index?: numb
             </span>
           </div>
 
-          {/* Difficulty badge — top-right */}
-          <div
-            className={`absolute top-3 right-3 flex items-center gap-1.5 rounded-xl px-2.5 py-1.5 ring-1 ring-white/10 backdrop-blur-sm bg-black/40`}
-          >
-            <span className={`h-1.5 w-1.5 rounded-full ${diff.dot}`} />
-            <span className="text-[10px] font-bold text-white/90 tracking-wide">
-              {game.difficulty}
-            </span>
+          {/* Action buttons — top-right */}
+          <div className="absolute top-3 right-3 flex items-center gap-2">
+            {/* Share Button */}
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                alert("Share link copied!");
+              }}
+              className="flex h-8 w-8 items-center justify-center rounded-full bg-black/40 text-white backdrop-blur-sm ring-1 ring-white/20 transition hover:bg-black/60 hover:scale-110 active:scale-95"
+              aria-label="Share game"
+              title="Challenge a friend"
+            >
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M7.217 10.907a2.25 2.25 0 1 0 0 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186 9.566-5.314m-9.566 7.5 9.566 5.314m0 0a2.25 2.25 0 1 0 3.935 2.186 2.25 2.25 0 0 0-3.935-2.186Zm0-12.814a2.25 2.25 0 1 0 3.933-2.185 2.25 2.25 0 0 0-3.933 2.185Z" />
+              </svg>
+            </button>
+            {/* Wishlist Button */}
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                const icon = e.currentTarget.querySelector('svg');
+                if (icon) icon.classList.toggle('text-rose-500');
+              }}
+              className="flex h-8 w-8 items-center justify-center rounded-full bg-black/40 text-white backdrop-blur-sm ring-1 ring-white/20 transition hover:bg-black/60 hover:scale-110 active:scale-95"
+              aria-label="Save to wishlist"
+              title="Save to wishlist"
+            >
+              <svg className="w-4 h-4 transition-colors" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z" />
+              </svg>
+            </button>
           </div>
         </div>
 
@@ -174,7 +198,7 @@ export default function GameCard({ game, index = 0 }: { game: Game; index?: numb
               mt-auto w-full flex items-center justify-center gap-2
               rounded-xl py-3 px-5 min-h-[44px]
               text-sm font-bold text-white
-              bg-indigo-600
+              bg-primary
             "
             tabIndex={-1}
             aria-hidden="true"

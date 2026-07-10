@@ -47,8 +47,16 @@ export default function Home() {
   }, [searchQuery, difficultyFilter, ratingFilter]);
 
   return (
-    <main className="min-h-screen w-full bg-[var(--gray-50)] dark:bg-[var(--gray-950)] text-gray-900 dark:text-gray-50">
-      <Navbar />
+    <main className="relative min-h-screen w-full bg-[var(--gray-50)] dark:bg-[var(--gray-950)] text-gray-900 dark:text-gray-50 overflow-hidden">
+      {/* ── GLOBAL BACKGROUND GRID ── */}
+      <div
+        className="fixed inset-0 pointer-events-none z-0 opacity-[0.04] dark:opacity-[0.04] bg-[linear-gradient(rgba(0,0,0,0.8)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.8)_1px,transparent_1px)] dark:bg-[linear-gradient(rgba(255,255,255,0.6)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.6)_1px,transparent_1px)]"
+        style={{ backgroundSize: "32px 32px" }}
+        aria-hidden="true"
+      />
+
+      <div className="relative z-10 flex flex-col">
+        <Navbar />
 
       {/* ══ 1. HERO — page-load, immediate ══════════════════ */}
       <AnimatedSection mode="page-load" delay={0}>
@@ -59,7 +67,7 @@ export default function Home() {
       <section
         id="games-section"
         aria-labelledby="games-heading"
-        className="mx-auto max-w-[1200px] px-5 sm:px-6 scroll-mt-20 py-[90px]"
+        className="mx-auto max-w-[1200px] px-5 sm:px-6 scroll-mt-16 py-[90px]"
       >
         {/* Section header — its own scroll-reveal */}
         <AnimatedSection className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
@@ -76,6 +84,26 @@ export default function Home() {
             <p className="mt-2 text-sm text-gray-500 dark:text-gray-400 font-medium">
               Choose your first game to begin.
             </p>
+          </div>
+        </AnimatedSection>
+
+        {/* ── Featured This Week Carousel ── */}
+        <AnimatedSection className="mb-12">
+          <div className="flex items-center gap-2 mb-6">
+            <span className="text-2xl" aria-hidden="true">🔥</span>
+            <h3 className="text-2xl font-bold text-gray-900 dark:text-white">Featured This Week</h3>
+          </div>
+          <div className="relative group">
+            <div className="flex overflow-x-auto gap-6 pb-6 pt-2 snap-x snap-mandatory no-scrollbar scroll-smooth">
+              {PRODUCT_DATA.filter(g => parseFloat(g.rate) >= 4.8).slice(0, 5).map((game, i) => (
+                <div key={game.id} className="snap-start shrink-0 w-[85vw] sm:w-[320px] lg:w-[380px]">
+                  <GameCard game={game} index={i} />
+                </div>
+              ))}
+            </div>
+            {/* Fade edges */}
+            <div className="pointer-events-none absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-[var(--gray-50)] dark:from-[var(--gray-950)] to-transparent" />
+            <div className="pointer-events-none absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-[var(--gray-50)] dark:from-[var(--gray-950)] to-transparent" />
           </div>
         </AnimatedSection>
 
@@ -125,7 +153,7 @@ export default function Home() {
         <div className="grid grid-cols-1 justify-items-center gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 min-h-[400px]">
           {!isClientLoaded ? (
             /* Loading skeletons (simulate network/render time) */
-            Array.from({ length: 3 }).map((_, i) => (
+            Array.from({ length: 4 }).map((_, i) => (
               <GameCardSkeleton key={i} />
             ))
           ) : filteredGames.length > 0 ? (
@@ -174,6 +202,7 @@ export default function Home() {
       <AnimatedSection>
         <Footer />
       </AnimatedSection>
+      </div>
     </main>
   );
 }

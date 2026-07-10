@@ -43,10 +43,10 @@ export default function CommingCard() {
           {/* Text */}
           <div className="flex flex-col gap-1.5">
             <h3 className="text-base font-bold text-gray-800 dark:text-gray-200">
-              Coming Soon
+              🚀 Multiplayer Battles
             </h3>
             <p className="text-xs leading-relaxed text-gray-400 dark:text-gray-500 max-w-[160px]">
-              A new game is in the works
+              Coming July 2026
             </p>
           </div>
 
