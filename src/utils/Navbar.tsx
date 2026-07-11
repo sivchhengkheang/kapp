@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useRef, useState, useContext } from "react";
 import { usePathname } from "next/navigation";
+import Image from "next/image";
 import AuthModel from "./AuthModel";
 import { AuthContext } from "../context/AuthContext";
 
@@ -14,28 +15,16 @@ const NAV_LINKS = [
   { label: "Leaderboard", href: "/leaderboard", id: "nav-leaderboard" },
 ] as const;
 
-/* ── Logo mark SVG ── */
+/* ── Logo mark SVG / Favicon ── */
 function LogoMark() {
   return (
-    <svg
-      width="28" height="28" viewBox="0 0 28 28" fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden="true"
-    >
-      <rect width="28" height="28" rx="8" fill="url(#logo-grad)" />
-      {/* Stylised K shape */}
-      <path
-        d="M9 7v14M9 14l8-7M9 14l8 7"
-        stroke="white" strokeWidth="2.4"
-        strokeLinecap="round" strokeLinejoin="round"
-      />
-      <defs>
-        <linearGradient id="logo-grad" x1="0" y1="0" x2="28" y2="28" gradientUnits="userSpaceOnUse">
-          <stop stopColor="#6366f1" />
-          <stop offset="1" stopColor="#8b5cf6" />
-        </linearGradient>
-      </defs>
-    </svg>
+    <Image 
+      src="/favicon.ico" 
+      alt="KAPP Logo" 
+      width={28} 
+      height={28} 
+      className="object-contain"
+    />
   );
 }
 

@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { FaFacebook, FaGithub, FaTelegramPlane, FaInstagram } from "react-icons/fa";
 import { Heart } from "lucide-react";
 
@@ -64,11 +65,13 @@ export function Footer() {
           <div className="col-span-2 sm:col-span-2 lg:col-span-1 flex flex-col gap-5">
             {/* Logo */}
             <Link href="/" id="footer-logo" className="flex items-center gap-2.5 group w-fit">
-              <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-br from-indigo-500 to-violet-600 shadow-md shadow-indigo-500/25 transition-transform duration-200 group-hover:scale-105">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                  <path d="M4 3v10M4 8l7-5M4 8l7 5" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </span>
+              <Image 
+                src="/favicon.ico" 
+                alt="KAPP Logo" 
+                width={32} 
+                height={32} 
+                className="rounded-xl object-contain shadow-md transition-transform duration-200 group-hover:scale-105"
+              />
               <span className="font-black tracking-[-0.04em] text-xl text-gray-900 dark:text-white">
                 KAPP
               </span>
