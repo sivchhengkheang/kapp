@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { Game, Difficulty } from "../constants";
 import Link from "next/link";
 import Image from "next/image";
@@ -15,8 +16,8 @@ const DIFFICULTY_STYLES: Record<
 };
 
 /* ── Small star rating renderer ── */
-function StarRow({ rate }: { rate: string }) {
-  const n = parseFloat(rate);
+function StarRow({ rate }: { rate: number }) {
+  const n = rate;
   return (
     <div className="flex items-center gap-0.5">
       {[1, 2, 3, 4, 5].map((i) => {
@@ -47,14 +48,38 @@ export default function GameCard({ game, index = 0 }: { game: Game; index?: numb
   const src = (game.thumbnail || game.cover || "/cover1.png").replace(/^(?!\/)/, "/");
   const diff = DIFFICULTY_STYLES[game.difficulty] ?? DIFFICULTY_STYLES.Easy;
   const [ref, inView] = useInView<HTMLAnchorElement>({ threshold: 0.08 });
+  const [wishlisted, setWishlisted] = useState(false);
   /* Stagger: cap at 8, then cycle back so large grids still animate */
   const staggerClass = `stagger-${((index % 8) + 1)}`;
+
+  const handleShare = async (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const url = `${window.location.origin}/${game.id}`;
+    try {
+      if (navigator.share) {
+        await navigator.share({ title: game.title, url });
+      } else {
+        await navigator.clipboard.writeText(url);
+        // Brief visual feedback via title attribute change is handled by tooltip
+      }
+    } catch {
+      // User cancelled or API unavailable — silently ignore
+    }
+  };
+
+  const handleWishlist = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setWishlisted((w) => !w);
+  };
 
   return (
     <Link
       href={`/${game.id}`}
       id={`game-card-${game.id}`}
       ref={ref}
+      aria-label={`Play ${game.title}`}
       className={`group block focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 rounded-2xl scroll-reveal ${staggerClass} ${inView ? "in-view" : ""} w-full mx-auto max-w-[400px] sm:max-w-none`}
     >
       <article
@@ -75,6 +100,7 @@ export default function GameCard({ game, index = 0 }: { game: Game; index?: numb
             alt={game.title}
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            priority={index < 3}
             className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.07]"
           />
 
@@ -93,14 +119,10 @@ export default function GameCard({ game, index = 0 }: { game: Game; index?: numb
           <div className="absolute top-3 right-3 flex items-center gap-2">
             {/* Share Button */}
             <button
-              onClick={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                alert("Share link copied!");
-              }}
+              onClick={handleShare}
               className="flex h-8 w-8 items-center justify-center rounded-full bg-black/40 text-white backdrop-blur-sm ring-1 ring-white/20 transition hover:bg-black/60 hover:scale-110 active:scale-95"
-              aria-label="Share game"
-              title="Challenge a friend"
+              aria-label={`Share ${game.title}`}
+              title="Share this game"
             >
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M7.217 10.907a2.25 2.25 0 1 0 0 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186 9.566-5.314m-9.566 7.5 9.566 5.314m0 0a2.25 2.25 0 1 0 3.935 2.186 2.25 2.25 0 0 0-3.935-2.186Zm0-12.814a2.25 2.25 0 1 0 3.933-2.185 2.25 2.25 0 0 0-3.933 2.185Z" />
@@ -108,17 +130,16 @@ export default function GameCard({ game, index = 0 }: { game: Game; index?: numb
             </button>
             {/* Wishlist Button */}
             <button
-              onClick={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                const icon = e.currentTarget.querySelector('svg');
-                if (icon) icon.classList.toggle('text-rose-500');
-              }}
-              className="flex h-8 w-8 items-center justify-center rounded-full bg-black/40 text-white backdrop-blur-sm ring-1 ring-white/20 transition hover:bg-black/60 hover:scale-110 active:scale-95"
-              aria-label="Save to wishlist"
-              title="Save to wishlist"
+              onClick={handleWishlist}
+              className="flex h-8 w-8 items-center justify-center rounded-full bg-black/40 backdrop-blur-sm ring-1 ring-white/20 transition hover:bg-black/60 hover:scale-110 active:scale-95"
+              aria-label={wishlisted ? `Remove ${game.title} from wishlist` : `Save ${game.title} to wishlist`}
+              title={wishlisted ? "Remove from wishlist" : "Save to wishlist"}
             >
-              <svg className="w-4 h-4 transition-colors" fill="currentColor" viewBox="0 0 24 24">
+              <svg
+                className={`w-4 h-4 transition-colors duration-200 ${wishlisted ? "text-rose-500" : "text-white"}`}
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
                 <path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z" />
               </svg>
             </button>
@@ -153,7 +174,7 @@ export default function GameCard({ game, index = 0 }: { game: Game; index?: numb
                 className="font-bold text-gray-700 dark:text-gray-300 tabular-nums"
                 style={{ fontSize: "var(--text-sm)", lineHeight: "var(--leading-normal)" }}
               >
-                {game.rate}
+                {game.rate.toFixed(1)}
               </span>
             </div>
 

@@ -148,10 +148,25 @@ export default function GameDetail() {
               {/* Right: Rating */}
               <div className="shrink-0 flex flex-col items-center justify-center bg-gray-50 dark:bg-gray-800/50 rounded-[var(--radius-lg)] p-6 min-w-[160px] border border-gray-100 dark:border-white/[0.06]">
                 <span className="text-6xl font-black text-gray-900 dark:text-white tracking-tighter">
-                  {product.rate}
+                  {product.rate.toFixed(1)}
                 </span>
-                <div className="mt-2 text-lg tracking-wide text-amber-400">
-                  {product.starRate}
+                <div className="mt-2 flex items-center gap-0.5">
+                  {[1, 2, 3, 4, 5].map((i) => {
+                    const n = product.rate;
+                    const fill = i <= Math.floor(n) ? 1 : i - n < 1 && i - n > 0 ? n - Math.floor(n) : 0;
+                    return (
+                      <span key={i} className="relative w-4 h-4 shrink-0">
+                        <svg className="absolute inset-0 w-4 h-4 text-gray-200 dark:text-gray-700" viewBox="0 0 24 24" fill="currentColor">
+                          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                        </svg>
+                        <span className="absolute inset-0 overflow-hidden" style={{ width: `${fill * 100}%` }}>
+                          <svg className="w-4 h-4 text-amber-400" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                          </svg>
+                        </span>
+                      </span>
+                    );
+                  })}
                 </div>
                 <p className="mt-1.5 text-[10px] font-bold text-gray-400 dark:text-gray-500 uppercase tracking-widest">
                   User Rating

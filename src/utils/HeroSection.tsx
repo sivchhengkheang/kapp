@@ -3,46 +3,28 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { PRODUCT_DATA } from "../constants";
 
-/* ── Mini game-preview cards shown in the right panel ── */
-const PREVIEW_GAMES = [
-  {
-    id: "typing-code",
-    title: "Typing Code",
-    category: "Typing",
-    thumbnail: "/game-cover/typing-code.png",
-    color: "from-violet-500 to-purple-600",
-    delay: "0s",
-    progress: 82,
-  },
-  {
-    id: "dragon-drop",
-    title: "Dragon Drop",
-    category: "Mouse Skills",
-    thumbnail: "/game-cover/dragon-drop.png",
-    color: "from-orange-500 to-rose-500",
-    delay: "0.15s",
-    progress: 76,
-  },
-  {
-    id: "robot-obstacle",
-    title: "Robot Obstacle",
-    category: "Logic",
-    thumbnail: "/game-cover/robot-obstacle.png",
-    color: "from-cyan-500 to-blue-600",
-    delay: "0.3s",
-    progress: 79,
-  },
-  {
-    id: "koompi-typing",
-    title: "Koompi Typing",
-    category: "Typing",
-    thumbnail: "/game-cover/koompi-typing.png",
-    color: "from-blue-500 to-indigo-600",
-    delay: "0.45s",
-    progress: 72,
-  },
-];
+/* ── Brand-colour → Tailwind gradient map ── */
+const BRAND_GRADIENTS: Record<string, string> = {
+  "bg-violet-600 hover:bg-violet-700 text-white": "from-violet-500 to-purple-600",
+  "bg-sky-500 hover:bg-sky-600 text-white":        "from-sky-400 to-blue-500",
+  "bg-orange-500 hover:bg-orange-600 text-white":  "from-orange-500 to-rose-500",
+  "bg-cyan-600 hover:bg-cyan-700 text-white":      "from-cyan-500 to-blue-600",
+  "bg-rose-500 hover:bg-rose-600 text-white":      "from-rose-500 to-pink-600",
+  "bg-emerald-600 hover:bg-emerald-700 text-white":"from-emerald-500 to-teal-600",
+  "bg-blue-600 hover:bg-blue-700 text-white":      "from-blue-500 to-indigo-600",
+};
+
+/* ── Derive preview cards from PRODUCT_DATA (top 4) ── */
+const PREVIEW_GAMES = PRODUCT_DATA.slice(0, 4).map((g) => ({
+  id: g.id,
+  title: g.title,
+  category: g.category,
+  thumbnail: `/${g.thumbnail}`,
+  color: BRAND_GRADIENTS[g.brandColor] ?? "from-indigo-500 to-violet-600",
+  progress: Math.min(99, Math.round((g.rate / 5) * 100)),
+}));
 
 /* ── Trust stat pill ── */
 function StatPill({
@@ -444,45 +426,6 @@ export default function HeroSection() {
         </button>
       </div>
 
-      {/* ── Inline keyframes ── */}
-      <style>{`
-        @keyframes heroFloat {
-          0%, 100% { transform: translateY(0px) rotate(0deg); }
-          33%       { transform: translateY(-10px) rotate(0.5deg); }
-          66%       { transform: translateY(5px) rotate(-0.3deg); }
-        }
-
-        .scroll-dot {
-          animation: scrollBounce 1.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-        }
-
-        @keyframes scrollBounce {
-          0%, 100% { opacity: 0.7; transform: translateY(0); }
-          50%       { opacity: 1;   transform: translateY(8px); }
-        }
-
-        .hero-preview-card {
-          transition: box-shadow 0.3s ease, transform 0.3s ease;
-        }
-        .hero-preview-card:hover {
-          box-shadow: 0 16px 48px rgba(0,0,0,0.7);
-          transform: scale(1.04);
-        }
-
-        .hero-cta-btn::before {
-          content: '';
-          position: absolute;
-          inset: -1px;
-          border-radius: inherit;
-          background: linear-gradient(135deg, rgba(99,102,241,0.6), rgba(139,92,246,0.4));
-          opacity: 0;
-          transition: opacity 0.3s ease;
-          z-index: -1;
-        }
-        .hero-cta-btn:hover::before {
-          opacity: 1;
-        }
-      `}</style>
     </section>
   );
 }

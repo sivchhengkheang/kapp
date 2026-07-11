@@ -13,8 +13,8 @@ export interface Game {
   category: string;
   /** Emoji icon for the category, e.g. "💻" */
   categoryIcon: string;
-  rate: string;
-  starRate: string;
+  /** Numeric rating 0–5, e.g. 4.7 */
+  rate: number;
   /** Difficulty badge */
   difficulty: Difficulty;
   /** Formatted play count, e.g. "12.5K" */
@@ -22,24 +22,6 @@ export interface Game {
   /** Average session time, e.g. "5 min" */
   avgTime: string;
   /** Tailwind bg + text classes for the brand accent button, e.g. "bg-blue-600 text-white hover:bg-blue-700" */
-  brandColor: string;
-  type: any;
-  windows: any;
-  linux: any;
-}
-export interface PRODUCT_DATA {
-  id: string;
-  title: string;
-  subTitle: string;
-  description: string;
-  iframeUrl: string;
-  appImageUrl: string;
-  cover: string;
-  insider: string;
-  thumbnail: string;
-  category: string;
-  rate: string;
-  starRate: string;
   brandColor: string;
   type: any;
   windows: any;
@@ -61,8 +43,7 @@ export const PRODUCT_DATA: Game[] = [
     thumbnail: "game-cover/typing-code.png",
     category: "Coding",
     categoryIcon: "💻",
-    rate: "4.7",
-    starRate: "⭐⭐⭐⭐",
+    rate: 4.7,
     difficulty: "Medium",
     plays: "18.3K",
     avgTime: "8 min",
@@ -128,8 +109,7 @@ export const PRODUCT_DATA: Game[] = [
     thumbnail: "game-cover/typing-math.png",
     category: "Math",
     categoryIcon: "🔢",
-    rate: "3.4",
-    starRate: "⭐⭐⭐⭐",
+    rate: 3.4,
     difficulty: "Easy",
     plays: "9.1K",
     avgTime: "5 min",
@@ -197,8 +177,7 @@ export const PRODUCT_DATA: Game[] = [
     thumbnail: "game-cover/dragon-drop.png",
     category: "Mouse Skills",
     categoryIcon: "🐉",
-    rate: "3.4",
-    starRate: "⭐⭐⭐⭐",
+    rate: 3.4,
     difficulty: "Medium",
     plays: "14.7K",
     avgTime: "6 min",
@@ -246,7 +225,7 @@ export const PRODUCT_DATA: Game[] = [
         fileType: ".AppImage",
         architecture: "x64",
         releaseDate: "2026-03-17",
-        download: "https://storage.koompi.cloud/org_6a2a675fd9ab673dd52326e2/kapp/Dragon Drop Setup 1.0.0.exe",
+        download: "https://storage.koompi.cloud/org_6a2a675fd9ab673dd52326e2/kapp/Dragon Drop-1.0.0.AppImage",
       },
     },
   },
@@ -265,8 +244,7 @@ export const PRODUCT_DATA: Game[] = [
     thumbnail: "game-cover/robot-obstacle.png",
     category: "Logic",
     categoryIcon: "🤖",
-    rate: "3.4",
-    starRate: "⭐⭐⭐⭐",
+    rate: 3.4,
     difficulty: "Hard",
     plays: "11.2K",
     avgTime: "10 min",
@@ -333,8 +311,7 @@ export const PRODUCT_DATA: Game[] = [
     thumbnail: "game-cover/master-mouse.png",
     category: "Mouse Skills",
     categoryIcon: "🖱️",
-    rate: "3.4",
-    starRate: "⭐⭐⭐⭐",
+    rate: 3.4,
     difficulty: "Easy",
     plays: "8.4K",
     avgTime: "7 min",
@@ -382,7 +359,7 @@ export const PRODUCT_DATA: Game[] = [
         fileType: ".AppImage",
         architecture: "x64",
         releaseDate: "2026-03-17",
-        download: "https://storage.koompi.cloud/org_6a2a675fd9ab673dd52326e2/kapp/Robot-Obstacle-Setup 1.0.0.exe",
+        download: "https://storage.koompi.cloud/org_6a2a675fd9ab673dd52326e2/kapp/MasterMouse-1.1.0.AppImage",
       },
     },
   },
@@ -401,8 +378,7 @@ export const PRODUCT_DATA: Game[] = [
     cover: "game-cover/cover/link-number-cover.png",
     category: "Puzzle",
     categoryIcon: "🧩",
-    rate: "3.4",
-    starRate: "⭐⭐⭐⭐",
+    rate: 3.4,
     difficulty: "Medium",
     plays: "7.8K",
     avgTime: "8 min",
@@ -469,8 +445,7 @@ export const PRODUCT_DATA: Game[] = [
     cover: "game-cover/cover/koompi-typing-cover.png",
     category: "Typing",
     categoryIcon: "⌨️",
-    rate: "4.2",
-    starRate: "⭐⭐⭐⭐",
+    rate: 4.2,
     difficulty: "Easy",
     plays: "21.6K",
     avgTime: "6 min",
