@@ -1,0 +1,133 @@
+# Game Detail Page — Code & UI Review
+`src/app/[game]/page.tsx`
+
+---
+
+## 🔴 Bugs / Broken Things
+
+### 1. `<a>` wrapping `<button>` — invalid HTML
+```tsx
+// Current (invalid)
+<a href={p?.releaseDetails?.download} target="_blank">
+  <button>Download for Windows</button>
+</a>
+```
+Interactive elements must not be nested. This breaks keyboard navigation and screen readers.  
+**Fix:** Make the `<a>` the styled element itself, or use `router.push` on a `<button>`.
+
+---
+
+### 2. Download URL is `undefined` when game has no desktop build
+`p?.releaseDetails?.download` can be `undefined`. When it is, the `<a>` renders with `href={undefined}`, which makes it a dead no-op link — no visual feedback to the user.
+
+---
+
+### 3. `useRouter` is imported but never used
+`router` is declared but no code path calls it. Dead import.
+
+---
+
+### 4. `SlideShow` is imported but never rendered
+`SlideShow` is imported at the top of the file but removed from the JSX. Dead import creating a bundle weight.
+
+---
+
+### 5. `ExternalLink` icon imported but never used
+Same issue — dead import from `lucide-react`.
+
+---
+
+### 6. Body scroll lock is never cleaned up on unmount
+```tsx
+useEffect(() => {
+  document.body.classList.toggle("overflow-hidden", showIfram);
+}, [showIfram]);
+```
+If the component unmounts while `showIfram === true` (e.g. user navigates away via back button), `overflow-hidden` stays on `<body>` forever — page stays un-scrollable.  
+**Fix:** Add a cleanup function that removes the class.
+
+---
+
+### 7. `brandColor` contains hover/text classes — splitting by `" "[0]` is fragile
+```tsx
+product.brandColor?.split(" ")[0] // e.g. "bg-violet-600"
+```
+This assumes the format is always `bg-X hover:bg-Y text-Z`. If any game's `brandColor` changes order, the accent bar silently gets the wrong colour.
+
+---
+
+## 🟡 UX / Usability Issues
+
+### 8. No "back" navigation
+There is no breadcrumb or back button. Users must rely on the browser back button. If they arrived from a deep link, back goes to the browser history — not the game library.
+
+### 9. No game screenshot / gallery section
+`SlideShow` was built for this exact purpose and then commented out. The page has a cover banner but no in-game screenshots, leaving a large empty visual gap between the cover and the info card.
+
+### 10. The iframe overlay has no loading indicator
+Clicking "Play Now" fires the iframe immediately with no spinner. The game can take 2–5 seconds to load — the user sees a blank black screen.
+
+### 11. No Escape key handler for the iframe overlay
+Common UX expectation: pressing `Escape` should close the fullscreen game. Currently only the close button works.
+
+### 12. Close button is hard to hit — only 36×36px and too close to navbar
+`top-20 right-5` puts it 80px from the top. On mobile this overlaps the Navbar area and is too small (< 44px touch target).
+
+### 13. Play count, avg time, and difficulty are not shown on the detail page
+The game card shows these stats. The detail page strips them out — users lose context after clicking through.
+
+### 14. No "Related Games" or "More Games" section
+After viewing a game, there is no path forward. Users have to scroll all the way back to the game grid. A "Play More Games" row at the bottom would improve session depth.
+
+### 15. "Not Found" state still renders `<Navbar>` incorrectly
+```tsx
+if (!product) {
+  return (
+    <div className="min-h-screen flex items-center ...">
+      <Navbar />         // ← inside a centered flex container
+      <p>Game not found.</p>
+    </div>
+  );
+}
+```
+The Navbar is inside the centered `div`, so it renders in the middle of the page rather than at the top.
+
+---
+
+## 🟢 Code Quality
+
+### 16. `showIfram` typo — should be `showIframe`
+Minor but it's a typo that exists in 8+ places.
+
+### 17. `specRows` is defined inside the component on every render
+It doesn't close over any state — it's a pure function that should be extracted outside the component or memoised.
+
+### 18. Star rating logic is duplicated
+The same `[1,2,3,4,5].map(...)` star-rendering block appears in both `GameCard.tsx` and this page. Should be a shared `<StarRow>` component (already exists in `GameCard` — extract it to a separate file).
+
+### 19. `product.type` has no TypeScript type — uses `any`
+```tsx
+product.type?.map((t: { text: string; color: string }, i: number) => ...)
+```
+The inline type cast is necessary because `type: any` in `constants.ts`. Should be `type Tag[]` where `Tag = { text: string; color: string }`.
+
+---
+
+## Priority Action Plan
+
+| Priority | Item | Effort |
+|---|---|---|
+| 🔴 High | Fix `<a>` wrapping `<button>` | 5 min |
+| 🔴 High | Fix body scroll lock cleanup | 5 min |
+| 🔴 High | Fix 404 Navbar position | 5 min |
+| 🔴 High | Remove 3 dead imports | 2 min |
+| 🟡 Medium | Add loading spinner inside iframe overlay | 15 min |
+| 🟡 Medium | Add Escape key handler for overlay | 5 min |
+| 🟡 Medium | Show play/difficulty/time stats on detail page | 10 min |
+| 🟡 Medium | Add back/breadcrumb navigation | 10 min |
+| 🟡 Medium | Handle undefined download URL gracefully | 10 min |
+| 🟡 Medium | Re-enable SlideShow or replace with game screenshots | 20 min |
+| 🟢 Low | Extract `StarRow` to shared component | 10 min |
+| 🟢 Low | Add "More Games" section at bottom | 20 min |
+| 🟢 Low | Fix `showIfram` typo | 2 min |
+| 🟢 Low | Type `product.type` properly | 10 min |
