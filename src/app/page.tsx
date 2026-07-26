@@ -112,7 +112,7 @@ export default function Home() {
 
 
   return (
-    <main className="relative min-h-screen w-full bg-[var(--gray-50)] dark:bg-[var(--gray-950)] text-gray-900 dark:text-gray-50 overflow-hidden">
+    <main className="relative min-h-screen w-full bg-[var(--gray-50)] dark:bg-[var(--gray-950)] text-gray-900 dark:text-gray-50 overflow-x-hidden">
       {/* ── GLOBAL BACKGROUND GRID ── */}
       <div
         className="fixed inset-0 pointer-events-none z-0 opacity-[0.04] dark:opacity-[0.04] bg-[linear-gradient(rgba(0,0,0,0.8)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.8)_1px,transparent_1px)] dark:bg-[linear-gradient(rgba(255,255,255,0.6)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.6)_1px,transparent_1px)]"
@@ -132,7 +132,7 @@ export default function Home() {
         <section
           id="games-section"
           aria-labelledby="games-heading"
-          className="mx-auto max-w-[1200px] px-5 sm:px-6 scroll-mt-16 py-[90px]"
+          className="mx-auto w-full max-w-[1200px] px-4 sm:px-6 scroll-mt-16 py-12 sm:py-[90px]"
         >
           {/* Section header — its own scroll-reveal */}
           <AnimatedSection className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
@@ -154,21 +154,45 @@ export default function Home() {
 
           {/* ── Featured This Week Carousel ── */}
           <AnimatedSection className="mb-12">
-            <div className="flex items-center gap-2 mb-6">
-              <span className="text-2xl" aria-hidden="true">🔥</span>
-              <h3 className="text-2xl font-bold text-gray-900 dark:text-white">Featured This Week</h3>
+            {/* Header row */}
+            <div className="mb-6 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3">
+              <div className="flex items-center gap-3">
+                {/* Live pulse dot */}
+                <span className="relative flex h-3 w-3 shrink-0" aria-hidden="true">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75" />
+                  <span className="relative inline-flex rounded-full h-3 w-3 bg-rose-500" />
+                </span>
+                <div>
+                  <h3 className="text-2xl font-black tracking-tight text-gray-900 dark:text-white leading-tight">
+                    Featured This Week
+                  </h3>
+                  <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5 font-medium">
+                    Hand-picked top games · Updated every week
+                  </p>
+                </div>
+              </div>
+              {/* Interaction hint — desktop only */}
+              <span className="hidden sm:inline-flex items-center gap-1.5 text-[11px] text-gray-400 dark:text-gray-600 font-medium select-none">
+                <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+                </svg>
+                drag to explore
+                <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+                </svg>
+              </span>
             </div>
             <FeaturedCarousel games={featuredGames} />
           </AnimatedSection>
 
           {/* ── Category Chips ── */}
           <AnimatedSection className="mb-6">
-            <div className="flex flex-wrap gap-2">
+            <div className="flex gap-2 overflow-x-auto no-scrollbar pb-1 -mx-4 px-4 sm:mx-0 sm:px-0 sm:flex-wrap">
               {ALL_CATEGORIES.map((cat) => (
                 <button
                   key={cat}
                   onClick={() => setCategoryFilter(cat)}
-                  className={`px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-200 border ${
+                  className={`shrink-0 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-200 border ${
                     categoryFilter === cat
                       ? "bg-indigo-600 border-indigo-600 text-white shadow-[0_2px_8px_rgba(99,102,241,0.35)]"
                       : "border-gray-200 dark:border-white/10 bg-white dark:bg-gray-900 text-gray-600 dark:text-gray-400 hover:border-indigo-300 hover:text-indigo-600 dark:hover:border-indigo-500/50 dark:hover:text-indigo-400"
@@ -182,9 +206,9 @@ export default function Home() {
           </AnimatedSection>
 
           {/* ── Toolbar (Search & Filters) ── */}
-          <AnimatedSection className="mb-6 flex flex-col sm:flex-row items-center gap-4 bg-white/50 dark:bg-gray-900/50 p-4 rounded-2xl border border-gray-200 dark:border-white/10 backdrop-blur-sm">
-            {/* Search */}
-            <div className="relative w-full sm:max-w-xs">
+          <AnimatedSection className="mb-6 flex flex-col gap-3 bg-white/50 dark:bg-gray-900/50 p-3 sm:p-4 rounded-2xl border border-gray-200 dark:border-white/10 backdrop-blur-sm">
+            {/* Search — full width always */}
+            <div className="relative w-full">
               <label htmlFor="game-search" className="sr-only">Search games</label>
               <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
@@ -199,13 +223,14 @@ export default function Home() {
               />
             </div>
 
-            <div className="flex w-full sm:w-auto items-center gap-3 overflow-x-auto no-scrollbar sm:ml-auto">
+            {/* Filters row — scrollable on mobile */}
+            <div className="flex items-center gap-2 overflow-x-auto no-scrollbar">
               {/* Sort */}
               <select
                 value={sortOption}
                 onChange={(e) => setSortOption(e.target.value as SortOption)}
                 aria-label="Sort games"
-                className="rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 px-3 py-2.5 text-sm outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 transition-all dark:text-white cursor-pointer"
+                className="shrink-0 rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 px-3 py-2 text-xs sm:text-sm outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 transition-all dark:text-white cursor-pointer"
               >
                 <option value="default">Default Order</option>
                 <option value="rating">Highest Rated</option>
@@ -214,12 +239,12 @@ export default function Home() {
                 <option value="difficulty-desc">Hardest First</option>
               </select>
 
-              {/* Difficulty Toggle */}
+              {/* Difficulty */}
               <select
                 value={difficultyFilter}
                 onChange={(e) => setDifficultyFilter(e.target.value as Difficulty | "All")}
                 aria-label="Filter by difficulty"
-                className="rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 px-3 py-2.5 text-sm outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 transition-all dark:text-white cursor-pointer"
+                className="shrink-0 rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 px-3 py-2 text-xs sm:text-sm outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 transition-all dark:text-white cursor-pointer"
               >
                 <option value="All">All Difficulties</option>
                 <option value="Easy">Easy</option>
@@ -228,14 +253,14 @@ export default function Home() {
               </select>
 
               {/* Rating Toggle */}
-              <label className="flex items-center gap-2 cursor-pointer bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 px-3 py-2.5 rounded-xl transition-all hover:bg-gray-50 dark:hover:bg-gray-700">
+              <label className="shrink-0 flex items-center gap-2 cursor-pointer bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 px-3 py-2 rounded-xl transition-all hover:bg-gray-50 dark:hover:bg-gray-700">
                 <input
                   type="checkbox"
                   checked={ratingFilter}
                   onChange={(e) => setRatingFilter(e.target.checked)}
                   className="w-4 h-4 rounded text-indigo-600 focus:ring-indigo-500 cursor-pointer"
                 />
-                <span className="text-sm font-medium whitespace-nowrap dark:text-white">4.5+ ⭐</span>
+                <span className="text-xs sm:text-sm font-medium whitespace-nowrap dark:text-white">4.5+ ⭐</span>
               </label>
             </div>
           </AnimatedSection>
@@ -267,7 +292,7 @@ export default function Home() {
           </div>
 
           {/* ── Cards Grid ── */}
-          <div className="grid grid-cols-1 justify-items-center gap-6 md:grid-cols-2 lg:grid-cols-3 min-h-[400px]">
+          <div className="grid grid-cols-1 gap-4 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3 min-h-[400px]">
             {!isClientLoaded ? (
               /* Loading skeletons — 6 to match 3-column grid */
               Array.from({ length: 6 }).map((_, i) => (

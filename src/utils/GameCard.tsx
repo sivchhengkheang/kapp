@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Game, Difficulty } from "../constants";
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useInView } from "../hooks/useInView";
 
 const DIFFICULTY_STYLES: Record<
@@ -49,6 +50,7 @@ export default function GameCard({ game, index = 0 }: { game: Game; index?: numb
   const diff = DIFFICULTY_STYLES[game.difficulty] ?? DIFFICULTY_STYLES.Easy;
   const [ref, inView] = useInView<HTMLAnchorElement>({ threshold: 0.08 });
   const [wishlisted, setWishlisted] = useState(false);
+  const router = useRouter();
   /* Stagger: cap at 8, then cycle back so large grids still animate */
   const staggerClass = `stagger-${((index % 8) + 1)}`;
 
@@ -74,13 +76,20 @@ export default function GameCard({ game, index = 0 }: { game: Game; index?: numb
     setWishlisted((w) => !w);
   };
 
+  /* Play Now — go directly to the dedicated immersive play route */
+  const handlePlay = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    router.push(`/play/${game.id}`);
+  };
+
   return (
     <Link
       href={`/${game.id}`}
       id={`game-card-${game.id}`}
       ref={ref}
       aria-label={`Play ${game.title}`}
-      className={`group block focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 rounded-2xl scroll-reveal ${staggerClass} ${inView ? "in-view" : ""} w-full mx-auto max-w-[400px] sm:max-w-none`}
+      className={`group block focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 rounded-2xl scroll-reveal ${staggerClass} ${inView ? "in-view" : ""} w-full`}
     >
       <article
         className="
@@ -91,10 +100,9 @@ export default function GameCard({ game, index = 0 }: { game: Game; index?: numb
           shadow-[0_2px_8px_rgba(0,0,0,0.06)]
           h-full
         "
-        style={{ minHeight: 400 }}
       >
-        {/* ── COVER IMAGE (200 × 150 px visible area) ─────── */}
-        <div className="relative overflow-hidden bg-gray-100 dark:bg-gray-800" style={{ height: 200 }}>
+        {/* ── COVER IMAGE ──────────────────────────── */}
+        <div className="relative overflow-hidden bg-gray-100 dark:bg-gray-800 h-48 sm:h-52 transition-all duration-300 group-hover:ring-1 group-hover:ring-indigo-500/30">
           <Image
             src={src}
             alt={game.title}
@@ -105,7 +113,7 @@ export default function GameCard({ game, index = 0 }: { game: Game; index?: numb
           />
 
           {/* Bottom gradient overlay for readability */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-black/5 to-transparent" />
 
           {/* Category icon badge — top-left */}
           <div className="absolute top-3 left-3 flex items-center gap-1.5 rounded-xl bg-black/45 backdrop-blur-sm px-2.5 py-1.5 ring-1 ring-white/10">
@@ -151,8 +159,7 @@ export default function GameCard({ game, index = 0 }: { game: Game; index?: numb
 
           {/* Title — 22px bold */}
           <h3
-            className="font-bold leading-snug text-gray-900 dark:text-white"
-            style={{ fontSize: 22 }}
+            className="font-bold leading-snug text-gray-900 dark:text-white text-lg sm:text-xl"
           >
             {game.title}
           </h3>
@@ -214,6 +221,7 @@ export default function GameCard({ game, index = 0 }: { game: Game; index?: numb
 
           {/* ── Play Now CTA ── */}
           <button
+            onClick={handlePlay}
             className="
               btn-micro
               mt-auto w-full flex items-center justify-center gap-2
@@ -221,11 +229,10 @@ export default function GameCard({ game, index = 0 }: { game: Game; index?: numb
               text-sm font-bold text-white
               bg-primary
             "
-            tabIndex={-1}
-            aria-hidden="true"
+            aria-label={`Play ${game.title} now`}
           >
             {/* Play triangle */}
-            <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
+            <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
               <path d="M8 5v14l11-7z" />
             </svg>
             Play Now
