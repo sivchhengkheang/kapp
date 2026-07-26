@@ -192,11 +192,10 @@ export default function Home() {
                 <button
                   key={cat}
                   onClick={() => setCategoryFilter(cat)}
-                  className={`shrink-0 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-200 border ${
-                    categoryFilter === cat
+                  className={`shrink-0 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-200 border ${categoryFilter === cat
                       ? "bg-indigo-600 border-indigo-600 text-white shadow-[0_2px_8px_rgba(99,102,241,0.35)]"
                       : "border-gray-200 dark:border-white/10 bg-white dark:bg-gray-900 text-gray-600 dark:text-gray-400 hover:border-indigo-300 hover:text-indigo-600 dark:hover:border-indigo-500/50 dark:hover:text-indigo-400"
-                  }`}
+                    }`}
                   aria-pressed={categoryFilter === cat}
                 >
                   {cat}

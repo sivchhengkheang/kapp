@@ -96,8 +96,8 @@ function StarRow({ rate, size = "sm" }: { rate: number; size?: "sm" | "md" }) {
           i <= Math.floor(rate)
             ? 1
             : i - rate < 1 && i - rate > 0
-            ? rate - Math.floor(rate)
-            : 0;
+              ? rate - Math.floor(rate)
+              : 0;
         return (
           <span key={i} className={`relative ${sz} shrink-0`}>
             <svg
@@ -198,7 +198,7 @@ export default function GameDetail() {
         {/* ══════════════════════════════════════════════════════════
             METADATA TAG BAR — pinned at very top
         ══════════════════════════════════════════════════════════ */}
-        <section className="border-b border-gray-200 dark:border-white/[0.06] bg-white dark:bg-gray-900 shadow-[var(--shadow-sm)]">
+        <section className="border-b border-gray-200 dark:border-white/[0.06] bg-white dark:bg-gray-900 shadow-[var(--shadow-sm)] ">
           <div className="mx-auto max-w-7xl px-5 py-3.5">
             <div className="flex flex-wrap items-center gap-2">
               {/* Type tags from product data */}
@@ -247,7 +247,7 @@ export default function GameDetail() {
         <section className="mx-auto max-w-7xl px-5 pt-8 pb-0">
           {/* Back navigation — sits above the rounded card */}
           <button
-            onClick={() => router.back()}
+            onClick={() => router.push('/#games-section')}
             className="mb-4 flex items-center gap-1.5 text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors duration-200 group"
           >
             <ArrowLeft className="w-4 h-4 transition-transform duration-200 group-hover:-translate-x-1" />
@@ -317,23 +317,23 @@ export default function GameDetail() {
 
                 {/* Right: CTAs */}
                 <div className="flex flex-col sm:flex-row md:flex-col gap-3 md:min-w-[220px]">
-                  <a
-                    href="#download-section"
-                    id="hero-download-cta"
-                    className={`group relative flex items-center justify-center gap-2.5 px-7 py-4 rounded-[var(--radius)] font-bold text-base transition-all duration-200 hover:scale-[1.03] active:scale-[0.98] shadow-lg overflow-hidden ${brandBtnCls}`}
-                  >
-                    <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full bg-white/10 skew-x-[-20deg] transition-transform duration-500 ease-out pointer-events-none" />
-                    <Download className="w-5 h-5 shrink-0" />
-                    Download Free
-                  </a>
                   <button
                     id="hero-play-btn"
                     onClick={() => router.push(`/play/${product.id}`)}
-                    className="flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-[var(--radius)] font-semibold text-sm text-white bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20 transition-all duration-200 hover:scale-[1.02] active:scale-[0.98]"
+                    className={`group relative flex items-center justify-center gap-2.5 px-7 py-4 rounded-[var(--radius)] font-semibold text-base transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] shadow-lg overflow-hidden ${brandBtnCls}`}
                   >
+                    <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full bg-white/10 skew-x-[-20deg] transition-transform duration-500 ease-out pointer-events-none" />
                     <Play className="w-4 h-4 fill-current" />
                     Play in Browser
                   </button>
+                  <a
+                    href="#download-section"
+                    id="hero-download-cta"
+                    className="flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-[var(--radius)] font-bold text-sm text-white bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20 transition-all duration-200 hover:scale-[1.03] active:scale-[0.98]"
+                  >
+                    <Download className="w-5 h-5 shrink-0" />
+                    Download Free
+                  </a>
                 </div>
               </div>
             </div>
@@ -625,11 +625,10 @@ export default function GameDetail() {
                           {specRows(plat).map(({ label, value, icon: Icon }, i) => (
                             <div
                               key={label}
-                              className={`flex items-center justify-between px-3 py-2 gap-2 ${
-                                i % 2 === 0
-                                  ? "bg-gray-50 dark:bg-gray-800/60"
-                                  : "bg-white dark:bg-gray-900"
-                              }`}
+                              className={`flex items-center justify-between px-3 py-2 gap-2 ${i % 2 === 0
+                                ? "bg-gray-50 dark:bg-gray-800/60"
+                                : "bg-white dark:bg-gray-900"
+                                }`}
                             >
                               <div className="flex items-center gap-1.5 text-gray-400 dark:text-gray-500">
                                 <Icon className="w-3 h-3 shrink-0" />
