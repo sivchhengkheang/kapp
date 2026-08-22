@@ -180,20 +180,16 @@ export default function HeroSection() {
   };
 
   return (
-    <section className="relative w-full overflow-hidden bg-transparent min-h-[620px] md:min-h-[720px">
+    <section className="relative w-full overflow-hidden bg-transparent min-h-screen sm:min-h-[100svh] flex flex-col justify-between">
       {/* ── Animated gradient canvas background ── */}
       <canvas
         ref={canvasRef}
-        className="absolute inset-0 h-full w-full "
+        className="absolute inset-0 h-full w-full pointer-events-none"
         aria-hidden="true"
       />
 
-
-
-      {/* ── Main content — centered, min 600px height ── */}
-      <div className="relative z-10 mx-auto max-w-7xl px-5 sm:px-6 flex flex-col lg:flex-row items-center gap-12 lg:gap-8"
-        style={{ minHeight: "clamp(600px, 100svh, 100svh)", paddingTop: "7rem", paddingBottom: "6rem" }}
-      >
+      {/* ── Main content — centered, full-screen viewport ── */}
+      <div className="relative z-10 mx-auto w-full max-w-7xl px-5 sm:px-6 flex-1 flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-12 pt-20 pb-16">
 
         {/* ─── LEFT: Copy ─────────────────────────────────── */}
         <div className="flex-1 flex flex-col items-center lg:items-start text-center lg:text-left gap-6 max-w-xl lg:max-w-none">
@@ -394,7 +390,7 @@ export default function HeroSection() {
         </div>
 
         {/* Mobile: horizontal scroll strip of game thumbnails */}
-        <div className="flex lg:hidden gap-3 overflow-x-auto no-scrollbar w-full pb-1" aria-hidden="true">
+        <div className="flex lg:hidden gap-3 overflow-x-auto no-scrollbar w-full pb-1 touch-pan-x touch-pan-y" aria-hidden="true">
           {PREVIEW_GAMES.map((game) => (
             <div
               key={game.id}
@@ -411,14 +407,14 @@ export default function HeroSection() {
       </div>
 
       {/* ── Scroll indicator ── */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-1.5">
+      <div className="absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-1">
         <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400 dark:text-white/30">
           Scroll
         </p>
         <button
           onClick={scrollToGames}
           aria-label="Scroll to games"
-          className="flex min-h-[44px] min-w-[44px] items-center justify-center group"
+          className="flex min-h-[44px] min-w-[44px] items-center justify-center group cursor-pointer"
         >
           <span className="flex h-8 w-5 flex-col items-center justify-start rounded-full border border-gray-300 dark:border-white/20 pt-1.5 group-hover:border-gray-500 dark:group-hover:border-white/40 transition-colors duration-200">
             <span className="scroll-dot h-1.5 w-1.5 rounded-full bg-gray-400 dark:bg-white/70" />

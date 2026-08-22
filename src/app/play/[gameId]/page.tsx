@@ -322,7 +322,7 @@ export default function PlayPage() {
         title={product.title}
         className="w-full flex-1 border-none"
         allowFullScreen
-        sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-fullscreen"
+        sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
         onError={() => {}}
         style={{ display: "block" }}
       />

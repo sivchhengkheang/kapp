@@ -224,7 +224,7 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
-    scroll-behavior: smooth;
+    overflow-x: clip;
   }
 
   body {
@@ -233,6 +233,7 @@
     font-size: var(--text-base);
     font-weight: var(--font-weight-body);
     line-height: var(--leading-relaxed);
+    overflow-x: clip;
     font-feature-settings:
       "kern" 1,
       "liga" 1,
@@ -451,25 +452,21 @@
       forwards;
   }
 
-  /* ── Card hover — 8px elevation ────────────────────────── */
+  /* ── Card hover — static box, subtle shadow highlight ── */
   .card-hover {
     transition:
-      transform var(--duration-moderate) var(--ease-out-cubic),
-      box-shadow var(--duration-moderate) var(--ease-out-cubic);
-    will-change: transform;
+      box-shadow var(--duration-moderate) var(--ease-out-cubic),
+      border-color var(--duration-moderate) var(--ease-out-cubic);
   }
   .card-hover:hover {
-    transform: translateY(-8px);
     box-shadow:
-      0 20px 48px -8px rgba(0, 0, 0, 0.14),
-      0 8px 16px -4px rgba(0, 0, 0, 0.08),
-      0 0 0 1px rgba(99, 102, 241, 0.14);
+      0 12px 32px -4px rgba(0, 0, 0, 0.12),
+      0 0 0 1px rgba(99, 102, 241, 0.2);
   }
   .dark .card-hover:hover {
     box-shadow:
-      0 20px 48px -8px rgba(0, 0, 0, 0.5),
-      0 8px 16px -4px rgba(0, 0, 0, 0.35),
-      0 0 0 1px rgba(99, 102, 241, 0.25);
+      0 12px 32px -4px rgba(0, 0, 0, 0.4),
+      0 0 0 1px rgba(99, 102, 241, 0.3);
   }
 
   /* ── Scroll reveal — viewport entrance ─────────────────── */
@@ -664,13 +661,10 @@
 }
 
 .hero-preview-card {
-  transition:
-    box-shadow 0.3s ease,
-    transform 0.3s ease;
+  transition: box-shadow 0.3s ease;
 }
 .hero-preview-card:hover {
   box-shadow: 0 16px 48px rgba(0, 0, 0, 0.7);
-  transform: scale(1.04);
 }
 
 .hero-cta-btn::before {

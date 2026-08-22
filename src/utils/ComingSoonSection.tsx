@@ -15,23 +15,23 @@ const TOTAL_DAYS = Math.round(
 
 function useCountdown(target: Date) {
   const [time, setTime] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
-  
+
   useEffect(() => {
     const calc = () => {
       const diff = Math.max(0, target.getTime() - Date.now());
       return {
-        days:    Math.floor(diff / 86_400_000),
-        hours:   Math.floor((diff % 86_400_000) / 3_600_000),
+        days: Math.floor(diff / 86_400_000),
+        hours: Math.floor((diff % 86_400_000) / 3_600_000),
         minutes: Math.floor((diff % 3_600_000) / 60_000),
         seconds: Math.floor((diff % 60_000) / 1_000),
       };
     };
-    
+
     setTime(calc());
     const id = setInterval(() => setTime(calc()), 1_000);
     return () => clearInterval(id);
   }, [target]);
-  
+
   return time;
 }
 
@@ -54,14 +54,14 @@ function TimeBlock({ value, label }: { value: number; label: string }) {
 }
 
 const UPCOMING_FEATURES = [
-  { icon: "🧠", label: "Brain Training",   desc: "Memory & pattern recognition challenges" },
+  { icon: "🧠", label: "Brain Training", desc: "Memory & pattern recognition challenges" },
   { icon: "✏️", label: "Creative Writing", desc: "AI-powered storytelling prompts" },
-  { icon: "🌏", label: "Language Skills",  desc: "Vocabulary games in 5 languages" },
+  { icon: "🌏", label: "Language Skills", desc: "Vocabulary games in 5 languages" },
 ];
 
 export default function ComingSoonSection() {
   const { days, hours, minutes, seconds } = useCountdown(RELEASE_DATE);
-  const [email, setEmail]         = useState("");
+  const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [progress, setProgress] = useState(0);
 
@@ -84,10 +84,10 @@ export default function ComingSoonSection() {
       aria-labelledby="coming-soon-heading"
     >
       {/* ── Background ── */}
-      <div className="absolute inset-0 bg-gradient-to-br from-transparent via-indigo-50/50 to-transparent dark:via-indigo-950/40" />
+      {/* <div className="absolute inset-0 bg-gradient-to-br from-transparent via-indigo-50/50 to-transparent dark:via-indigo-950/40" /> */}
       {/* Ambient orbs */}
-      <div className="absolute left-1/4 top-0 h-80 w-80 -translate-x-1/2 rounded-full bg-indigo-600/20 blur-[100px] pointer-events-none" />
-      <div className="absolute right-1/4 bottom-0 h-64 w-64 translate-x-1/2 rounded-full bg-violet-600/15 blur-[80px] pointer-events-none" />
+      {/* <div className="absolute left-1/4 top-0 h-80 w-80 -translate-x-1/2 rounded-full bg-indigo-600/20 blur-[100px] pointer-events-none" />
+      <div className="absolute right-1/4 bottom-0 h-64 w-64 translate-x-1/2 rounded-full bg-violet-600/15 blur-[80px] pointer-events-none" /> */}
 
 
       {/* ── Content ── */}
@@ -123,9 +123,9 @@ export default function ComingSoonSection() {
 
         {/* ── Countdown ── */}
         <div className="flex items-start gap-3 sm:gap-5">
-          <TimeBlock value={days}    label="Days"    />
+          <TimeBlock value={days} label="Days" />
           <span className="mt-4 sm:mt-5 text-2xl font-black text-gray-300 dark:text-white/30">:</span>
-          <TimeBlock value={hours}   label="Hours"   />
+          <TimeBlock value={hours} label="Hours" />
           <span className="mt-4 sm:mt-5 text-2xl font-black text-gray-300 dark:text-white/30">:</span>
           <TimeBlock value={minutes} label="Minutes" />
           <span className="mt-4 sm:mt-5 text-2xl font-black text-gray-300 dark:text-white/30">:</span>

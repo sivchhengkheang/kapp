@@ -12,7 +12,6 @@ export default function CommingCard() {
           bg-white/60 dark:bg-gray-900/40
           shadow-[var(--shadow-sm)]
           transition-all duration-250 ease-out
-          hover:-translate-y-1 hover:scale-[1.025]
           hover:border-indigo-300/70 dark:hover:border-indigo-500/40
           hover:shadow-[var(--shadow-md)]
         "

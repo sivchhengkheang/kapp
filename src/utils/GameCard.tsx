@@ -93,30 +93,36 @@ export default function GameCard({ game, index = 0 }: { game: Game; index?: numb
     >
       <article
         className="
-          card-hover
+          card-hover group/card
           relative flex flex-col overflow-hidden rounded-2xl
           bg-white dark:bg-gray-900
-          border border-border dark:border-white/[0.07]
-          shadow-[0_2px_8px_rgba(0,0,0,0.06)]
+          border border-gray-200/90 dark:border-white/[0.08]
+          hover:border-indigo-400/40 dark:hover:border-indigo-400/40
+          shadow-[0_2px_12px_rgba(0,0,0,0.05)]
+          hover:shadow-[0_12px_32px_rgba(99,102,241,0.12)]
+          transition-all duration-300
           h-full
         "
       >
+        {/* Top gradient accent bar */}
+        <div className="h-1 w-full bg-gradient-to-r from-indigo-500 via-violet-500 to-purple-500 opacity-80 group-hover/card:opacity-100 transition-opacity" />
+
         {/* ── COVER IMAGE ──────────────────────────── */}
-        <div className="relative overflow-hidden bg-gray-100 dark:bg-gray-800 h-48 sm:h-52 transition-all duration-300 group-hover:ring-1 group-hover:ring-indigo-500/30">
+        <div className="relative overflow-hidden bg-gray-100 dark:bg-gray-800 h-48 sm:h-52 transition-all duration-300">
           <Image
             src={src}
             alt={game.title}
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             priority={index < 3}
-            className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.07]"
+            className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.06]"
           />
 
           {/* Bottom gradient overlay for readability */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-black/5 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-black/5 to-transparent" />
 
           {/* Category icon badge — top-left */}
-          <div className="absolute top-3 left-3 flex items-center gap-1.5 rounded-xl bg-black/45 backdrop-blur-sm px-2.5 py-1.5 ring-1 ring-white/10">
+          <div className="absolute top-3 left-3 flex items-center gap-1.5 rounded-xl bg-black/50 backdrop-blur-md px-2.5 py-1.5 ring-1 ring-white/15">
             <span className="text-sm leading-none" aria-hidden="true">{game.categoryIcon}</span>
             <span className="text-[10px] font-bold uppercase tracking-wider text-white/90">
               {game.category}
@@ -128,7 +134,7 @@ export default function GameCard({ game, index = 0 }: { game: Game; index?: numb
             {/* Share Button */}
             <button
               onClick={handleShare}
-              className="flex h-8 w-8 items-center justify-center rounded-full bg-black/40 text-white backdrop-blur-sm ring-1 ring-white/20 transition hover:bg-black/60 hover:scale-110 active:scale-95"
+              className="flex h-8 w-8 items-center justify-center rounded-full bg-black/40 text-white backdrop-blur-sm ring-1 ring-white/20 transition hover:bg-black/60 hover:scale-110 active:scale-95 cursor-pointer"
               aria-label={`Share ${game.title}`}
               title="Share this game"
             >
@@ -139,7 +145,7 @@ export default function GameCard({ game, index = 0 }: { game: Game; index?: numb
             {/* Wishlist Button */}
             <button
               onClick={handleWishlist}
-              className="flex h-8 w-8 items-center justify-center rounded-full bg-black/40 backdrop-blur-sm ring-1 ring-white/20 transition hover:bg-black/60 hover:scale-110 active:scale-95"
+              className="flex h-8 w-8 items-center justify-center rounded-full bg-black/40 backdrop-blur-sm ring-1 ring-white/20 transition hover:bg-black/60 hover:scale-110 active:scale-95 cursor-pointer"
               aria-label={wishlisted ? `Remove ${game.title} from wishlist` : `Save ${game.title} to wishlist`}
               title={wishlisted ? "Remove from wishlist" : "Save to wishlist"}
             >
@@ -159,7 +165,7 @@ export default function GameCard({ game, index = 0 }: { game: Game; index?: numb
 
           {/* Title — 22px bold */}
           <h3
-            className="font-bold leading-snug text-gray-900 dark:text-white text-lg sm:text-xl"
+            className="font-bold leading-snug text-gray-900 dark:text-white text-lg sm:text-xl group-hover/card:text-indigo-600 dark:group-hover/card:text-indigo-400 transition-colors"
           >
             {game.title}
           </h3>
@@ -192,17 +198,17 @@ export default function GameCard({ game, index = 0 }: { game: Game; index?: numb
               className="flex items-center gap-1 text-gray-500 dark:text-gray-400"
               style={{ fontSize: "var(--text-sm)", lineHeight: "var(--leading-normal)" }}
             >
-              <svg className="w-3 h-3 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <svg className="w-3.5 h-3.5 shrink-0 text-indigo-500 dark:text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.347a1.125 1.125 0 0 1 0 1.972l-11.54 6.347a1.125 1.125 0 0 1-1.667-.986V5.653Z" />
               </svg>
-              <span className="font-semibold">{game.plays}</span> plays
+              <span className="font-semibold text-gray-700 dark:text-gray-300">{game.plays}</span> plays
             </span>
 
             <span className="text-gray-300 dark:text-gray-600 text-xs">·</span>
 
             {/* Avg time */}
             <span className="flex items-center gap-1 text-xs text-gray-500 dark:text-gray-400">
-              <svg className="w-3 h-3 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <svg className="w-3.5 h-3.5 shrink-0 text-indigo-500 dark:text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6l4 2m6-2a10 10 0 1 1-20 0 10 10 0 0 1 20 0Z" />
               </svg>
               {game.avgTime} avg
@@ -223,16 +229,20 @@ export default function GameCard({ game, index = 0 }: { game: Game; index?: numb
           <button
             onClick={handlePlay}
             className="
-              btn-micro
+              btn-micro group/btn
               mt-auto w-full flex items-center justify-center gap-2
               rounded-xl py-3 px-5 min-h-[44px]
               text-sm font-bold text-white
-              bg-primary
+              bg-gradient-to-r from-indigo-600 to-violet-600
+              hover:from-indigo-500 hover:to-purple-600
+              shadow-[0_2px_10px_rgba(99,102,241,0.25)]
+              hover:shadow-[0_4px_16px_rgba(99,102,241,0.4)]
+              transition-all duration-300 cursor-pointer
             "
             aria-label={`Play ${game.title} now`}
           >
             {/* Play triangle */}
-            <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+            <svg className="w-4 h-4 fill-current transition-transform duration-200 group-hover/btn:scale-110" viewBox="0 0 24 24" aria-hidden="true">
               <path d="M8 5v14l11-7z" />
             </svg>
             Play Now

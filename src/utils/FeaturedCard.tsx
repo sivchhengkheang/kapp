@@ -29,9 +29,8 @@ export default function FeaturedCard({ game, index = 0 }: { game: Game; index?: 
           bg-white dark:bg-gray-900
           border border-gray-200/80 dark:border-white/[0.08]
           shadow-[0_4px_20px_rgba(0,0,0,0.09)]
-          w-[240px] sm:w-[280px]
+          w-full h-full
           transition-all duration-300 ease-out
-          group-hover:-translate-y-2
           group-hover:shadow-[0_12px_36px_rgba(99,102,241,0.22),0_4px_12px_rgba(0,0,0,0.10)]
         "
       >
