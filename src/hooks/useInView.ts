@@ -12,8 +12,8 @@ interface UseInViewOptions {
  * Attach `ref` to the element you want to observe.
  */
 export function useInView<T extends Element = HTMLDivElement>({
-  threshold = 0.12,
-  rootMargin = "0px 0px -40px 0px",
+  threshold = 0.05,
+  rootMargin = "0px 0px 0px 0px",
   once = true,
 }: UseInViewOptions = {}) {
   const ref = useRef<T>(null);
@@ -32,7 +32,7 @@ export function useInView<T extends Element = HTMLDivElement>({
           setInView(false);
         }
       },
-      { threshold, rootMargin }
+      { threshold, rootMargin },
     );
 
     observer.observe(el);

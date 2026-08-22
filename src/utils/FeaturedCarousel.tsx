@@ -5,30 +5,30 @@ import { Game } from "../constants";
 import FeaturedCard from "./FeaturedCard";
 
 /* ── Physics constants ──────────────────────────────────── */
-const CARD_WIDTH  = 240;          // card render width (px) — matches w-[240px] on mobile
-const CARD_GAP    = 20;           // gap between cards
-const CARD_STEP   = CARD_WIDTH + CARD_GAP;
-const AUTO_SPEED  = 0.22;         // px / frame at 60 fps → ~13 px/s — intentionally slow
-const FRICTION    = 0.92;         // momentum decay per frame (higher = smoother coast)
-const WHEEL_SENS  = 0.08;         // wheel / trackpad sensitivity multiplier
-const COPIES      = 4;            // deck copies for seamless infinite loop
+const CARD_WIDTH = 240;          // card render width (px) — matches w-[240px] on mobile
+const CARD_GAP = 20;           // gap between cards
+const CARD_STEP = CARD_WIDTH + CARD_GAP;
+const AUTO_SPEED = 0.20;            // auto-scroll disabled — drag/swipe only
+const FRICTION = 0.92;         // momentum decay per frame (higher = smoother coast)
+const WHEEL_SENS = 0.08;         // wheel / trackpad sensitivity multiplier
+const COPIES = 4;            // deck copies for seamless infinite loop
 
 export default function FeaturedCarousel({ games }: { games: Game[] }) {
   const totalWidth = games.length * CARD_STEP;
-  const looped     = Array.from({ length: COPIES }, () => games).flat();
+  const looped = Array.from({ length: COPIES }, () => games).flat();
 
   /* ── Refs (avoid re-render inside RAF) ── */
-  const wrapRef     = useRef<HTMLDivElement>(null);
-  const trackRef    = useRef<HTMLDivElement>(null);
-  const rafRef      = useRef<number>(0);
-  const offsetRef   = useRef(0);
-  const velRef      = useRef(0);
-  const pausedRef   = useRef(false);    // hover / focus pause
+  const wrapRef = useRef<HTMLDivElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const rafRef = useRef<number>(0);
+  const offsetRef = useRef(0);
+  const velRef = useRef(0);
+  const pausedRef = useRef(false);    // hover / focus pause
   const draggingRef = useRef(false);
 
   /* ── State for UI (dots + pause indicator) ── */
   const [activeIndex, setActiveIndex] = useState(0);
-  const [isPaused, setIsPaused]       = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
 
   /* ── RAF animation loop ── */
   useEffect(() => {
@@ -86,22 +86,22 @@ export default function FeaturedCarousel({ games }: { games: Game[] }) {
     let dragV = 0;
 
     const onTouchStart = (e: TouchEvent) => {
-      startX       = e.touches[0].clientX;
-      startOffset  = offsetRef.current;
-      lastX        = startX;
-      lastT        = e.timeStamp;
-      dragV        = 0;
-      velRef.current   = 0;
+      startX = e.touches[0].clientX;
+      startOffset = offsetRef.current;
+      lastX = startX;
+      lastT = e.timeStamp;
+      dragV = 0;
+      velRef.current = 0;
       draggingRef.current = true;
     };
 
     const onTouchMove = (e: TouchEvent) => {
       if (!draggingRef.current) return;
-      const x  = e.touches[0].clientX;
+      const x = e.touches[0].clientX;
       const dt = Math.max(1, e.timeStamp - lastT);
-      dragV    = (lastX - x) / dt;
-      lastX    = x;
-      lastT    = e.timeStamp;
+      dragV = (lastX - x) / dt;
+      lastX = x;
+      lastT = e.timeStamp;
       const dx = startX - x;
       offsetRef.current = ((startOffset + dx) % totalWidth + totalWidth) % totalWidth;
       if (trackRef.current) {
@@ -115,13 +115,13 @@ export default function FeaturedCarousel({ games }: { games: Game[] }) {
     };
 
     el.addEventListener("touchstart", onTouchStart, { passive: true });
-    el.addEventListener("touchmove",  onTouchMove,  { passive: true });
-    el.addEventListener("touchend",   onTouchEnd,   { passive: true });
+    el.addEventListener("touchmove", onTouchMove, { passive: true });
+    el.addEventListener("touchend", onTouchEnd, { passive: true });
 
     return () => {
       el.removeEventListener("touchstart", onTouchStart);
-      el.removeEventListener("touchmove",  onTouchMove);
-      el.removeEventListener("touchend",   onTouchEnd);
+      el.removeEventListener("touchmove", onTouchMove);
+      el.removeEventListener("touchend", onTouchEnd);
     };
   }, [totalWidth]);
 
@@ -137,23 +137,23 @@ export default function FeaturedCarousel({ games }: { games: Game[] }) {
     let dragV = 0;
 
     const onMouseDown = (e: MouseEvent) => {
-      startX               = e.clientX;
-      startOffset          = offsetRef.current;
-      lastX                = startX;
-      lastT                = performance.now();
-      dragV                = 0;
-      velRef.current       = 0;
-      draggingRef.current  = true;
-      el.style.cursor      = "grabbing";
+      startX = e.clientX;
+      startOffset = offsetRef.current;
+      lastX = startX;
+      lastT = performance.now();
+      dragV = 0;
+      velRef.current = 0;
+      draggingRef.current = true;
+      el.style.cursor = "grabbing";
     };
 
     const onMouseMove = (e: MouseEvent) => {
       if (!draggingRef.current) return;
-      const t  = performance.now();
+      const t = performance.now();
       const dt = Math.max(1, t - lastT);
-      dragV    = (lastX - e.clientX) / dt;
-      lastX    = e.clientX;
-      lastT    = t;
+      dragV = (lastX - e.clientX) / dt;
+      lastX = e.clientX;
+      lastT = t;
       const dx = startX - e.clientX;
       offsetRef.current = ((startOffset + dx) % totalWidth + totalWidth) % totalWidth;
       if (trackRef.current) {
@@ -164,18 +164,18 @@ export default function FeaturedCarousel({ games }: { games: Game[] }) {
     const onMouseUp = () => {
       if (!draggingRef.current) return;
       draggingRef.current = false;
-      el.style.cursor     = "grab";
-      velRef.current      = dragV * 14;
+      el.style.cursor = "grab";
+      velRef.current = dragV * 14;
     };
 
     el.addEventListener("mousedown", onMouseDown);
     window.addEventListener("mousemove", onMouseMove);
-    window.addEventListener("mouseup",   onMouseUp);
+    window.addEventListener("mouseup", onMouseUp);
 
     return () => {
       el.removeEventListener("mousedown", onMouseDown);
       window.removeEventListener("mousemove", onMouseMove);
-      window.removeEventListener("mouseup",   onMouseUp);
+      window.removeEventListener("mouseup", onMouseUp);
     };
   }, [totalWidth]);
 
@@ -189,7 +189,7 @@ export default function FeaturedCarousel({ games }: { games: Game[] }) {
 
   /* ── Jump to slide ── */
   const jumpTo = (i: number) => {
-    velRef.current    = 0;
+    velRef.current = 0;
     offsetRef.current = ((i * CARD_STEP) % totalWidth + totalWidth) % totalWidth;
     if (trackRef.current) {
       trackRef.current.style.transform = `translate3d(-${offsetRef.current}px, 0, 0)`;
@@ -259,19 +259,18 @@ export default function FeaturedCarousel({ games }: { games: Game[] }) {
             className={`
               rounded-full transition-all duration-300 ease-out
               focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500
-              ${
-                i === activeIndex
-                  ? "w-6 h-2 bg-indigo-500 shadow-[0_0_10px_rgba(99,102,241,0.55)]"
-                  : "w-2 h-2 bg-gray-300 dark:bg-gray-700 hover:bg-indigo-400 dark:hover:bg-indigo-500 hover:scale-125"
+              ${i === activeIndex
+                ? "w-6 h-2 bg-indigo-500 shadow-[0_0_10px_rgba(99,102,241,0.55)]"
+                : "w-2 h-2 bg-gray-300 dark:bg-gray-700 hover:bg-indigo-400 dark:hover:bg-indigo-500 hover:scale-125"
               }
             `}
           />
         ))}
       </div>
 
-      {/* ── Drag hint (shown briefly on mount, fades out) ── */}
+      {/* ── Drag hint ── */}
       <p className="mt-3 text-center text-[11px] text-gray-400 dark:text-gray-600 select-none" aria-hidden="true">
-        Hover to pause · Drag or swipe to explore
+        Drag or swipe to explore
       </p>
     </div>
   );

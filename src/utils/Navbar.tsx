@@ -18,11 +18,11 @@ const NAV_LINKS = [
 /* ── Logo mark SVG / Favicon ── */
 function LogoMark() {
   return (
-    <Image 
-      src="/favicon.ico" 
-      alt="KAPP Logo" 
-      width={28} 
-      height={28} 
+    <Image
+      src="/favicon.ico"
+      alt="KAPP Logo"
+      width={28}
+      height={28}
       className="object-contain"
     />
   );
@@ -190,7 +190,8 @@ export default function Navbar() {
         `}
       >
         {/* Max-width container: 1200px */}
-        <div className="mx-auto flex max-w-[1200px] items-center justify-between px-5 sm:px-6 h-16">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-5 sm:px-6 h-16">
+          {/* <div className="mx-auto flex max-w-[1200px] items-center justify-between px-5 sm:px-6 h-16"> */}
 
           {/* ── LOGO ── */}
           <Link
@@ -255,8 +256,8 @@ export default function Navbar() {
             <button
               onClick={toggleDarkMode}
               className={`p-2.5 rounded-xl border transition-all duration-200 ${isSolid
-                  ? "border-gray-200 text-gray-500 hover:text-indigo-600 dark:border-white/10 dark:text-gray-400 dark:hover:text-indigo-400"
-                  : "border-gray-300 bg-white/50 text-gray-600 hover:bg-white hover:text-indigo-600 dark:border-white/20 dark:bg-white/10 dark:text-gray-300 dark:hover:text-indigo-400 dark:hover:bg-white/20"
+                ? "border-gray-200 text-gray-500 hover:text-indigo-600 dark:border-white/10 dark:text-gray-400 dark:hover:text-indigo-400"
+                : "border-gray-300 bg-white/50 text-gray-600 hover:bg-white hover:text-indigo-600 dark:border-white/20 dark:bg-white/10 dark:text-gray-300 dark:hover:text-indigo-400 dark:hover:bg-white/20"
                 }`}
               aria-label="Toggle Dark Mode"
             >
@@ -273,8 +274,8 @@ export default function Navbar() {
 
             {user ? (
               <div className={`flex items-center gap-3 px-3 py-1.5 rounded-xl border ${isSolid
-                  ? "border-gray-200 bg-white dark:border-white/10 dark:bg-gray-900"
-                  : "border-gray-300 bg-white/50 dark:border-white/20 dark:bg-white/10 backdrop-blur-sm"
+                ? "border-gray-200 bg-white dark:border-white/10 dark:bg-gray-900"
+                : "border-gray-300 bg-white/50 dark:border-white/20 dark:bg-white/10 backdrop-blur-sm"
                 }`}>
                 <div className="flex flex-col text-right">
                   <span className={`text-[11px] font-semibold uppercase tracking-wider text-indigo-500 dark:text-indigo-400`}>

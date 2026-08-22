@@ -552,9 +552,9 @@ export default function GameDetail() {
                             id={`download-${key}-btn`}
                           >
                             <button
-                              className={`w-full py-3 px-4 rounded-[var(--radius)] font-semibold text-sm flex items-center gap-3 transition-all duration-200 hover:scale-[1.01] active:scale-[0.99] hover:shadow-[var(--shadow-sm)] ${brandBtnCls}`}
+                              className="w-full py-3 px-4 rounded-[var(--radius)] font-semibold text-sm flex items-center gap-3 transition-all duration-200 hover:scale-[1.01] active:scale-[0.99] bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-white/10 hover:shadow-[var(--shadow-sm)]"
                             >
-                              <div className={`p-1.5 rounded-md bg-white/20 shrink-0`}>
+                              <div className="p-1.5 rounded-md bg-gray-200 dark:bg-white/10 shrink-0">
                                 <Image
                                   src={icon}
                                   alt={iconAlt}

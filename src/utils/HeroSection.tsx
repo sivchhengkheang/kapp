@@ -8,12 +8,12 @@ import { PRODUCT_DATA } from "../constants";
 /* ── Brand-colour → Tailwind gradient map ── */
 const BRAND_GRADIENTS: Record<string, string> = {
   "bg-violet-600 hover:bg-violet-700 text-white": "from-violet-500 to-purple-600",
-  "bg-sky-500 hover:bg-sky-600 text-white":        "from-sky-400 to-blue-500",
-  "bg-orange-500 hover:bg-orange-600 text-white":  "from-orange-500 to-rose-500",
-  "bg-cyan-600 hover:bg-cyan-700 text-white":      "from-cyan-500 to-blue-600",
-  "bg-rose-500 hover:bg-rose-600 text-white":      "from-rose-500 to-pink-600",
-  "bg-emerald-600 hover:bg-emerald-700 text-white":"from-emerald-500 to-teal-600",
-  "bg-blue-600 hover:bg-blue-700 text-white":      "from-blue-500 to-indigo-600",
+  "bg-sky-500 hover:bg-sky-600 text-white": "from-sky-400 to-blue-500",
+  "bg-orange-500 hover:bg-orange-600 text-white": "from-orange-500 to-rose-500",
+  "bg-cyan-600 hover:bg-cyan-700 text-white": "from-cyan-500 to-blue-600",
+  "bg-rose-500 hover:bg-rose-600 text-white": "from-rose-500 to-pink-600",
+  "bg-emerald-600 hover:bg-emerald-700 text-white": "from-emerald-500 to-teal-600",
+  "bg-blue-600 hover:bg-blue-700 text-white": "from-blue-500 to-indigo-600",
 };
 
 /* ── Derive preview cards from PRODUCT_DATA (top 4) ── */
@@ -122,10 +122,10 @@ export default function HeroSection() {
 
     /* Orb definitions */
     const orbs = [
-      { x: 0.25, y: 0.3,  r: 0.45, color: [99, 102, 241],  speed: 0.00018, phase: 0 },    // indigo
+      { x: 0.25, y: 0.3, r: 0.45, color: [99, 102, 241], speed: 0.00018, phase: 0 },    // indigo
       { x: 0.65, y: 0.55, r: 0.38, color: [139, 92, 246], speed: 0.00014, phase: 2.1 },   // violet
-      { x: 0.5,  y: 0.85, r: 0.3,  color: [59, 130, 246],  speed: 0.0002,  phase: 4.3 },  // blue
-      { x: 0.8,  y: 0.2,  r: 0.28, color: [168, 85, 247],  speed: 0.00016, phase: 1.5 },  // purple
+      { x: 0.5, y: 0.85, r: 0.3, color: [59, 130, 246], speed: 0.0002, phase: 4.3 },  // blue
+      { x: 0.8, y: 0.2, r: 0.28, color: [168, 85, 247], speed: 0.00016, phase: 1.5 },  // purple
     ];
 
     let t = 0;
@@ -173,25 +173,25 @@ export default function HeroSection() {
   }, []);
 
   const scrollToGames = () => {
-    document.getElementById("games-section")?.scrollIntoView({ behavior: "smooth" });
+    document.getElementById("games-section")?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
   };
 
   return (
-    <section
-      className="relative w-full overflow-hidden bg-transparent"
-      style={{ minHeight: "clamp(600px, 100svh, 100svh)" }}
-    >
+    <section className="relative w-full overflow-hidden bg-transparent min-h-[620px] md:min-h-[720px">
       {/* ── Animated gradient canvas background ── */}
       <canvas
         ref={canvasRef}
-        className="absolute inset-0 h-full w-full"
+        className="absolute inset-0 h-full w-full "
         aria-hidden="true"
       />
 
 
 
       {/* ── Main content — centered, min 600px height ── */}
-      <div className="relative z-10 mx-auto max-w-[1200px] px-5 sm:px-6 flex flex-col lg:flex-row items-center gap-12 lg:gap-8"
+      <div className="relative z-10 mx-auto max-w-7xl px-5 sm:px-6 flex flex-col lg:flex-row items-center gap-12 lg:gap-8"
         style={{ minHeight: "clamp(600px, 100svh, 100svh)", paddingTop: "7rem", paddingBottom: "6rem" }}
       >
 
