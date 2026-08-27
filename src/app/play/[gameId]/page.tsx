@@ -525,21 +525,22 @@ export default function PlayPage() {
         />
       </div>
 
-      {/* Mobile tap zones — top & bottom strips reveal the HUD */}
+      {/* Mobile Pull Handle — visible when HUD is hidden */}
       <div
-        className="sm:hidden absolute top-0 left-0 right-0 h-12 z-20"
+        className={`
+          sm:hidden absolute bottom-2 left-1/2 -translate-x-1/2 z-20
+          flex items-center justify-center p-4
+          transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]
+          ${hudVisible ? "opacity-0 pointer-events-none translate-y-4" : "opacity-100 translate-y-0 cursor-pointer"}
+        `}
         onTouchStart={(e) => { e.stopPropagation(); showHud(); }}
-        aria-label="Tap to show game controls"
+        onClick={(e) => { e.stopPropagation(); showHud(); }}
+        aria-label="Show game controls"
         role="button"
-        tabIndex={-1}
-      />
-      <div
-        className="sm:hidden absolute bottom-0 left-0 right-0 h-20 z-20"
-        onTouchStart={(e) => { e.stopPropagation(); showHud(); }}
-        aria-label="Tap to show game controls"
-        role="button"
-        tabIndex={-1}
-      />
+        tabIndex={0}
+      >
+        <div className="w-12 h-1.5 rounded-full bg-white/30 backdrop-blur-md shadow-sm" />
+      </div>
 
       {/* Bottom fade edge */}
       <div
