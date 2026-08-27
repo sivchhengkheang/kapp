@@ -74,47 +74,47 @@ const DEFAULT_OBJECTIVES = [
 /* ── Skills per category ─────────────────────────────────────────── */
 const SKILLS_MAP: Record<string, { icon: string; label: string; color: string }[]> = {
   Coding: [
-    { icon: "⌨️", label: "Typing Speed",     color: "bg-violet-50 dark:bg-violet-500/10 text-violet-700 dark:text-violet-300 border-violet-200 dark:border-violet-500/30" },
-    { icon: "🧠", label: "Code Memory",      color: "bg-indigo-50 dark:bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 border-indigo-200 dark:border-indigo-500/30" },
-    { icon: "⚡", label: "Reaction Speed",   color: "bg-amber-50 dark:bg-amber-500/10 text-amber-700 dark:text-amber-300 border-amber-200 dark:border-amber-500/30" },
-    { icon: "🎯", label: "Pattern Focus",    color: "bg-teal-50 dark:bg-teal-500/10 text-teal-700 dark:text-teal-300 border-teal-200 dark:border-teal-500/30" },
+    { icon: "⌨️", label: "Typing Speed", color: "bg-violet-50 dark:bg-violet-500/10 text-violet-700 dark:text-violet-300 border-violet-200 dark:border-violet-500/30" },
+    { icon: "🧠", label: "Code Memory", color: "bg-indigo-50 dark:bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 border-indigo-200 dark:border-indigo-500/30" },
+    { icon: "⚡", label: "Reaction Speed", color: "bg-amber-50 dark:bg-amber-500/10 text-amber-700 dark:text-amber-300 border-amber-200 dark:border-amber-500/30" },
+    { icon: "🎯", label: "Pattern Focus", color: "bg-teal-50 dark:bg-teal-500/10 text-teal-700 dark:text-teal-300 border-teal-200 dark:border-teal-500/30" },
   ],
   Math: [
-    { icon: "🧮", label: "Mental Math",      color: "bg-blue-50 dark:bg-blue-500/10 text-blue-700 dark:text-blue-300 border-blue-200 dark:border-blue-500/30" },
+    { icon: "🧮", label: "Mental Math", color: "bg-blue-50 dark:bg-blue-500/10 text-blue-700 dark:text-blue-300 border-blue-200 dark:border-blue-500/30" },
     { icon: "⚡", label: "Calculation Speed", color: "bg-amber-50 dark:bg-amber-500/10 text-amber-700 dark:text-amber-300 border-amber-200 dark:border-amber-500/30" },
-    { icon: "🎯", label: "Accuracy",         color: "bg-teal-50 dark:bg-teal-500/10 text-teal-700 dark:text-teal-300 border-teal-200 dark:border-teal-500/30" },
-    { icon: "🧠", label: "Working Memory",   color: "bg-violet-50 dark:bg-violet-500/10 text-violet-700 dark:text-violet-300 border-violet-200 dark:border-violet-500/30" },
+    { icon: "🎯", label: "Accuracy", color: "bg-teal-50 dark:bg-teal-500/10 text-teal-700 dark:text-teal-300 border-teal-200 dark:border-teal-500/30" },
+    { icon: "🧠", label: "Working Memory", color: "bg-violet-50 dark:bg-violet-500/10 text-violet-700 dark:text-violet-300 border-violet-200 dark:border-violet-500/30" },
   ],
   "Mouse Skills": [
-    { icon: "🖱️", label: "Precision",        color: "bg-sky-50 dark:bg-sky-500/10 text-sky-700 dark:text-sky-300 border-sky-200 dark:border-sky-500/30" },
-    { icon: "👁️", label: "Hand-Eye Coord",   color: "bg-teal-50 dark:bg-teal-500/10 text-teal-700 dark:text-teal-300 border-teal-200 dark:border-teal-500/30" },
-    { icon: "⚡", label: "Reaction Time",    color: "bg-amber-50 dark:bg-amber-500/10 text-amber-700 dark:text-amber-300 border-amber-200 dark:border-amber-500/30" },
-    { icon: "🎯", label: "Target Tracking",  color: "bg-rose-50 dark:bg-rose-500/10 text-rose-700 dark:text-rose-300 border-rose-200 dark:border-rose-500/30" },
+    { icon: "🖱️", label: "Precision", color: "bg-sky-50 dark:bg-sky-500/10 text-sky-700 dark:text-sky-300 border-sky-200 dark:border-sky-500/30" },
+    { icon: "👁️", label: "Hand-Eye Coord", color: "bg-teal-50 dark:bg-teal-500/10 text-teal-700 dark:text-teal-300 border-teal-200 dark:border-teal-500/30" },
+    { icon: "⚡", label: "Reaction Time", color: "bg-amber-50 dark:bg-amber-500/10 text-amber-700 dark:text-amber-300 border-amber-200 dark:border-amber-500/30" },
+    { icon: "🎯", label: "Target Tracking", color: "bg-rose-50 dark:bg-rose-500/10 text-rose-700 dark:text-rose-300 border-rose-200 dark:border-rose-500/30" },
   ],
   Logic: [
     { icon: "🧠", label: "Critical Thinking", color: "bg-indigo-50 dark:bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 border-indigo-200 dark:border-indigo-500/30" },
     { icon: "🗺️", label: "Spatial Reasoning", color: "bg-teal-50 dark:bg-teal-500/10 text-teal-700 dark:text-teal-300 border-teal-200 dark:border-teal-500/30" },
-    { icon: "🔗", label: "Pattern Logic",     color: "bg-violet-50 dark:bg-violet-500/10 text-violet-700 dark:text-violet-300 border-violet-200 dark:border-violet-500/30" },
-    { icon: "🎯", label: "Problem Solving",   color: "bg-amber-50 dark:bg-amber-500/10 text-amber-700 dark:text-amber-300 border-amber-200 dark:border-amber-500/30" },
+    { icon: "🔗", label: "Pattern Logic", color: "bg-violet-50 dark:bg-violet-500/10 text-violet-700 dark:text-violet-300 border-violet-200 dark:border-violet-500/30" },
+    { icon: "🎯", label: "Problem Solving", color: "bg-amber-50 dark:bg-amber-500/10 text-amber-700 dark:text-amber-300 border-amber-200 dark:border-amber-500/30" },
   ],
   Puzzle: [
     { icon: "🧩", label: "Pattern Recognition", color: "bg-violet-50 dark:bg-violet-500/10 text-violet-700 dark:text-violet-300 border-violet-200 dark:border-violet-500/30" },
-    { icon: "🧠", label: "Logical Deduction",   color: "bg-indigo-50 dark:bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 border-indigo-200 dark:border-indigo-500/30" },
-    { icon: "🎯", label: "Focus",               color: "bg-teal-50 dark:bg-teal-500/10 text-teal-700 dark:text-teal-300 border-teal-200 dark:border-teal-500/30" },
-    { icon: "⏱️", label: "Patience",            color: "bg-blue-50 dark:bg-blue-500/10 text-blue-700 dark:text-blue-300 border-blue-200 dark:border-blue-500/30" },
+    { icon: "🧠", label: "Logical Deduction", color: "bg-indigo-50 dark:bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 border-indigo-200 dark:border-indigo-500/30" },
+    { icon: "🎯", label: "Focus", color: "bg-teal-50 dark:bg-teal-500/10 text-teal-700 dark:text-teal-300 border-teal-200 dark:border-teal-500/30" },
+    { icon: "⏱️", label: "Patience", color: "bg-blue-50 dark:bg-blue-500/10 text-blue-700 dark:text-blue-300 border-blue-200 dark:border-blue-500/30" },
   ],
   Typing: [
-    { icon: "⌨️", label: "WPM Speed",       color: "bg-sky-50 dark:bg-sky-500/10 text-sky-700 dark:text-sky-300 border-sky-200 dark:border-sky-500/30" },
-    { icon: "🎯", label: "Accuracy",        color: "bg-teal-50 dark:bg-teal-500/10 text-teal-700 dark:text-teal-300 border-teal-200 dark:border-teal-500/30" },
-    { icon: "🧠", label: "Muscle Memory",   color: "bg-violet-50 dark:bg-violet-500/10 text-violet-700 dark:text-violet-300 border-violet-200 dark:border-violet-500/30" },
-    { icon: "⚡", label: "Rhythm & Flow",   color: "bg-amber-50 dark:bg-amber-500/10 text-amber-700 dark:text-amber-300 border-amber-200 dark:border-amber-500/30" },
+    { icon: "⌨️", label: "WPM Speed", color: "bg-sky-50 dark:bg-sky-500/10 text-sky-700 dark:text-sky-300 border-sky-200 dark:border-sky-500/30" },
+    { icon: "🎯", label: "Accuracy", color: "bg-teal-50 dark:bg-teal-500/10 text-teal-700 dark:text-teal-300 border-teal-200 dark:border-teal-500/30" },
+    { icon: "🧠", label: "Muscle Memory", color: "bg-violet-50 dark:bg-violet-500/10 text-violet-700 dark:text-violet-300 border-violet-200 dark:border-violet-500/30" },
+    { icon: "⚡", label: "Rhythm & Flow", color: "bg-amber-50 dark:bg-amber-500/10 text-amber-700 dark:text-amber-300 border-amber-200 dark:border-amber-500/30" },
   ],
 };
 
 const DEFAULT_SKILLS = [
-  { icon: "🎮", label: "Digital Skills",   color: "bg-gray-50 dark:bg-gray-800 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-gray-600" },
-  { icon: "🎯", label: "Focus",            color: "bg-teal-50 dark:bg-teal-500/10 text-teal-700 dark:text-teal-300 border-teal-200 dark:border-teal-500/30" },
-  { icon: "⚡", label: "Speed",            color: "bg-amber-50 dark:bg-amber-500/10 text-amber-700 dark:text-amber-300 border-amber-200 dark:border-amber-500/30" },
+  { icon: "🎮", label: "Digital Skills", color: "bg-gray-50 dark:bg-gray-800 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-gray-600" },
+  { icon: "🎯", label: "Focus", color: "bg-teal-50 dark:bg-teal-500/10 text-teal-700 dark:text-teal-300 border-teal-200 dark:border-teal-500/30" },
+  { icon: "⚡", label: "Speed", color: "bg-amber-50 dark:bg-amber-500/10 text-amber-700 dark:text-amber-300 border-amber-200 dark:border-amber-500/30" },
 ];
 
 /* ── Testimonials per category ──────────────────────────────────── */
@@ -203,6 +203,7 @@ export default function GameDetail() {
   const [lightboxSrc, setLightboxSrc] = useState<string | null>(null);
   const [shareToast, setShareToast] = useState(false);
   const [showStickyCTA, setShowStickyCTA] = useState(false);
+  const [showAllGames, setShowAllGames] = useState(false);
   const params = useParams<{ game: string }>();
   const gameName = params?.game;
   const product = gameName ? PRODUCT_DATA.find((p) => p.id === gameName) : null;
@@ -214,12 +215,14 @@ export default function GameDetail() {
   const diff = DIFFICULTY_STYLES[product?.difficulty ?? "Easy"] ?? DIFFICULTY_STYLES.Easy;
 
   /* Related games: same category first, then other games, excluding current */
-  const relatedGames = product
+  const allRelatedGames = product
     ? [
-        ...PRODUCT_DATA.filter((g) => g.id !== product.id && g.category === product.category),
-        ...PRODUCT_DATA.filter((g) => g.id !== product.id && g.category !== product.category),
-      ].slice(0, 3)
+      ...PRODUCT_DATA.filter((g) => g.id !== product.id && g.category === product.category),
+      ...PRODUCT_DATA.filter((g) => g.id !== product.id && g.category !== product.category),
+    ]
     : [];
+
+  const relatedGames = showAllGames ? allRelatedGames : allRelatedGames.slice(0, 3);
 
   /* Lock body scroll when lightbox is open */
   useEffect(() => {
@@ -258,10 +261,10 @@ export default function GameDetail() {
   const specRows = (platform: "windows" | "linux") => {
     const p = product[platform];
     return [
-      { label: "Version",      value: p?.releaseDetails?.version,      icon: Tag },
-      { label: "File Size",    value: p?.releaseDetails?.fileSize,      icon: HardDrive },
-      { label: "Architecture", value: p?.releaseDetails?.architecture,  icon: Cpu },
-      { label: "Last Updated", value: p?.releaseDetails?.releaseDate,   icon: Calendar },
+      { label: "Version", value: p?.releaseDetails?.version, icon: Tag },
+      { label: "File Size", value: p?.releaseDetails?.fileSize, icon: HardDrive },
+      { label: "Architecture", value: p?.releaseDetails?.architecture, icon: Cpu },
+      { label: "Last Updated", value: p?.releaseDetails?.releaseDate, icon: Calendar },
     ];
   };
 
@@ -282,467 +285,650 @@ export default function GameDetail() {
 
       <div className="mt-16 flex-1">
 
-        {/* ── METADATA TAG BAR ── */}
-        <section className="border-b border-gray-200 dark:border-white/[0.06] bg-white dark:bg-gray-900 shadow-[var(--shadow-sm)]">
-          <div className="mx-auto max-w-7xl px-5 py-3.5">
-            <div className="flex flex-wrap items-center gap-2">
-              {product.type?.map((t: { text: string; color: string }, i: number) => (
-                <span key={i} className={`px-2.5 py-1 rounded-[var(--radius-sm)] text-[11px] font-bold uppercase tracking-wider ${t.color}`}>
-                  {t.text}
-                </span>
-              ))}
-              <span className="hidden sm:block w-px h-4 bg-gray-200 dark:bg-white/10 mx-1" />
-              <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-[var(--radius-sm)] text-[11px] font-bold uppercase tracking-wider ${diff.bg} ${diff.text}`}>
-                <span className={`h-1.5 w-1.5 rounded-full ${diff.dot}`} />
-                {product.difficulty}
-              </span>
-              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-[var(--radius-sm)] text-[11px] font-bold uppercase tracking-wider bg-emerald-50 text-emerald-700 dark:bg-emerald-500/15 dark:text-emerald-300">
-                <Wifi className="w-3 h-3" /> Offline Capable
-              </span>
-              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-[var(--radius-sm)] text-[11px] font-bold uppercase tracking-wider bg-blue-50 text-blue-700 dark:bg-blue-500/15 dark:text-blue-300">
-                <Monitor className="w-3 h-3" /> Windows 10/11
-              </span>
-              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-[var(--radius-sm)] text-[11px] font-bold uppercase tracking-wider bg-emerald-50 text-emerald-700 dark:bg-emerald-500/15 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-500/30">
-                <svg className="w-3 h-3" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                  <path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z" />
-                </svg>
-                KOOMPI / Linux
-              </span>
-              {/* Share button */}
-              <button
-                onClick={handleShare}
-                id="game-detail-share-btn"
-                className="ml-auto flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold border border-gray-200 dark:border-white/10 bg-white/80 dark:bg-white/5 text-gray-600 dark:text-gray-400 hover:border-teal-300 dark:hover:border-teal-500/40 hover:text-teal-700 dark:hover:text-teal-400 transition-all cursor-pointer"
-                aria-label="Share this game"
-              >
-                <Share2 className="w-3.5 h-3.5" /> Share
+        {/* ── MOBILE APP STORE LAYOUT ── */}
+        <div className="md:hidden flex flex-col bg-white dark:bg-gray-950 min-h-screen pb-10">
+          {/* Header & Cover Image */}
+          <div className="relative w-full aspect-[4/3] bg-gray-100 dark:bg-gray-900">
+            <Image src={coverSrc} alt={`${product.title} promotional banner`} fill priority className="object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+
+            {/* Top Navigation Overlay */}
+            <div className="absolute top-4 left-4 right-4 flex items-center justify-between z-10">
+              <button onClick={() => router.back()} className="w-8 h-8 rounded-full bg-black/30 backdrop-blur-md flex items-center justify-center text-white hover:bg-black/50 transition">
+                <ChevronRight className="w-5 h-5 rotate-180" />
+              </button>
+              <button onClick={handleShare} className="w-8 h-8 rounded-full bg-black/30 backdrop-blur-md flex items-center justify-center text-white hover:bg-black/50 transition">
+                <Share2 className="w-4 h-4" />
               </button>
             </div>
           </div>
-        </section>
 
-        {/* ── HERO BANNER ── */}
-        <section className="mx-auto max-w-7xl px-5 pt-8 pb-0">
-          <nav aria-label="Breadcrumb" className="mb-4">
-            <ol className="flex items-center gap-2 text-sm font-medium text-gray-500 dark:text-gray-400">
-              <li>
-                <Link href="/" className="hover:text-gray-900 dark:hover:text-white transition-colors">Home</Link>
-              </li>
-              <li aria-hidden="true">
-                <ChevronRight className="w-3.5 h-3.5 text-gray-400 dark:text-gray-600" />
-              </li>
-              <li>
-                <Link href="/#games-section" className="hover:text-gray-900 dark:hover:text-white transition-colors">Games</Link>
-              </li>
-              <li aria-hidden="true">
-                <ChevronRight className="w-3.5 h-3.5 text-gray-400 dark:text-gray-600" />
-              </li>
-              <li className="text-gray-900 dark:text-white font-semibold" aria-current="page">
-                {product.title}
-              </li>
-            </ol>
-          </nav>
-
-          <div className="relative overflow-hidden rounded-[var(--radius-xl)] shadow-[var(--shadow-lg)]" style={{ minHeight: 420 }}>
-            <div className="absolute inset-0">
-              <Image src={coverSrc} alt={`${product.title} promotional banner`} fill priority sizes="(max-width: 1280px) 100vw, 1280px" className="object-cover object-top" />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#f9fafb] via-[#f9fafb]/60 to-transparent dark:from-[#030712] dark:via-[#030712]/60 dark:to-transparent" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/35 to-black/5" />
-              <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/15 to-transparent dark:from-black/70 dark:via-black/20 dark:to-transparent" />
+          {/* App Info Header */}
+          <div className="px-5 pt-4 pb-6 flex items-start gap-4">
+            <div className="w-[100px] h-[100px] shrink-0 rounded-[22px] overflow-hidden shadow-md ring-1 ring-black/5 dark:ring-white/10 relative bg-white dark:bg-gray-800">
+              <Image src={thumbnailSrc} alt={product.title} fill className="object-cover" />
             </div>
+            <div className="flex flex-col flex-1 pt-1 justify-center">
+              <h1 className="text-xl font-bold text-gray-900 dark:text-white leading-tight mb-1">{product.title}</h1>
+              <p className="text-sm text-gray-500 dark:text-gray-400 leading-snug mb-3 line-clamp-2">{product.subTitle}</p>
+              <button onClick={() => router.push(`/play/${product.id}`)} className={`w-full max-w-[140px] py-1.5 rounded-full font-bold text-sm text-center shadow-sm ${brandBtnCls}`}>
+                Play
+              </button>
+            </div>
+          </div>
 
-            <div className="relative z-10 px-8 pt-8 pb-10 flex flex-col h-full min-h-[420px]">
-              <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mt-auto">
-                <div className="flex-1 max-w-2xl">
-                  <div className="flex items-center gap-2 mb-3">
-                    <span className="text-lg" aria-hidden="true">{product.categoryIcon}</span>
-                    <span className="text-xs font-bold uppercase tracking-widest text-white/50">{product.category}</span>
-                  </div>
-                  <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-white leading-tight">{product.title}</h1>
-                  <p className="mt-3 text-base md:text-lg text-white/70 leading-relaxed max-w-xl">{product.subTitle}</p>
-                  <div className="mt-4 flex items-center gap-4">
-                    <div className="flex items-center gap-1.5">
-                      <StarRow rate={product.rate} size="md" />
-                      <span className="text-sm font-bold text-white ml-1">{product.rate.toFixed(1)}</span>
+          {/* Stats Bar (Scrollable) */}
+          <div className="border-y border-gray-200/60 dark:border-white/[0.06] py-3 pl-5 mb-6">
+            <div className="flex gap-6 overflow-x-auto snap-x [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] pr-5">
+              <div className="flex flex-col items-center justify-center snap-start min-w-[70px]">
+                <p className="text-[10px] font-semibold text-gray-400 dark:text-gray-500 tracking-wider mb-1 uppercase">RATINGS</p>
+                <p className="text-xl font-bold text-gray-500 dark:text-gray-300">{product.rate.toFixed(1)}</p>
+                <StarRow rate={product.rate} size="sm" />
+              </div>
+              <div className="w-px h-10 bg-gray-200 dark:bg-white/10 shrink-0 self-center" />
+              <div className="flex flex-col items-center justify-center snap-start min-w-[70px]">
+                <p className="text-[10px] font-semibold text-gray-400 dark:text-gray-500 tracking-wider mb-1 uppercase">DIFFICULTY</p>
+                <p className="text-xl font-bold text-gray-500 dark:text-gray-300 uppercase">{product.difficulty}</p>
+                <p className="text-[10px] text-gray-400 dark:text-gray-500">{product.category}</p>
+              </div>
+              <div className="w-px h-10 bg-gray-200 dark:bg-white/10 shrink-0 self-center" />
+              <div className="flex flex-col items-center justify-center snap-start min-w-[70px]">
+                <p className="text-[10px] font-semibold text-gray-400 dark:text-gray-500 tracking-wider mb-1 uppercase">PLAYS</p>
+                <p className="text-xl font-bold text-gray-500 dark:text-gray-300">{product.plays}</p>
+                <p className="text-[10px] text-gray-400 dark:text-gray-500">Global</p>
+              </div>
+              <div className="w-px h-10 bg-gray-200 dark:bg-white/10 shrink-0 self-center" />
+              <div className="flex flex-col items-center justify-center snap-start min-w-[70px]">
+                <p className="text-[10px] font-semibold text-gray-400 dark:text-gray-500 tracking-wider mb-1 uppercase">DEVELOPER</p>
+                <Image src="/koompi-footer.png" alt="KOOMPI" width={22} height={22} className="rounded-sm object-contain mb-1" />
+                <p className="text-[10px] text-gray-400 dark:text-gray-500">KOOMPI</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Preview Section */}
+          <div className="px-5 mb-8">
+            <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">Preview</h2>
+            <div className="flex gap-4 overflow-x-auto snap-x [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] pb-2 -mx-5 px-5">
+              {[
+                { src: insiderSrc, caption: "Challenge Selection" },
+                { src: thumbnailSrc, caption: "Live Coding Challenge" },
+                { src: coverSrc, caption: "Results Screen" },
+                { src: insiderSrc, caption: "Leaderboard View" }
+              ].map((shot, idx) => (
+                <div key={idx} className="snap-start shrink-0 relative w-[280px] aspect-video rounded-xl overflow-hidden bg-gray-100 dark:bg-gray-800 shadow-sm border border-black/5 dark:border-white/10">
+                  <Image src={shot.src} alt={shot.caption} fill className="object-cover" />
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* About This Game */}
+          <div className="px-5 mb-8">
+            <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-3">About This Game</h2>
+            <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed mb-4 line-clamp-4">{product.description}</p>
+            <div className="rounded-xl bg-teal-50 dark:bg-teal-500/10 p-4">
+              <p className="text-xs font-bold uppercase tracking-widest text-teal-600 dark:text-teal-400 mb-2">Learning Objectives</p>
+              <ul className="flex flex-col gap-2">
+                {objectives.map((obj, i) => (
+                  <li key={i} className="flex items-start gap-2">
+                    <CheckCircle2 className="w-4 h-4 mt-0.5 text-teal-500 dark:text-teal-400 shrink-0" />
+                    <span className="text-xs text-teal-900 dark:text-teal-200 leading-relaxed">{obj}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          {/* Skills You'll Build */}
+          <div className="px-5 mb-8">
+            <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-1">Skills You'll Build</h2>
+            <p className="text-xs text-gray-500 dark:text-gray-400 mb-4">Strengthen real, transferable skills.</p>
+            <div className="flex gap-3 overflow-x-auto snap-x [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] pb-2 -mx-5 px-5">
+              {skills.map((skill, i) => (
+                <div key={i} className={`snap-start shrink-0 w-[110px] flex flex-col items-center gap-2 rounded-2xl border px-3 py-4 text-center ${skill.color}`}>
+                  <span className="text-2xl">{skill.icon}</span>
+                  <span className="text-xs font-bold leading-tight">{skill.label}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Testimonials */}
+          <div className="px-5">
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-xl font-bold text-gray-900 dark:text-white">What Players Say</h2>
+              <div className="flex items-center gap-1 text-amber-500">
+                <Star className="w-4 h-4 fill-current" />
+                <span className="text-sm font-bold">{product.rate.toFixed(1)}</span>
+              </div>
+            </div>
+            <div className="flex gap-4 overflow-x-auto snap-x [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] pb-4 -mx-5 px-5">
+              {testimonials.map((t, i) => (
+                <div key={i} className="snap-start shrink-0 w-[260px] flex flex-col gap-3 rounded-2xl bg-gray-50 dark:bg-gray-800/60 border border-gray-200/60 dark:border-white/[0.06] p-4">
+                  <StarRow rate={t.rating} size="sm" />
+                  <p className="text-sm leading-relaxed text-gray-700 dark:text-gray-300 flex-1 line-clamp-4">
+                    &ldquo;{t.quote}&rdquo;
+                  </p>
+                  <div className="flex items-center gap-2.5 pt-3 border-t border-gray-200/60 dark:border-white/[0.06] mt-auto">
+                    <div className="h-8 w-8 rounded-full bg-gradient-to-br from-teal-500 to-indigo-600 flex items-center justify-center text-white text-sm font-bold shrink-0">
+                      {t.avatar}
                     </div>
-                    <span className="text-white/30 text-sm">·</span>
-                    <span className="flex items-center gap-1 text-sm text-white/60"><Users className="w-3.5 h-3.5" />{product.plays} plays</span>
-                    <span className="text-white/30 text-sm">·</span>
-                    <span className="flex items-center gap-1 text-sm text-white/60"><Clock className="w-3.5 h-3.5" />{product.avgTime} avg</span>
+                    <div>
+                      <p className="text-xs font-bold text-gray-900 dark:text-white leading-tight flex items-center gap-1">
+                        {t.name} <span className="text-sm">{t.flag}</span>
+                      </p>
+                      <p className="text-[10px] text-gray-400 dark:text-gray-500">{t.role}</p>
+                    </div>
                   </div>
                 </div>
-                <div className="flex flex-col sm:flex-row md:flex-col gap-3 md:min-w-[220px]">
-                  <button id="hero-play-btn" onClick={() => router.push(`/play/${product.id}`)} className={`group relative flex items-center justify-center gap-2.5 px-7 py-4 rounded-[var(--radius)] font-semibold text-base transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] shadow-lg overflow-hidden ${brandBtnCls}`}>
-                    <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full bg-white/10 skew-x-[-20deg] transition-transform duration-500 ease-out pointer-events-none" />
-                    <Play className="w-4 h-4 fill-current" /> Play in Browser
+              ))}
+            </div>
+          </div>
+
+          {/* Similar Games */}
+          {relatedGames.length > 0 && (
+            <div className="px-5 mt-8 mb-6">
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="text-xl font-bold text-gray-900 dark:text-white">You Might Also Like</h2>
+                {allRelatedGames.length > 3 && (
+                  <button onClick={() => setShowAllGames(!showAllGames)} className="text-xs font-bold text-teal-600 dark:text-teal-400">
+                    {showAllGames ? "Show Less" : "Show More"}
                   </button>
-                  <a href="#download-section" id="hero-download-cta" className="flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-[var(--radius)] font-bold text-sm text-white bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20 transition-all duration-200 hover:scale-[1.03] active:scale-[0.98]">
-                    <Download className="w-5 h-5 shrink-0" /> Download Free
-                  </a>
+                )}
+              </div>
+              <div className="flex gap-4 overflow-x-auto snap-x [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] pb-4 -mx-5 px-5">
+                {relatedGames.map((game) => {
+                  const thumbSrc = (game.thumbnail || game.cover || "/cover1.png").replace(/^(?!\/)/, "/");
+                  return (
+                    <Link
+                      key={game.id}
+                      href={`/${game.id}`}
+                      className="snap-start shrink-0 w-[140px] flex flex-col gap-2"
+                    >
+                      <div className="relative aspect-square w-full rounded-2xl overflow-hidden shadow-sm border border-black/5 dark:border-white/10 bg-white dark:bg-gray-800">
+                        <Image src={thumbSrc} alt={game.title} fill className="object-cover" />
+                      </div>
+                      <div className="px-1 pt-1">
+                        <p className="font-bold text-sm text-gray-900 dark:text-white leading-snug line-clamp-1">{game.title}</p>
+                        <p className="text-[11px] text-gray-500 dark:text-gray-400 line-clamp-1">{game.category}</p>
+                      </div>
+                    </Link>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* ── DESKTOP LAYOUT (HIDDEN ON MOBILE) ── */}
+        <div className="hidden md:block">
+
+          {/* ── METADATA TAG BAR ── */}
+          <section className="hidden md:block border-b border-gray-200 dark:border-white/[0.06] bg-white dark:bg-gray-900 shadow-[var(--shadow-sm)]">
+            <div className="mx-auto max-w-7xl px-5 py-3.5">
+              <div className="flex flex-wrap items-center gap-2">
+                {product.type?.map((t: { text: string; color: string }, i: number) => (
+                  <span key={i} className={`px-2.5 py-1 rounded-[var(--radius-sm)] text-[11px] font-bold uppercase tracking-wider ${t.color}`}>
+                    {t.text}
+                  </span>
+                ))}
+                <span className="hidden sm:block w-px h-4 bg-gray-200 dark:bg-white/10 mx-1" />
+                <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-[var(--radius-sm)] text-[11px] font-bold uppercase tracking-wider ${diff.bg} ${diff.text}`}>
+                  <span className={`h-1.5 w-1.5 rounded-full ${diff.dot}`} />
+                  {product.difficulty}
+                </span>
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-[var(--radius-sm)] text-[11px] font-bold uppercase tracking-wider bg-emerald-50 text-emerald-700 dark:bg-emerald-500/15 dark:text-emerald-300">
+                  <Wifi className="w-3 h-3" /> Offline Capable
+                </span>
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-[var(--radius-sm)] text-[11px] font-bold uppercase tracking-wider bg-blue-50 text-blue-700 dark:bg-blue-500/15 dark:text-blue-300">
+                  <Monitor className="w-3 h-3" /> Windows 10/11
+                </span>
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-[var(--radius-sm)] text-[11px] font-bold uppercase tracking-wider bg-emerald-50 text-emerald-700 dark:bg-emerald-500/15 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-500/30">
+                  <svg className="w-3 h-3" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z" />
+                  </svg>
+                  KOOMPI / Linux
+                </span>
+                {/* Share button */}
+                <button
+                  onClick={handleShare}
+                  id="game-detail-share-btn"
+                  className="ml-auto flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold border border-gray-200 dark:border-white/10 bg-white/80 dark:bg-white/5 text-gray-600 dark:text-gray-400 hover:border-teal-300 dark:hover:border-teal-500/40 hover:text-teal-700 dark:hover:text-teal-400 transition-all cursor-pointer"
+                  aria-label="Share this game"
+                >
+                  <Share2 className="w-3.5 h-3.5" /> Share
+                </button>
+              </div>
+            </div>
+          </section>
+
+          {/* ── HERO BANNER ── */}
+          <section className="mx-auto max-w-7xl px-5 pt-8 pb-0">
+            <nav aria-label="Breadcrumb" className="mb-4">
+              <ol className="flex items-center gap-2 text-sm font-medium text-gray-500 dark:text-gray-400">
+                <li>
+                  <Link href="/" className="hover:text-gray-900 dark:hover:text-white transition-colors">Home</Link>
+                </li>
+                <li aria-hidden="true">
+                  <ChevronRight className="w-3.5 h-3.5 text-gray-400 dark:text-gray-600" />
+                </li>
+                <li>
+                  <Link href="/#games-section" className="hover:text-gray-900 dark:hover:text-white transition-colors">Games</Link>
+                </li>
+                <li aria-hidden="true">
+                  <ChevronRight className="w-3.5 h-3.5 text-gray-400 dark:text-gray-600" />
+                </li>
+                <li className="text-gray-900 dark:text-white font-semibold" aria-current="page">
+                  {product.title}
+                </li>
+              </ol>
+            </nav>
+
+            <div className="relative overflow-hidden rounded-[var(--radius-xl)] shadow-[var(--shadow-lg)]" style={{ minHeight: 420 }}>
+              <div className="absolute inset-0">
+                <Image src={coverSrc} alt={`${product.title} promotional banner`} fill priority sizes="(max-width: 1280px) 100vw, 1280px" className="object-cover object-top" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#f9fafb] via-[#f9fafb]/60 to-transparent dark:from-[#030712] dark:via-[#030712]/60 dark:to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/35 to-black/5" />
+                <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/15 to-transparent dark:from-black/70 dark:via-black/20 dark:to-transparent" />
+              </div>
+
+              <div className="relative z-10 px-8 pt-8 pb-10 flex flex-col h-full min-h-[420px]">
+                <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mt-auto">
+                  <div className="flex-1 max-w-2xl">
+                    <div className="flex items-center gap-2 mb-3">
+                      <span className="text-lg" aria-hidden="true">{product.categoryIcon}</span>
+                      <span className="text-xs font-bold uppercase tracking-widest text-white/50">{product.category}</span>
+                    </div>
+                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-white leading-tight">{product.title}</h1>
+                    <p className="mt-3 text-base md:text-lg text-white/70 leading-relaxed max-w-xl">{product.subTitle}</p>
+                    <div className="mt-4 flex items-center gap-4">
+                      <div className="flex items-center gap-1.5">
+                        <StarRow rate={product.rate} size="md" />
+                        <span className="text-sm font-bold text-white ml-1">{product.rate.toFixed(1)}</span>
+                      </div>
+                      <span className="text-white/30 text-sm">·</span>
+                      <span className="flex items-center gap-1 text-sm text-white/60"><Users className="w-3.5 h-3.5" />{product.plays} plays</span>
+                      <span className="text-white/30 text-sm">·</span>
+                      <span className="flex items-center gap-1 text-sm text-white/60"><Clock className="w-3.5 h-3.5" />{product.avgTime} avg</span>
+                    </div>
+                  </div>
+                  <div className="flex flex-col sm:flex-row md:flex-col gap-3 md:min-w-[220px]">
+                    <button id="hero-play-btn" onClick={() => router.push(`/play/${product.id}`)} className={`group relative flex items-center justify-center gap-2.5 px-7 py-4 rounded-[var(--radius)] font-semibold text-base transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] shadow-lg overflow-hidden ${brandBtnCls}`}>
+                      <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full bg-white/10 skew-x-[-20deg] transition-transform duration-500 ease-out pointer-events-none" />
+                      <Play className="w-4 h-4 fill-current" /> Play in Browser
+                    </button>
+                    <a href="#download-section" id="hero-download-cta" className="flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-[var(--radius)] font-bold text-sm text-white bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20 transition-all duration-200 hover:scale-[1.03] active:scale-[0.98]">
+                      <Download className="w-5 h-5 shrink-0" /> Download Free
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
 
-        {/* ── SOCIAL PROOF STATS BAR ── */}
-        <section className="mx-auto max-w-7xl px-5 mt-6">
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-            {[
-              { icon: <Users className="w-4 h-4 text-teal-500" />, value: product.plays, label: "Total Plays", color: "text-teal-600 dark:text-teal-400" },
-              { icon: <Star className="w-4 h-4 text-amber-500 fill-amber-400" />, value: `${product.rate.toFixed(1)} / 5`, label: "Player Rating", color: "text-amber-600 dark:text-amber-400" },
-              { icon: <Clock className="w-4 h-4 text-indigo-500" />, value: product.avgTime, label: "Avg. Session", color: "text-indigo-600 dark:text-indigo-400" },
-              { icon: <Trophy className="w-4 h-4 text-violet-500" />, value: "45+ countries", label: "Players worldwide", color: "text-violet-600 dark:text-violet-400" },
-            ].map((s, i) => (
-              <div key={i} className="flex items-center gap-3 rounded-2xl bg-white dark:bg-gray-900 border border-gray-200/70 dark:border-white/[0.07] px-4 py-3.5 shadow-[var(--shadow-sm)]">
-                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-gray-50 dark:bg-gray-800 ring-1 ring-gray-100 dark:ring-white/[0.06]">
-                  {s.icon}
-                </div>
-                <div>
-                  <p className={`text-base font-black ${s.color} leading-tight`}>{s.value}</p>
-                  <p className="text-[10px] font-medium text-gray-400 dark:text-gray-500">{s.label}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* ── MAIN BODY ── */}
-        <div className="mx-auto max-w-7xl px-5 py-10">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
-
-            {/* ─── LEFT COLUMN ─────────────────────────────── */}
-            <div className="lg:col-span-2 flex flex-col gap-8">
-
-              {/* About This Game */}
-              <section aria-labelledby="about-heading" className="rounded-[var(--radius-lg)] border border-gray-200/70 dark:border-white/[0.07] bg-white dark:bg-gray-900 shadow-[var(--shadow-sm)] overflow-hidden">
-                <div className={`h-0.5 w-full ${accentBg}`} />
-                <div className="p-6 md:p-8">
-                  <SectionHead accentBg={accentBg}>About This Game</SectionHead>
-                  <p className="text-base md:text-lg font-semibold text-gray-800 dark:text-gray-100 leading-snug mb-4">{product.subTitle}</p>
-                  <p className="text-sm md:text-base text-gray-600 dark:text-gray-400 leading-relaxed mb-6">{product.description}</p>
-                  <p className="text-sm text-gray-500 dark:text-gray-500 leading-relaxed mb-8">
-                    Designed for learners of all ages, <strong className="text-gray-700 dark:text-gray-300">{product.title}</strong> is a{" "}
-                    <span className="font-medium">{product.difficulty.toLowerCase()}-difficulty</span> {product.category.toLowerCase()} game
-                    with an average session time of <span className="font-medium">{product.avgTime}</span>. With over{" "}
-                    <span className="font-medium">{product.plays} plays</span>, it has quickly become one of KOOMPI&apos;s
-                    most-loved educational tools — available for free both in-browser and as a native desktop app for Windows and Linux.
-                  </p>
-
-                  {/* Learning objectives */}
-                  <div className="rounded-[var(--radius)] bg-teal-50 dark:bg-teal-500/10 border border-teal-100 dark:border-teal-500/20 p-5">
-                    <p className="text-xs font-bold uppercase tracking-widest text-teal-600 dark:text-teal-400 mb-3">Learning Objectives</p>
-                    <ul className="flex flex-col gap-2">
-                      {objectives.map((obj, i) => (
-                        <li key={i} className="flex items-start gap-2.5">
-                          <CheckCircle2 className="w-4 h-4 mt-0.5 text-teal-500 dark:text-teal-400 shrink-0" />
-                          <span className="text-sm text-teal-900 dark:text-teal-200 leading-relaxed">{obj}</span>
-                        </li>
-                      ))}
-                    </ul>
+          {/* ── SOCIAL PROOF STATS BAR ── */}
+          <section className="mx-auto max-w-7xl px-5 mt-6">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+              {[
+                { icon: <Users className="w-4 h-4 text-teal-500" />, value: product.plays, label: "Total Plays", color: "text-teal-600 dark:text-teal-400" },
+                { icon: <Star className="w-4 h-4 text-amber-500 fill-amber-400" />, value: `${product.rate.toFixed(1)} / 5`, label: "Player Rating", color: "text-amber-600 dark:text-amber-400" },
+                { icon: <Clock className="w-4 h-4 text-indigo-500" />, value: product.avgTime, label: "Avg. Session", color: "text-indigo-600 dark:text-indigo-400" },
+                { icon: <Trophy className="w-4 h-4 text-violet-500" />, value: "45+ countries", label: "Players worldwide", color: "text-violet-600 dark:text-violet-400" },
+              ].map((s, i) => (
+                <div key={i} className="flex items-center gap-3 rounded-2xl bg-white dark:bg-gray-900 border border-gray-200/70 dark:border-white/[0.07] px-4 py-3.5 shadow-[var(--shadow-sm)]">
+                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-gray-50 dark:bg-gray-800 ring-1 ring-gray-100 dark:ring-white/[0.06]">
+                    {s.icon}
+                  </div>
+                  <div>
+                    <p className={`text-base font-black ${s.color} leading-tight`}>{s.value}</p>
+                    <p className="text-[10px] font-medium text-gray-400 dark:text-gray-500">{s.label}</p>
                   </div>
                 </div>
-              </section>
+              ))}
+            </div>
+          </section>
 
-              {/* Skills You'll Build — NEW */}
-              <section aria-labelledby="skills-heading" className="rounded-[var(--radius-lg)] border border-gray-200/70 dark:border-white/[0.07] bg-white dark:bg-gray-900 shadow-[var(--shadow-sm)] overflow-hidden">
-                <div className={`h-0.5 w-full ${accentBg}`} />
-                <div className="p-6 md:p-8">
-                  <SectionHead accentBg={accentBg}>Skills You&apos;ll Build</SectionHead>
-                  <p className="text-sm text-gray-500 dark:text-gray-400 mb-5">
-                    Every minute you play strengthens real, transferable skills used by professionals worldwide.
-                  </p>
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                    {skills.map((skill, i) => (
-                      <div key={i} className={`flex flex-col items-center gap-2 rounded-2xl border px-4 py-4 text-center transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md ${skill.color}`}>
-                        <span className="text-2xl">{skill.icon}</span>
-                        <span className="text-xs font-bold leading-tight">{skill.label}</span>
-                      </div>
-                    ))}
-                  </div>
+          {/* ── MAIN BODY ── */}
+          <div className="mx-auto max-w-7xl px-5 py-10">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
 
-                  {/* Progress encouragement bar */}
-                  <div className="mt-6 rounded-2xl bg-gradient-to-r from-teal-500 to-indigo-600 p-5 text-white">
-                    <div className="flex items-center gap-3 mb-3">
-                      <Zap className="w-5 h-5 text-yellow-300" />
-                      <p className="font-bold text-sm">Your skill growth trajectory</p>
-                    </div>
-                    <div className="space-y-2">
-                      {skills.slice(0, 2).map((skill, i) => (
-                        <div key={i} className="flex items-center gap-3">
-                          <span className="text-xs font-medium w-28 shrink-0 text-white/80">{skill.label}</span>
-                          <div className="flex-1 h-1.5 rounded-full bg-white/20">
-                            <div
-                              className="h-1.5 rounded-full bg-white"
-                              style={{ width: `${[72, 65][i]}%` }}
-                            />
-                          </div>
-                          <span className="text-xs font-bold text-white/90 w-8 shrink-0">{[72, 65][i]}%</span>
-                        </div>
-                      ))}
-                    </div>
-                    <p className="text-[11px] text-white/60 mt-3">Play more to unlock your full potential</p>
-                  </div>
-                </div>
-              </section>
+              {/* ─── LEFT COLUMN ─────────────────────────────── */}
+              <div className="lg:col-span-2 flex flex-col gap-8">
 
-              {/* Media Gallery */}
-              <section aria-labelledby="gallery-heading" className="rounded-[var(--radius-lg)] border border-gray-200/70 dark:border-white/[0.07] bg-white dark:bg-gray-900 shadow-[var(--shadow-sm)] overflow-hidden">
-                <div className={`h-0.5 w-full ${accentBg}`} />
-                <div className="p-6 md:p-8">
-                  <SectionHead accentBg={accentBg}>Screenshots</SectionHead>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                    {[
-                      { src: insiderSrc, caption: "Challenge Selection", desc: "Pick your difficulty level" },
-                      { src: thumbnailSrc, caption: "Live Coding Challenge", desc: "Master syntax in real-time" },
-                      { src: coverSrc, caption: "Results Screen", desc: "Track your speed and accuracy" },
-                      { src: insiderSrc, caption: "Leaderboard View", desc: "See how you rank globally" }
-                    ].map((shot, idx) => (
-                      <div key={idx} className="flex flex-col gap-2.5">
-                        <button onClick={() => setLightboxSrc(shot.src)} className="group relative aspect-video rounded-[var(--radius)] overflow-hidden bg-gray-100 dark:bg-gray-800 ring-1 ring-gray-200/60 dark:ring-white/[0.08] hover:ring-2 hover:ring-teal-500/50 transition-all duration-200" aria-label={`View ${shot.caption}`}>
-                          <Image src={shot.src} alt={shot.caption} fill sizes="(max-width: 640px) 100vw, 50vw" className="object-cover transition-transform duration-500 group-hover:scale-[1.06]" />
-                          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-200 flex items-center justify-center">
-                            <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-black/60 rounded-full p-2"><ZoomIn className="w-5 h-5 text-white" /></div>
-                          </div>
-                        </button>
-                        <div className="px-1">
-                          <p className="text-sm font-bold text-gray-800 dark:text-gray-200">{shot.caption}</p>
-                          <p className="text-[11px] text-gray-500 dark:text-gray-400 mt-0.5">{shot.desc}</p>
-                        </div>
-                      </div>
-                    ))}
-                    
-                    <button onClick={() => router.push(`/play/${product.id}`)} id="gallery-play-browser-btn" className={`group relative aspect-video sm:col-span-2 mt-2 rounded-[var(--radius)] overflow-hidden bg-gray-900 dark:bg-gray-800 ring-1 ring-gray-200/60 dark:ring-white/[0.08] hover:ring-2 hover:ring-teal-500/50 transition-all duration-200 flex items-center justify-center`} aria-label="Play game in browser">
-                      <Image src={coverSrc} alt="" fill sizes="100vw" className="object-cover opacity-40 group-hover:opacity-50 transition-opacity duration-300" aria-hidden="true" />
-                      <div className="relative z-10 flex flex-col items-center gap-3">
-                        <div className={`w-14 h-14 rounded-full flex items-center justify-center shadow-xl group-hover:scale-110 transition-transform duration-300 ${brandBtnCls}`}>
-                          <Play className="w-7 h-7 fill-current" />
-                        </div>
-                        <span className="text-sm font-bold text-white">Play in Browser — Free</span>
-                      </div>
-                    </button>
-                  </div>
-                </div>
-              </section>
-
-              {/* Player Testimonials — NEW */}
-              <section aria-labelledby="testimonials-heading" className="rounded-[var(--radius-lg)] border border-gray-200/70 dark:border-white/[0.07] bg-white dark:bg-gray-900 shadow-[var(--shadow-sm)] overflow-hidden">
-                <div className={`h-0.5 w-full ${accentBg}`} />
-                <div className="p-6 md:p-8">
-                  <SectionHead accentBg={accentBg}>What Players Say</SectionHead>
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                    {testimonials.map((t, i) => (
-                      <div key={i} className="flex flex-col gap-3 rounded-2xl bg-gray-50 dark:bg-gray-800/60 border border-gray-200/60 dark:border-white/[0.06] p-5 hover:-translate-y-0.5 hover:shadow-md transition-all duration-200">
-                        {/* Stars */}
-                        <StarRow rate={t.rating} size="sm" />
-                        {/* Quote */}
-                        <p className="text-sm leading-relaxed text-gray-700 dark:text-gray-300 flex-1">
-                          &ldquo;{t.quote}&rdquo;
-                        </p>
-                        {/* Author */}
-                        <div className="flex items-center gap-2.5 pt-1 border-t border-gray-200/60 dark:border-white/[0.06]">
-                          <div className="h-8 w-8 rounded-full bg-gradient-to-br from-teal-500 to-indigo-600 flex items-center justify-center text-white text-sm font-bold shrink-0">
-                            {t.avatar}
-                          </div>
-                          <div>
-                            <p className="text-xs font-bold text-gray-900 dark:text-white leading-tight flex items-center gap-1">
-                              {t.name} <span className="text-base">{t.flag}</span>
-                            </p>
-                            <p className="text-[10px] text-gray-400 dark:text-gray-500">{t.role}</p>
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* Aggregate trust signal */}
-                  <div className="mt-5 flex items-center gap-4 rounded-2xl bg-amber-50 dark:bg-amber-500/10 border border-amber-100 dark:border-amber-500/20 p-4">
-                    <div className="flex items-center gap-1">
-                      {[1,2,3,4,5].map(i => <Star key={i} className="w-4 h-4 text-amber-400 fill-amber-400" />)}
-                    </div>
-                    <p className="text-sm font-bold text-amber-800 dark:text-amber-300">{product.rate.toFixed(1)} average rating</p>
-                    <p className="text-xs text-amber-600 dark:text-amber-500 ml-auto font-medium">From {product.plays} players</p>
-                  </div>
-                </div>
-              </section>
-
-              {/* Similar Games — NEW */}
-              {relatedGames.length > 0 && (
-                <section aria-labelledby="related-heading" className="rounded-[var(--radius-lg)] border border-gray-200/70 dark:border-white/[0.07] bg-white dark:bg-gray-900 shadow-[var(--shadow-sm)] overflow-hidden">
+                {/* About This Game */}
+                <section aria-labelledby="about-heading" className="rounded-[var(--radius-lg)] border border-gray-200/70 dark:border-white/[0.07] bg-white dark:bg-gray-900 shadow-[var(--shadow-sm)] overflow-hidden">
                   <div className={`h-0.5 w-full ${accentBg}`} />
                   <div className="p-6 md:p-8">
-                    <div className="flex items-center justify-between mb-6">
-                      <SectionHead accentBg={accentBg}>You Might Also Like</SectionHead>
-                      <Link href="/#games-section" className="text-xs font-bold text-teal-600 dark:text-teal-400 hover:text-teal-700 dark:hover:text-teal-300 transition-colors flex items-center gap-1">
-                        All games <ChevronRight className="w-3.5 h-3.5" />
-                      </Link>
-                    </div>
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                      {relatedGames.map((game) => {
-                        const thumbSrc = (game.thumbnail || game.cover || "/cover1.png").replace(/^(?!\/)/, "/");
-                        return (
-                          <Link
-                            key={game.id}
-                            href={`/${game.id}`}
-                            id={`related-game-${game.id}`}
-                            className="group block rounded-2xl overflow-hidden border border-gray-200/70 dark:border-white/[0.07] hover:border-teal-400/40 dark:hover:border-teal-500/30 bg-gray-50 dark:bg-gray-800/60 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md"
-                          >
-                            <div className="relative aspect-video overflow-hidden">
-                              <Image src={thumbSrc} alt={game.title} fill sizes="300px" className="object-cover transition-transform duration-500 group-hover:scale-[1.06]" />
-                              <div className="absolute bottom-2 left-2 flex items-center gap-1 rounded-lg bg-black/55 backdrop-blur-sm px-2 py-1">
-                                <span className="text-xs">{game.categoryIcon}</span>
-                                <span className="text-[9px] font-bold uppercase tracking-wider text-white/90">{game.category}</span>
-                              </div>
-                            </div>
-                            <div className="p-3.5">
-                              <p className="font-bold text-sm text-gray-900 dark:text-white group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors leading-snug mb-1 line-clamp-1">{game.title}</p>
-                              <div className="flex items-center gap-1.5">
-                                <StarRow rate={game.rate} size="sm" />
-                                <span className="text-[10px] font-bold text-gray-500 dark:text-gray-400">{game.rate.toFixed(1)}</span>
-                                <span className="text-gray-300 dark:text-gray-600 text-xs">·</span>
-                                <span className="text-[10px] text-gray-400 dark:text-gray-500">{game.plays}</span>
-                              </div>
-                            </div>
-                          </Link>
-                        );
-                      })}
+                    <SectionHead accentBg={accentBg}>About This Game</SectionHead>
+                    <p className="text-base md:text-lg font-semibold text-gray-800 dark:text-gray-100 leading-snug mb-4">{product.subTitle}</p>
+                    <p className="text-sm md:text-base text-gray-600 dark:text-gray-400 leading-relaxed mb-6">{product.description}</p>
+                    <p className="text-sm text-gray-500 dark:text-gray-500 leading-relaxed mb-8">
+                      Designed for learners of all ages, <strong className="text-gray-700 dark:text-gray-300">{product.title}</strong> is a{" "}
+                      <span className="font-medium">{product.difficulty.toLowerCase()}-difficulty</span> {product.category.toLowerCase()} game
+                      with an average session time of <span className="font-medium">{product.avgTime}</span>. With over{" "}
+                      <span className="font-medium">{product.plays} plays</span>, it has quickly become one of KOOMPI&apos;s
+                      most-loved educational tools — available for free both in-browser and as a native desktop app for Windows and Linux.
+                    </p>
+
+                    {/* Learning objectives */}
+                    <div className="rounded-[var(--radius)] bg-teal-50 dark:bg-teal-500/10 border border-teal-100 dark:border-teal-500/20 p-5">
+                      <p className="text-xs font-bold uppercase tracking-widest text-teal-600 dark:text-teal-400 mb-3">Learning Objectives</p>
+                      <ul className="flex flex-col gap-2">
+                        {objectives.map((obj, i) => (
+                          <li key={i} className="flex items-start gap-2.5">
+                            <CheckCircle2 className="w-4 h-4 mt-0.5 text-teal-500 dark:text-teal-400 shrink-0" />
+                            <span className="text-sm text-teal-900 dark:text-teal-200 leading-relaxed">{obj}</span>
+                          </li>
+                        ))}
+                      </ul>
                     </div>
                   </div>
                 </section>
-              )}
-            </div>
 
-            {/* ─── RIGHT COLUMN: Specs Sidebar ──────────────────── */}
-            <div className="lg:col-span-1 flex flex-col gap-6 lg:sticky lg:top-24">
+                {/* Skills You'll Build — NEW */}
+                <section aria-labelledby="skills-heading" className="rounded-[var(--radius-lg)] border border-gray-200/70 dark:border-white/[0.07] bg-white dark:bg-gray-900 shadow-[var(--shadow-sm)] overflow-hidden">
+                  <div className={`h-0.5 w-full ${accentBg}`} />
+                  <div className="p-6 md:p-8">
+                    <SectionHead accentBg={accentBg}>Skills You&apos;ll Build</SectionHead>
+                    <p className="text-sm text-gray-500 dark:text-gray-400 mb-5">
+                      Every minute you play strengthens real, transferable skills used by professionals worldwide.
+                    </p>
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                      {skills.map((skill, i) => (
+                        <div key={i} className={`flex flex-col items-center gap-2 rounded-2xl border px-4 py-4 text-center transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md ${skill.color}`}>
+                          <span className="text-2xl">{skill.icon}</span>
+                          <span className="text-xs font-bold leading-tight">{skill.label}</span>
+                        </div>
+                      ))}
+                    </div>
 
-              {/* Primary Download CTA card */}
-              <div id="download-section" className="rounded-[var(--radius-lg)] border border-gray-200/70 dark:border-white/[0.07] bg-white dark:bg-gray-900 shadow-[var(--shadow-md)] overflow-hidden">
-                <div className={`h-1 w-full ${accentBg}`} />
-                <div className="p-6">
-                  <div className="flex items-center gap-3 mb-1">
-                    <span className="text-2xl font-black text-gray-900 dark:text-white">Free</span>
-                    <span className="text-xs font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-500/15 px-2 py-0.5 rounded-full">No Cost</span>
+                    {/* Progress encouragement bar */}
+                    <div className="mt-6 rounded-2xl bg-gradient-to-r from-teal-500 to-indigo-600 p-5 text-white">
+                      <div className="flex items-center gap-3 mb-3">
+                        <Zap className="w-5 h-5 text-yellow-300" />
+                        <p className="font-bold text-sm">Your skill growth trajectory</p>
+                      </div>
+                      <div className="space-y-2">
+                        {skills.slice(0, 2).map((skill, i) => (
+                          <div key={i} className="flex items-center gap-3">
+                            <span className="text-xs font-medium w-28 shrink-0 text-white/80">{skill.label}</span>
+                            <div className="flex-1 h-1.5 rounded-full bg-white/20">
+                              <div
+                                className="h-1.5 rounded-full bg-white"
+                                style={{ width: `${[72, 65][i]}%` }}
+                              />
+                            </div>
+                            <span className="text-xs font-bold text-white/90 w-8 shrink-0">{[72, 65][i]}%</span>
+                          </div>
+                        ))}
+                      </div>
+                      <p className="text-[11px] text-white/60 mt-3">Play more to unlock your full potential</p>
+                    </div>
                   </div>
-                  <p className="text-xs text-gray-400 dark:text-gray-500 mb-5">Available for Windows & Linux · KOOMPI Optimized</p>
+                </section>
 
-                  <div className="flex flex-col gap-3">
-                    {([
-                      { key: "linux" as const, icon: linux, iconAlt: "Linux", label: "Download for Linux", note: "KOOMPI Optimized", noteClass: "text-emerald-600 dark:text-emerald-400" },
-                      { key: "windows" as const, icon: windows, iconAlt: "Windows", label: "Download for Windows", note: "Windows 10/11", noteClass: "text-blue-600 dark:text-blue-400" },
-                    ]).map(({ key, icon, iconAlt, label, note, noteClass }) => {
-                      const p = product[key];
-                      return (
-                        <div key={key}>
-                          <a href={p?.releaseDetails?.download} target="_blank" rel="noopener noreferrer" id={`download-${key}-btn`}>
-                            <button className="w-full py-3 px-4 rounded-[var(--radius)] font-semibold text-sm flex items-center gap-3 transition-all duration-200 hover:scale-[1.01] active:scale-[0.99] bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-white/10 hover:shadow-[var(--shadow-sm)]">
-                              <div className="p-1.5 rounded-md bg-gray-200 dark:bg-white/10 shrink-0">
-                                <Image src={icon} alt={iconAlt} width={18} height={18} />
-                              </div>
-                              <span className="flex-1 text-left">{label}</span>
-                              <ChevronRight className="w-4 h-4 opacity-60 shrink-0" />
-                            </button>
-                          </a>
-                          <p className={`text-[10px] font-medium mt-1 ml-1 ${noteClass}`}>
-                            {note} · {p?.releaseDetails?.fileSize}
+                {/* Media Gallery */}
+                <section aria-labelledby="gallery-heading" className="rounded-[var(--radius-lg)] border border-gray-200/70 dark:border-white/[0.07] bg-white dark:bg-gray-900 shadow-[var(--shadow-sm)] overflow-hidden">
+                  <div className={`h-0.5 w-full ${accentBg}`} />
+                  <div className="p-6 md:p-8">
+                    <SectionHead accentBg={accentBg}>Screenshots</SectionHead>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                      {[
+                        { src: insiderSrc, caption: "Challenge Selection", desc: "Pick your difficulty level" },
+                        { src: thumbnailSrc, caption: "Live Coding Challenge", desc: "Master syntax in real-time" },
+                        { src: coverSrc, caption: "Results Screen", desc: "Track your speed and accuracy" },
+                        { src: insiderSrc, caption: "Leaderboard View", desc: "See how you rank globally" }
+                      ].map((shot, idx) => (
+                        <div key={idx} className="flex flex-col gap-2.5">
+                          <button onClick={() => setLightboxSrc(shot.src)} className="group relative aspect-video rounded-[var(--radius)] overflow-hidden bg-gray-100 dark:bg-gray-800 ring-1 ring-gray-200/60 dark:ring-white/[0.08] hover:ring-2 hover:ring-teal-500/50 transition-all duration-200" aria-label={`View ${shot.caption}`}>
+                            <Image src={shot.src} alt={shot.caption} fill sizes="(max-width: 640px) 100vw, 50vw" className="object-cover transition-transform duration-500 group-hover:scale-[1.06]" />
+                            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-200 flex items-center justify-center">
+                              <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-black/60 rounded-full p-2"><ZoomIn className="w-5 h-5 text-white" /></div>
+                            </div>
+                          </button>
+                          <div className="px-1">
+                            <p className="text-sm font-bold text-gray-800 dark:text-gray-200">{shot.caption}</p>
+                            <p className="text-[11px] text-gray-500 dark:text-gray-400 mt-0.5">{shot.desc}</p>
+                          </div>
+                        </div>
+                      ))}
+
+                      <button onClick={() => router.push(`/play/${product.id}`)} id="gallery-play-browser-btn" className={`group relative aspect-video sm:col-span-2 mt-2 rounded-[var(--radius)] overflow-hidden bg-gray-900 dark:bg-gray-800 ring-1 ring-gray-200/60 dark:ring-white/[0.08] hover:ring-2 hover:ring-teal-500/50 transition-all duration-200 flex items-center justify-center`} aria-label="Play game in browser">
+                        <Image src={coverSrc} alt="" fill sizes="100vw" className="object-cover opacity-40 group-hover:opacity-50 transition-opacity duration-300" aria-hidden="true" />
+                        <div className="relative z-10 flex flex-col items-center gap-3">
+                          <div className={`w-14 h-14 rounded-full flex items-center justify-center shadow-xl group-hover:scale-110 transition-transform duration-300 ${brandBtnCls}`}>
+                            <Play className="w-7 h-7 fill-current" />
+                          </div>
+                          <span className="text-sm font-bold text-white">Play in Browser — Free</span>
+                        </div>
+                      </button>
+                    </div>
+                  </div>
+                </section>
+
+                {/* Player Testimonials — NEW */}
+                <section aria-labelledby="testimonials-heading" className="rounded-[var(--radius-lg)] border border-gray-200/70 dark:border-white/[0.07] bg-white dark:bg-gray-900 shadow-[var(--shadow-sm)] overflow-hidden">
+                  <div className={`h-0.5 w-full ${accentBg}`} />
+                  <div className="p-6 md:p-8">
+                    <SectionHead accentBg={accentBg}>What Players Say</SectionHead>
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                      {testimonials.map((t, i) => (
+                        <div key={i} className="flex flex-col gap-3 rounded-2xl bg-gray-50 dark:bg-gray-800/60 border border-gray-200/60 dark:border-white/[0.06] p-5 hover:-translate-y-0.5 hover:shadow-md transition-all duration-200">
+                          {/* Stars */}
+                          <StarRow rate={t.rating} size="sm" />
+                          {/* Quote */}
+                          <p className="text-sm leading-relaxed text-gray-700 dark:text-gray-300 flex-1">
+                            &ldquo;{t.quote}&rdquo;
                           </p>
+                          {/* Author */}
+                          <div className="flex items-center gap-2.5 pt-1 border-t border-gray-200/60 dark:border-white/[0.06]">
+                            <div className="h-8 w-8 rounded-full bg-gradient-to-br from-teal-500 to-indigo-600 flex items-center justify-center text-white text-sm font-bold shrink-0">
+                              {t.avatar}
+                            </div>
+                            <div>
+                              <p className="text-xs font-bold text-gray-900 dark:text-white leading-tight flex items-center gap-1">
+                                {t.name} <span className="text-base">{t.flag}</span>
+                              </p>
+                              <p className="text-[10px] text-gray-400 dark:text-gray-500">{t.role}</p>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Aggregate trust signal */}
+                    <div className="mt-5 flex items-center gap-4 rounded-2xl bg-amber-50 dark:bg-amber-500/10 border border-amber-100 dark:border-amber-500/20 p-4">
+                      <div className="flex items-center gap-1">
+                        {[1, 2, 3, 4, 5].map(i => <Star key={i} className="w-4 h-4 text-amber-400 fill-amber-400" />)}
+                      </div>
+                      <p className="text-sm font-bold text-amber-800 dark:text-amber-300">{product.rate.toFixed(1)} average rating</p>
+                      <p className="text-xs text-amber-600 dark:text-amber-500 ml-auto font-medium">From {product.plays} players</p>
+                    </div>
+                  </div>
+                </section>
+
+                {/* Similar Games — NEW */}
+                {relatedGames.length > 0 && (
+                  <section aria-labelledby="related-heading" className="rounded-[var(--radius-lg)] border border-gray-200/70 dark:border-white/[0.07] bg-white dark:bg-gray-900 shadow-[var(--shadow-sm)] overflow-hidden">
+                    <div className={`h-0.5 w-full ${accentBg}`} />
+                    <div className="p-6 md:p-8">
+                      <div className="flex items-center justify-between mb-6">
+                        <SectionHead accentBg={accentBg}>You Might Also Like</SectionHead>
+                        {allRelatedGames.length > 3 && (
+                          <button onClick={() => setShowAllGames(!showAllGames)} className="text-xs font-bold text-teal-600 dark:text-teal-400 hover:text-teal-700 dark:hover:text-teal-300 transition-colors flex items-center gap-1">
+                            {showAllGames ? "Show less" : "Show more"} <ChevronRight className={`w-3.5 h-3.5 transition-transform ${showAllGames ? "rotate-90" : ""}`} />
+                          </button>
+                        )}
+                      </div>
+                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        {relatedGames.map((game) => {
+                          const thumbSrc = (game.thumbnail || game.cover || "/cover1.png").replace(/^(?!\/)/, "/");
+                          return (
+                            <Link
+                              key={game.id}
+                              href={`/${game.id}`}
+                              id={`related-game-${game.id}`}
+                              className="group block rounded-2xl overflow-hidden border border-gray-200/70 dark:border-white/[0.07] hover:border-teal-400/40 dark:hover:border-teal-500/30 bg-gray-50 dark:bg-gray-800/60 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md"
+                            >
+                              <div className="relative aspect-video overflow-hidden">
+                                <Image src={thumbSrc} alt={game.title} fill sizes="300px" className="object-cover transition-transform duration-500 group-hover:scale-[1.06]" />
+                                <div className="absolute bottom-2 left-2 flex items-center gap-1 rounded-lg bg-black/55 backdrop-blur-sm px-2 py-1">
+                                  <span className="text-xs">{game.categoryIcon}</span>
+                                  <span className="text-[9px] font-bold uppercase tracking-wider text-white/90">{game.category}</span>
+                                </div>
+                              </div>
+                              <div className="p-3.5">
+                                <p className="font-bold text-sm text-gray-900 dark:text-white group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors leading-snug mb-1 line-clamp-1">{game.title}</p>
+                                <div className="flex items-center gap-1.5">
+                                  <StarRow rate={game.rate} size="sm" />
+                                  <span className="text-[10px] font-bold text-gray-500 dark:text-gray-400">{game.rate.toFixed(1)}</span>
+                                  <span className="text-gray-300 dark:text-gray-600 text-xs">·</span>
+                                  <span className="text-[10px] text-gray-400 dark:text-gray-500">{game.plays}</span>
+                                </div>
+                              </div>
+                            </Link>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  </section>
+                )}
+              </div>
+
+              {/* ─── RIGHT COLUMN: Specs Sidebar ──────────────────── */}
+              <div className="lg:col-span-1 flex flex-col gap-6 lg:sticky lg:top-24">
+
+                {/* Primary Download CTA card */}
+                <div id="download-section" className="rounded-[var(--radius-lg)] border border-gray-200/70 dark:border-white/[0.07] bg-white dark:bg-gray-900 shadow-[var(--shadow-md)] overflow-hidden">
+                  <div className={`h-1 w-full ${accentBg}`} />
+                  <div className="p-6">
+                    <div className="flex items-center gap-3 mb-1">
+                      <span className="text-2xl font-black text-gray-900 dark:text-white">Free</span>
+                      <span className="text-xs font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-500/15 px-2 py-0.5 rounded-full">No Cost</span>
+                    </div>
+                    <p className="text-xs text-gray-400 dark:text-gray-500 mb-5">Available for Windows & Linux · KOOMPI Optimized</p>
+
+                    <div className="flex flex-col gap-3">
+                      {([
+                        { key: "linux" as const, icon: linux, iconAlt: "Linux", label: "Download for Linux", note: "KOOMPI Optimized", noteClass: "text-emerald-600 dark:text-emerald-400" },
+                        { key: "windows" as const, icon: windows, iconAlt: "Windows", label: "Download for Windows", note: "Windows 10/11", noteClass: "text-blue-600 dark:text-blue-400" },
+                      ]).map(({ key, icon, iconAlt, label, note, noteClass }) => {
+                        const p = product[key];
+                        return (
+                          <div key={key}>
+                            <a href={p?.releaseDetails?.download} target="_blank" rel="noopener noreferrer" id={`download-${key}-btn`}>
+                              <button className="w-full py-3 px-4 rounded-[var(--radius)] font-semibold text-sm flex items-center gap-3 transition-all duration-200 hover:scale-[1.01] active:scale-[0.99] bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-white/10 hover:shadow-[var(--shadow-sm)]">
+                                <div className="p-1.5 rounded-md bg-gray-200 dark:bg-white/10 shrink-0">
+                                  <Image src={icon} alt={iconAlt} width={18} height={18} />
+                                </div>
+                                <span className="flex-1 text-left">{label}</span>
+                                <ChevronRight className="w-4 h-4 opacity-60 shrink-0" />
+                              </button>
+                            </a>
+                            <p className={`text-[10px] font-medium mt-1 ml-1 ${noteClass}`}>
+                              {note} · {p?.releaseDetails?.fileSize}
+                            </p>
+                          </div>
+                        );
+                      })}
+                    </div>
+
+                    <button onClick={() => router.push(`/play/${product.id}`)} className="mt-4 w-full py-2.5 px-4 rounded-[var(--radius)] text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white border border-gray-200 dark:border-white/10 hover:border-gray-300 dark:hover:border-white/20 bg-transparent transition-all duration-200 flex items-center justify-center gap-2">
+                      <Play className="w-3.5 h-3.5" /> Or play free in browser
+                    </button>
+                  </div>
+                </div>
+
+                {/* Technical Specs card */}
+                <div className="rounded-[var(--radius-lg)] border border-gray-200/70 dark:border-white/[0.07] bg-white dark:bg-gray-900 shadow-[var(--shadow-sm)] overflow-hidden">
+                  <div className="p-6">
+                    <div className="flex items-center gap-3 mb-5">
+                      <div className={`w-1 h-5 rounded-full ${accentBg}`} />
+                      <h2 className="text-sm font-bold text-gray-900 dark:text-white tracking-tight uppercase">Technical Details</h2>
+                    </div>
+                    {(["linux", "windows"] as const).map((plat, pi) => {
+                      const p = product[plat];
+                      const isLinux = plat === "linux";
+                      return (
+                        <div key={plat} className={pi > 0 ? "mt-5 pt-5 border-t border-gray-100 dark:border-white/[0.06]" : ""}>
+                          <div className="flex items-center gap-2 mb-3">
+                            <div className={`p-1.5 rounded-md ring-1 ${isLinux ? "bg-emerald-50 dark:bg-emerald-950/40 ring-emerald-100 dark:ring-emerald-900/40" : "bg-blue-50 dark:bg-blue-950/40 ring-blue-100 dark:ring-blue-900/40"}`}>
+                              <Image src={isLinux ? linux : windows} alt={p?.platform ?? plat} width={16} height={16} />
+                            </div>
+                            <span className="text-xs font-bold text-gray-700 dark:text-gray-300">{p?.platform}</span>
+                            {isLinux && <span className="ml-auto text-[9px] font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-500/15 px-1.5 py-0.5 rounded-full">KOOMPI</span>}
+                          </div>
+                          <div className="rounded-[var(--radius-sm)] overflow-hidden border border-gray-100 dark:border-white/[0.06] text-xs">
+                            {specRows(plat).map(({ label, value, icon: Icon }, i) => (
+                              <div key={label} className={`flex items-center justify-between px-3 py-2 gap-2 ${i % 2 === 0 ? "bg-gray-50 dark:bg-gray-800/60" : "bg-white dark:bg-gray-900"}`}>
+                                <div className="flex items-center gap-1.5 text-gray-400 dark:text-gray-500">
+                                  <Icon className="w-3 h-3 shrink-0" />
+                                  <span className="font-medium">{label}</span>
+                                </div>
+                                <span className="text-gray-800 dark:text-gray-200 font-semibold tabular-nums">{value ?? "—"}</span>
+                              </div>
+                            ))}
+                            <div className={`flex items-start justify-between px-3 py-2 gap-2 ${specRows(plat).length % 2 === 0 ? "bg-gray-50 dark:bg-gray-800/60" : "bg-white dark:bg-gray-900"}`}>
+                              <div className="flex items-center gap-1.5 text-gray-400 dark:text-gray-500 shrink-0">
+                                <Monitor className="w-3 h-3 shrink-0" />
+                                <span className="font-medium">OS</span>
+                              </div>
+                              <span className="text-gray-800 dark:text-gray-200 font-semibold text-right">{p?.osRequirement ?? "—"}</span>
+                            </div>
+                          </div>
+                          <p className="text-[10px] text-gray-400 dark:text-gray-600 mt-1.5 ml-0.5">{p?.fileName}</p>
+                        </div>
+                      );
+                    })}
+
+                    <div className="mt-5 pt-5 border-t border-gray-100 dark:border-white/[0.06] flex items-center justify-between">
+                      <span className="text-xs text-gray-400 dark:text-gray-500 font-medium">Developer</span>
+                      <div className="flex items-center gap-2">
+                        <Image src="/koompi-footer.png" alt="KOOMPI" width={20} height={20} className="rounded-sm object-contain" />
+                        <span className="text-xs font-bold text-gray-800 dark:text-gray-200">KOOMPI</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Rating card */}
+                <div className="rounded-[var(--radius-lg)] border border-gray-200/70 dark:border-white/[0.07] bg-white dark:bg-gray-900 shadow-[var(--shadow-sm)] p-5 flex items-center gap-5">
+                  <div className="flex flex-col items-center">
+                    <span className="text-4xl font-black text-gray-900 dark:text-white tracking-tighter">{product.rate.toFixed(1)}</span>
+                    <StarRow rate={product.rate} size="sm" />
+                    <p className="mt-1 text-[9px] font-bold text-gray-400 dark:text-gray-600 uppercase tracking-widest">Rating</p>
+                  </div>
+                  <div className="flex-1 flex flex-col gap-1.5">
+                    {[5, 4, 3, 2, 1].map((star) => {
+                      const pct = star === Math.round(product.rate) ? 70 : star < Math.round(product.rate) ? 20 : 10;
+                      return (
+                        <div key={star} className="flex items-center gap-2">
+                          <span className="text-[10px] text-gray-400 w-2 shrink-0">{star}</span>
+                          <div className="flex-1 h-1.5 rounded-full bg-gray-100 dark:bg-gray-800 overflow-hidden">
+                            <div className="h-full rounded-full bg-amber-400" style={{ width: `${pct}%` }} />
+                          </div>
                         </div>
                       );
                     })}
                   </div>
-
-                  <button onClick={() => router.push(`/play/${product.id}`)} className="mt-4 w-full py-2.5 px-4 rounded-[var(--radius)] text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white border border-gray-200 dark:border-white/10 hover:border-gray-300 dark:hover:border-white/20 bg-transparent transition-all duration-200 flex items-center justify-center gap-2">
-                    <Play className="w-3.5 h-3.5" /> Or play free in browser
-                  </button>
                 </div>
-              </div>
 
-              {/* Technical Specs card */}
-              <div className="rounded-[var(--radius-lg)] border border-gray-200/70 dark:border-white/[0.07] bg-white dark:bg-gray-900 shadow-[var(--shadow-sm)] overflow-hidden">
-                <div className="p-6">
-                  <div className="flex items-center gap-3 mb-5">
-                    <div className={`w-1 h-5 rounded-full ${accentBg}`} />
-                    <h2 className="text-sm font-bold text-gray-900 dark:text-white tracking-tight uppercase">Technical Details</h2>
+                {/* Leaderboard prompt card */}
+                <Link href="/leaderboard" id="game-detail-leaderboard-link" className="group block rounded-[var(--radius-lg)] bg-gradient-to-br from-teal-500 to-indigo-600 p-5 text-white shadow-[0_4px_20px_rgba(20,184,166,0.25)] hover:shadow-[0_6px_28px_rgba(20,184,166,0.38)] hover:-translate-y-0.5 transition-all duration-200">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Trophy className="w-5 h-5 text-yellow-300" />
+                    <span className="font-black text-sm">Global Leaderboard</span>
                   </div>
-                  {(["linux", "windows"] as const).map((plat, pi) => {
-                    const p = product[plat];
-                    const isLinux = plat === "linux";
-                    return (
-                      <div key={plat} className={pi > 0 ? "mt-5 pt-5 border-t border-gray-100 dark:border-white/[0.06]" : ""}>
-                        <div className="flex items-center gap-2 mb-3">
-                          <div className={`p-1.5 rounded-md ring-1 ${isLinux ? "bg-emerald-50 dark:bg-emerald-950/40 ring-emerald-100 dark:ring-emerald-900/40" : "bg-blue-50 dark:bg-blue-950/40 ring-blue-100 dark:ring-blue-900/40"}`}>
-                            <Image src={isLinux ? linux : windows} alt={p?.platform ?? plat} width={16} height={16} />
-                          </div>
-                          <span className="text-xs font-bold text-gray-700 dark:text-gray-300">{p?.platform}</span>
-                          {isLinux && <span className="ml-auto text-[9px] font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-500/15 px-1.5 py-0.5 rounded-full">KOOMPI</span>}
-                        </div>
-                        <div className="rounded-[var(--radius-sm)] overflow-hidden border border-gray-100 dark:border-white/[0.06] text-xs">
-                          {specRows(plat).map(({ label, value, icon: Icon }, i) => (
-                            <div key={label} className={`flex items-center justify-between px-3 py-2 gap-2 ${i % 2 === 0 ? "bg-gray-50 dark:bg-gray-800/60" : "bg-white dark:bg-gray-900"}`}>
-                              <div className="flex items-center gap-1.5 text-gray-400 dark:text-gray-500">
-                                <Icon className="w-3 h-3 shrink-0" />
-                                <span className="font-medium">{label}</span>
-                              </div>
-                              <span className="text-gray-800 dark:text-gray-200 font-semibold tabular-nums">{value ?? "—"}</span>
-                            </div>
-                          ))}
-                          <div className={`flex items-start justify-between px-3 py-2 gap-2 ${specRows(plat).length % 2 === 0 ? "bg-gray-50 dark:bg-gray-800/60" : "bg-white dark:bg-gray-900"}`}>
-                            <div className="flex items-center gap-1.5 text-gray-400 dark:text-gray-500 shrink-0">
-                              <Monitor className="w-3 h-3 shrink-0" />
-                              <span className="font-medium">OS</span>
-                            </div>
-                            <span className="text-gray-800 dark:text-gray-200 font-semibold text-right">{p?.osRequirement ?? "—"}</span>
-                          </div>
-                        </div>
-                        <p className="text-[10px] text-gray-400 dark:text-gray-600 mt-1.5 ml-0.5">{p?.fileName}</p>
-                      </div>
-                    );
-                  })}
-
-                  <div className="mt-5 pt-5 border-t border-gray-100 dark:border-white/[0.06] flex items-center justify-between">
-                    <span className="text-xs text-gray-400 dark:text-gray-500 font-medium">Developer</span>
-                    <div className="flex items-center gap-2">
-                      <Image src="/koompi-footer.png" alt="KOOMPI" width={20} height={20} className="rounded-sm object-contain" />
-                      <span className="text-xs font-bold text-gray-800 dark:text-gray-200">KOOMPI</span>
-                    </div>
+                  <p className="text-xs text-white/75 mb-3 leading-relaxed">Play and submit your score to see where you rank among 2.5M+ learners worldwide.</p>
+                  <div className="flex items-center gap-1 text-xs font-bold text-white/90">
+                    View rankings <ChevronRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
                   </div>
-                </div>
+                </Link>
               </div>
-
-              {/* Rating card */}
-              <div className="rounded-[var(--radius-lg)] border border-gray-200/70 dark:border-white/[0.07] bg-white dark:bg-gray-900 shadow-[var(--shadow-sm)] p-5 flex items-center gap-5">
-                <div className="flex flex-col items-center">
-                  <span className="text-4xl font-black text-gray-900 dark:text-white tracking-tighter">{product.rate.toFixed(1)}</span>
-                  <StarRow rate={product.rate} size="sm" />
-                  <p className="mt-1 text-[9px] font-bold text-gray-400 dark:text-gray-600 uppercase tracking-widest">Rating</p>
-                </div>
-                <div className="flex-1 flex flex-col gap-1.5">
-                  {[5, 4, 3, 2, 1].map((star) => {
-                    const pct = star === Math.round(product.rate) ? 70 : star < Math.round(product.rate) ? 20 : 10;
-                    return (
-                      <div key={star} className="flex items-center gap-2">
-                        <span className="text-[10px] text-gray-400 w-2 shrink-0">{star}</span>
-                        <div className="flex-1 h-1.5 rounded-full bg-gray-100 dark:bg-gray-800 overflow-hidden">
-                          <div className="h-full rounded-full bg-amber-400" style={{ width: `${pct}%` }} />
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-
-              {/* Leaderboard prompt card */}
-              <Link href="/leaderboard" id="game-detail-leaderboard-link" className="group block rounded-[var(--radius-lg)] bg-gradient-to-br from-teal-500 to-indigo-600 p-5 text-white shadow-[0_4px_20px_rgba(20,184,166,0.25)] hover:shadow-[0_6px_28px_rgba(20,184,166,0.38)] hover:-translate-y-0.5 transition-all duration-200">
-                <div className="flex items-center gap-2 mb-2">
-                  <Trophy className="w-5 h-5 text-yellow-300" />
-                  <span className="font-black text-sm">Global Leaderboard</span>
-                </div>
-                <p className="text-xs text-white/75 mb-3 leading-relaxed">Play and submit your score to see where you rank among 2.5M+ learners worldwide.</p>
-                <div className="flex items-center gap-1 text-xs font-bold text-white/90">
-                  View rankings <ChevronRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
-                </div>
-              </Link>
             </div>
           </div>
+
         </div>
       </div>
 
@@ -752,7 +938,7 @@ export default function GameDetail() {
       </div>
 
       {/* ── STICKY CTA BAR ── */}
-      <div className={`fixed bottom-0 left-0 right-0 z-[60] transform transition-transform duration-300 ease-in-out ${showStickyCTA ? "translate-y-0" : "translate-y-full"}`}>
+      <div className={`hidden md:block fixed bottom-0 left-0 right-0 z-[60] transform transition-transform duration-300 ease-in-out ${showStickyCTA ? "translate-y-0" : "translate-y-full"}`}>
         <div className="bg-white/90 dark:bg-gray-900/90 backdrop-blur-md border-t border-gray-200/80 dark:border-white/10 shadow-[0_-8px_30px_rgba(0,0,0,0.12)] dark:shadow-[0_-8px_30px_rgba(0,0,0,0.5)]">
           <div className="mx-auto max-w-7xl px-5 py-3 md:py-4 flex items-center justify-between gap-4">
             <div className="flex items-center gap-3.5">
