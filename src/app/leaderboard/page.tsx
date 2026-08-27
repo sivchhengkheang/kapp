@@ -135,7 +135,7 @@ const TOTAL_PLAYERS = 500;
 const USER_ID = "you";
 
 type SortKey = "score" | "gamesPlayed" | "winRate" | "streak";
-type TimeFrame = "weekly" | "all-time";
+type TimeFrame = "weekly" | "monthly" | "all-time";
 type TabKey = "global" | "typing" | "coding" | "math" | "logic" | "mouse" | "puzzle";
 
 const TABS: { key: TabKey; label: string; icon: string; category?: string }[] = [
@@ -195,17 +195,17 @@ export default function LeaderboardPage() {
       <Navbar />
 
       <div className="flex-1 pb-32">
-        {/* Background gradient */}
-        <div className="absolute top-0 inset-x-0 h-[700px] bg-gradient-to-b from-indigo-500/10 dark:from-indigo-500/5 via-purple-500/5 to-transparent pointer-events-none" />
+        {/* Background gradient — teal + indigo */}
+        <div className="absolute top-0 inset-x-0 h-[700px] bg-gradient-to-b from-teal-500/8 dark:from-teal-500/6 via-indigo-500/5 to-transparent pointer-events-none" />
 
         {/* ── HEADER ──────────────────────────────────────────────── */}
         <AnimatedSection
           mode="page-load"
           className="relative z-10 mx-auto max-w-[1100px] px-5 sm:px-6 pt-20 pb-12 text-center"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-indigo-500/20 bg-indigo-50 dark:bg-indigo-500/10 mb-6">
-            <Trophy className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
-            <span className="text-xs font-bold uppercase tracking-widest text-indigo-600 dark:text-indigo-400">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-teal-500/25 bg-teal-50 dark:bg-teal-500/10 mb-6">
+            <Trophy className="w-4 h-4 text-teal-600 dark:text-teal-400" />
+            <span className="text-xs font-bold uppercase tracking-widest text-teal-600 dark:text-teal-400">
               Global Rankings
             </span>
           </div>
@@ -219,6 +219,22 @@ export default function LeaderboardPage() {
             See how you rank against learners worldwide. Play games, earn
             points, and climb to the top!
           </p>
+          {/* Global stats bar */}
+          <div className="flex flex-wrap items-center justify-center gap-6 mt-6 mb-2">
+            {[
+              { value: "2.5M+", label: "Total Plays", icon: "🎮" },
+              { value: TOTAL_PLAYERS.toLocaleString() + "+", label: "Ranked Players", icon: "🏆" },
+              { value: "45+", label: "Countries", icon: "🌍" },
+            ].map((s) => (
+              <div key={s.label} className="flex items-center gap-2.5">
+                <span className="text-xl">{s.icon}</span>
+                <div className="text-left">
+                  <p className="text-lg font-black text-gray-900 dark:text-white leading-tight">{s.value}</p>
+                  <p className="text-[11px] text-gray-500 dark:text-gray-400 font-medium">{s.label}</p>
+                </div>
+              </div>
+            ))}
+          </div>
         </AnimatedSection>
 
         <AnimatedSection
@@ -285,17 +301,17 @@ export default function LeaderboardPage() {
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
             {/* Timeframe toggle */}
             <div className="flex bg-gray-200/60 dark:bg-gray-900/80 p-1.5 rounded-2xl border border-gray-300/50 dark:border-white/10 backdrop-blur-sm">
-              {(["weekly", "all-time"] as TimeFrame[]).map((tf) => (
+              {(["weekly", "monthly", "all-time"] as TimeFrame[]).map((tf) => (
                 <button
                   key={tf}
                   onClick={() => setTimeframe(tf)}
-                  className={`px-6 py-2.5 rounded-xl text-sm font-bold transition-all duration-300 capitalize ${
+                  className={`px-4 sm:px-6 py-2.5 rounded-xl text-sm font-bold transition-all duration-300 capitalize ${
                     timeframe === tf
-                      ? "bg-white dark:bg-gray-800 text-indigo-600 dark:text-white shadow-md scale-105"
+                      ? "bg-gradient-to-r from-teal-500 to-indigo-600 text-white shadow-md scale-105"
                       : "text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200"
                   }`}
                 >
-                  {tf === "all-time" ? "All Time" : "Weekly"}
+                  {tf === "all-time" ? "All Time" : tf === "monthly" ? "Monthly" : "Weekly"}
                 </button>
               ))}
             </div>
@@ -311,8 +327,8 @@ export default function LeaderboardPage() {
                   onClick={() => setSortBy(opt.key)}
                   className={`px-4 py-1.5 rounded-full text-xs font-bold border transition-all duration-200 ${
                     sortBy === opt.key
-                      ? "bg-indigo-600 text-white border-indigo-600 shadow-md"
-                      : "bg-white dark:bg-gray-900 text-gray-600 dark:text-gray-400 border-gray-200 dark:border-white/10 hover:border-indigo-400 hover:text-indigo-600 dark:hover:text-indigo-400"
+                      ? "bg-gradient-to-r from-teal-500 to-indigo-600 text-white border-transparent shadow-md"
+                      : "bg-white dark:bg-gray-900 text-gray-600 dark:text-gray-400 border-gray-200 dark:border-white/10 hover:border-teal-400 hover:text-teal-600 dark:hover:text-teal-400"
                   }`}
                 >
                   {opt.label}
@@ -329,8 +345,8 @@ export default function LeaderboardPage() {
                 onClick={() => setActiveTab(tab.key)}
                 className={`flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-bold border whitespace-nowrap transition-all duration-200 ${
                   activeTab === tab.key
-                    ? "bg-indigo-600 text-white border-indigo-600 shadow-lg shadow-indigo-500/20"
-                    : "bg-white dark:bg-gray-900 text-gray-600 dark:text-gray-400 border-gray-200 dark:border-white/10 hover:border-indigo-400 hover:text-indigo-600 dark:hover:text-indigo-400"
+                    ? "bg-gradient-to-r from-teal-500 to-indigo-600 text-white border-transparent shadow-lg shadow-teal-500/20"
+                    : "bg-white dark:bg-gray-900 text-gray-600 dark:text-gray-400 border-gray-200 dark:border-white/10 hover:border-teal-400 hover:text-teal-600 dark:hover:text-teal-400"
                 }`}
               >
                 <span>{tab.icon}</span>
@@ -343,7 +359,7 @@ export default function LeaderboardPage() {
           <div className="bg-white dark:bg-gray-900/80 border border-gray-200/70 dark:border-white/[0.07] rounded-2xl p-5 mb-8">
             <div className="flex items-center justify-between mb-3">
               <div className="flex items-center gap-2">
-                <BarChart3 className="w-4 h-4 text-indigo-500" />
+                <BarChart3 className="w-4 h-4 text-teal-500" />
                 <span className="text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">
                   Score Distribution
                 </span>

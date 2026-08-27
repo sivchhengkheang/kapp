@@ -31,7 +31,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
     setUser({
       id: 'user-123',
-      username: 'guest_player',
+      username: 'Guest Player',
       avatarId: savedAvatar !== null ? parseInt(savedAvatar, 10) : 0,
       gender: savedGender ?? "male",
     });

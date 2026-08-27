@@ -31,7 +31,7 @@ export default function FeaturedCard({ game, index = 0 }: { game: Game; index?: 
           shadow-[0_4px_20px_rgba(0,0,0,0.09)]
           w-full h-full
           transition-all duration-300 ease-out
-          group-hover:shadow-[0_12px_36px_rgba(99,102,241,0.22),0_4px_12px_rgba(0,0,0,0.10)]
+          group-hover:shadow-[0_12px_36px_rgba(20,184,166,0.2),0_4px_12px_rgba(0,0,0,0.10)]
         "
       >
         {/* ── Thumbnail ─────────────────────────────── */}

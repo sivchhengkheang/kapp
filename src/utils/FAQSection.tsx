@@ -58,11 +58,10 @@ function FAQItem({
 }) {
   return (
     <div
-      className={`group rounded-2xl border transition-all duration-300 ${
-        isOpen
-          ? "border-indigo-200/70 dark:border-indigo-500/30 bg-indigo-50/40 dark:bg-indigo-500/[0.05]"
-          : "border-gray-200/70 dark:border-white/[0.07] bg-white dark:bg-gray-900 hover:border-gray-300 dark:hover:border-white/[0.12]"
-      }`}
+      className={`group rounded-2xl border transition-all duration-300 ${isOpen
+        ? "border-indigo-200/70 dark:border-indigo-500/30 bg-indigo-50/40 dark:bg-indigo-500/[0.05]"
+        : "border-gray-200/70 dark:border-white/[0.07] bg-white dark:bg-gray-900 hover:border-gray-300 dark:hover:border-white/[0.12]"
+        }`}
     >
       <button
         id={faq.id}
@@ -73,11 +72,10 @@ function FAQItem({
       >
         {/* Icon */}
         <span
-          className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-lg transition-colors duration-200 ${
-            isOpen
-              ? "bg-indigo-100 dark:bg-indigo-500/20"
-              : "bg-gray-100 dark:bg-white/[0.07] group-hover:bg-indigo-50 dark:group-hover:bg-indigo-500/10"
-          }`}
+          className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-lg transition-colors duration-200 ${isOpen
+            ? "bg-indigo-100 dark:bg-indigo-500/20"
+            : "bg-gray-100 dark:bg-white/[0.07] group-hover:bg-indigo-50 dark:group-hover:bg-indigo-500/10"
+            }`}
           aria-hidden="true"
         >
           {faq.icon}
@@ -90,17 +88,15 @@ function FAQItem({
 
         {/* Chevron */}
         <span
-          className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full border transition-all duration-300 ${
-            isOpen
-              ? "border-indigo-300 dark:border-indigo-500/40 bg-indigo-100 dark:bg-indigo-500/20 rotate-180"
-              : "border-gray-200 dark:border-white/10 bg-transparent"
-          }`}
+          className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full border transition-all duration-300 ${isOpen
+            ? "border-indigo-300 dark:border-indigo-500/40 bg-indigo-100 dark:bg-indigo-500/20 rotate-180"
+            : "border-gray-200 dark:border-white/10 bg-transparent"
+            }`}
           aria-hidden="true"
         >
           <svg
-            className={`w-3.5 h-3.5 transition-colors duration-200 ${
-              isOpen ? "text-indigo-600 dark:text-indigo-400" : "text-gray-400"
-            }`}
+            className={`w-3.5 h-3.5 transition-colors duration-200 ${isOpen ? "text-indigo-600 dark:text-indigo-400" : "text-gray-400"
+              }`}
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -158,7 +154,7 @@ export default function FAQSection() {
         </div>
 
         {/* Two-column accordion on large screens */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        <div className="grid grid-col-1 gap-4">
           {FAQS.map((faq) => (
             <FAQItem
               key={faq.id}

@@ -10,41 +10,41 @@ const FOOTER_COLS = [
   {
     heading: "Company",
     links: [
-      { label: "About KOOMPI", href: "https://koompi.com", external: true  },
-      { label: "Blog",         href: "#",                  external: false },
-      { label: "Careers",      href: "#",                  external: false },
-      { label: "Contact",      href: "https://koompi.com", external: true  },
+      { label: "About KOOMPI", href: "https://koompi.com", external: true },
+      { label: "Blog", href: "https://koompi.com/blog", external: true },
+      { label: "Careers", href: "https://koompi.com/careers", external: true },
+      { label: "Contact", href: "https://koompi.com", external: true },
     ],
   },
   {
     heading: "Games",
     links: [
-      { label: "Typing Code",     href: "/typing-code",     external: false },
-      { label: "Typing Math",     href: "/typing-math",     external: false },
-      { label: "Dragon Drop",     href: "/dragon-drop",     external: false },
-      { label: "Robot Obstacle",  href: "/robot-obstacle",  external: false },
-      { label: "Master Mouse",    href: "/master-mouse",    external: false },
-      { label: "Number Link",     href: "/number-link",     external: false },
-      { label: "Koompi Typing",   href: "/koompi-typing",   external: false },
+      { label: "Typing Code", href: "/typing-code", external: false },
+      { label: "Typing Math", href: "/typing-math", external: false },
+      { label: "Dragon Drop", href: "/dragon-drop", external: false },
+      { label: "Robot Obstacle", href: "/robot-obstacle", external: false },
+      { label: "Master Mouse", href: "/master-mouse", external: false },
+      { label: "Number Link", href: "/number-link", external: false },
+      { label: "Koompi Typing", href: "/koompi-typing", external: false },
     ],
   },
   {
     heading: "Resources",
     links: [
       { label: "Start Learning", href: "/#games-section", external: false },
-      { label: "How It Works",   href: "/about",          external: false },
-      { label: "Leaderboard",    href: "/leaderboard",    external: false },
-      { label: "Privacy Policy", href: "#",               external: false },
-      { label: "Terms of Use",   href: "#",               external: false },
+      { label: "How It Works", href: "/about", external: false },
+      // { label: "Leaderboard",    href: "/leaderboard",    external: false },
+      { label: "Privacy Policy", href: "/privacy", external: false },
+      { label: "Terms of Use", href: "/terms", external: false },
     ],
   },
 ] as const;
 
 const SOCIALS = [
-  { Icon: FaFacebook,     href: "https://facebook.com/koompi",         label: "Facebook",  id: "footer-facebook"  },
-  { Icon: FaGithub,       href: "https://github.com/koompi",           label: "GitHub",    id: "footer-github"    },
-  { Icon: FaTelegramPlane,href: "https://t.me/koompi",                 label: "Telegram",  id: "footer-telegram"  },
-  { Icon: FaInstagram,    href: "https://instagram.com/koompiofficial", label: "Instagram", id: "footer-instagram" },
+  { Icon: FaFacebook, href: "https://facebook.com/koompi", label: "Facebook", id: "footer-facebook" },
+  { Icon: FaGithub, href: "https://github.com/koompi", label: "GitHub", id: "footer-github" },
+  { Icon: FaTelegramPlane, href: "https://t.me/koompi", label: "Telegram", id: "footer-telegram" },
+  { Icon: FaInstagram, href: "https://instagram.com/koompiofficial", label: "Instagram", id: "footer-instagram" },
 ];
 
 export function Footer() {
@@ -65,11 +65,11 @@ export function Footer() {
           <div className="col-span-2 sm:col-span-2 lg:col-span-1 flex flex-col gap-5">
             {/* Logo */}
             <Link href="/" id="footer-logo" className="flex items-center gap-2.5 group w-fit">
-              <Image 
-                src="/favicon.ico" 
-                alt="KAPP Logo" 
-                width={32} 
-                height={32} 
+              <Image
+                src="/favicon.ico"
+                alt="KAPP Logo"
+                width={32}
+                height={32}
                 className="rounded-xl object-contain shadow-md transition-transform duration-200 group-hover:scale-105"
               />
               <span className="font-black tracking-[-0.04em] text-xl text-gray-900 dark:text-white">
@@ -153,11 +153,9 @@ export function Footer() {
             </span>
           </p>
           <div className="flex items-center gap-4 text-xs text-gray-400 dark:text-gray-500">
-            <a href="#" className="hover:text-gray-600 dark:hover:text-gray-300 transition-colors">Privacy</a>
+            <Link href="/privacy" className="hover:text-gray-600 dark:hover:text-gray-300 transition-colors">Privacy</Link>
             <span>·</span>
-            <a href="#" className="hover:text-gray-600 dark:hover:text-gray-300 transition-colors">Terms</a>
-            <span>·</span>
-            <a href="#" className="hover:text-gray-600 dark:hover:text-gray-300 transition-colors">Sitemap</a>
+            <Link href="/terms" className="hover:text-gray-600 dark:hover:text-gray-300 transition-colors">Terms</Link>
           </div>
         </div>
 

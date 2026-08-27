@@ -13,7 +13,7 @@ const NAV_LINKS = [
   { label: "Home", href: "/", id: "nav-home" },
   { label: "Start Learning", href: "/#games-section", id: "nav-browse" },
   { label: "How It Works", href: "/about", id: "nav-how" },
-  { label: "Leaderboard", href: "/leaderboard", id: "nav-leaderboard" },
+  // { label: "Leaderboard", href: "/leaderboard", id: "nav-leaderboard" },
 ] as const;
 
 /* ── Logo mark SVG / Favicon ── */
@@ -186,7 +186,7 @@ export default function Navbar() {
           transition-all duration-300 ease-in-out
           ${isSolid
             //</>  ? "bg-[#f8f9fb]/95 dark:bg-gray-950/95 backdrop-blur-xl border-b border-gray-200/70 dark:border-white/[0.07] shadow-[0_1px_12px_rgba(0,0,0,0.06)]"
-            ? "bg-transparent backdrop-blur-xl border-b border-gray-200/70 dark:border-white/[0.07] shadow-[0_1px_12px_rgba(0,0,0,0.06)]"
+            ? "bg-[#f8f9fb]/50 dark:bg-gray-950/50 backdrop-blur-xl border-b border-gray-200/70 dark:border-white/[0.07] shadow-[0_1px_12px_rgba(0,0,0,0.06)]"
             : "bg-transparent"
           }
         `}
@@ -284,6 +284,7 @@ export default function Navbar() {
                     : "border-gray-300 bg-white/60 hover:bg-white dark:border-white/20 dark:bg-white/10 backdrop-blur-sm dark:hover:bg-white/20"
                     }`}
                 >
+                  <Avatar avatarId={user.avatarId} username={user.username} size="sm" />
                   <div className="flex flex-col text-right">
                     <span className="text-[11px] font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400">
                       {user.username}
@@ -295,7 +296,6 @@ export default function Navbar() {
                       </svg>
                     </span>
                   </div>
-                  <Avatar avatarId={user.avatarId} username={user.username} size="sm" />
                 </button>
 
                 {/* Avatar Switcher Popover */}

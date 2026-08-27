@@ -34,10 +34,13 @@ kapp/
 │   │   ├── page.tsx          # Home page — preloader, search, filter, game grid
 │   │   ├── globals.css       # Design tokens, dark mode, keyframes
 │   │   ├── layout.tsx        # Root layout (fonts, theme provider)
+│   │   ├── not-found.tsx     # Custom 404 Not Found page
 │   │   ├── [game]/           # Dynamic game detail page
 │   │   ├── play/             # In-browser game player
 │   │   ├── leaderboard/      # Leaderboard page
 │   │   ├── about/            # About page
+│   │   ├── privacy/          # Privacy policy page
+│   │   ├── terms/            # Terms of service page
 │   │   └── api/              # API routes
 │   ├── utils/
 │   │   ├── AppPreloader.tsx  # Fullscreen splash preloader component
@@ -54,6 +57,7 @@ kapp/
 │   │   ├── FAQSection.tsx    # FAQ accordion section
 │   │   ├── FeaturedCard.tsx  # Card used inside the carousel
 │   │   ├── AuthModel.tsx     # Authentication modal
+│   │   ├── MobileFilterDrawer.tsx # Mobile drawer for game filtering
 │   │   ├── RippleButton.tsx  # Button with ripple effect
 │   │   ├── SlideShow.tsx     # Slideshow component
 │   │   ├── TransitionLink.tsx # Animated page transition link

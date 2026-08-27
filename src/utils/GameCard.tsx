@@ -7,33 +7,23 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useInView } from "../hooks/useInView";
 
-const DIFFICULTY_STYLES: Record<
-  Difficulty,
-  { bg: string; text: string; dot: string }
-> = {
-  Easy:   { bg: "bg-teal-50 dark:bg-teal-500/10", text: "text-teal-700 dark:text-teal-400", dot: "bg-teal-500" },
-  Medium: { bg: "bg-amber-50 dark:bg-amber-500/10",     text: "text-amber-700 dark:text-amber-400",   dot: "bg-amber-500"   },
-  Hard:   { bg: "bg-rose-50 dark:bg-rose-500/10",       text: "text-rose-700 dark:text-rose-400",     dot: "bg-rose-500"    },
+const DIFFICULTY_STYLES: Record<Difficulty, { bg: string; text: string; dot: string }> = {
+  Easy: { bg: "bg-teal-50 dark:bg-teal-500/10", text: "text-teal-700 dark:text-teal-400", dot: "bg-teal-500" },
+  Medium: { bg: "bg-amber-50 dark:bg-amber-500/10", text: "text-amber-700 dark:text-amber-400", dot: "bg-amber-500" },
+  Hard: { bg: "bg-rose-50 dark:bg-rose-500/10", text: "text-rose-700 dark:text-rose-400", dot: "bg-rose-500" },
 };
 
-/* ── Small star rating renderer ── */
 function StarRow({ rate }: { rate: number }) {
-  const n = rate;
   return (
     <div className="flex items-center gap-0.5">
       {[1, 2, 3, 4, 5].map((i) => {
-        const fill = i <= Math.floor(n) ? 1 : i - n < 1 && i - n > 0 ? n - Math.floor(n) : 0;
+        const fill = i <= Math.floor(rate) ? 1 : i - rate < 1 && i - rate > 0 ? rate - Math.floor(rate) : 0;
         return (
           <span key={i} className="relative w-3 h-3 shrink-0">
-            {/* Grey base */}
             <svg className="absolute inset-0 w-3 h-3 text-gray-200 dark:text-gray-700" viewBox="0 0 24 24" fill="currentColor">
               <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
             </svg>
-            {/* Amber fill clipped to percentage */}
-            <span
-              className="absolute inset-0 overflow-hidden"
-              style={{ width: `${fill * 100}%` }}
-            >
+            <span className="absolute inset-0 overflow-hidden" style={{ width: `${fill * 100}%` }}>
               <svg className="w-3 h-3 text-amber-400" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
               </svg>
@@ -51,35 +41,24 @@ export default function GameCard({ game, index = 0 }: { game: Game; index?: numb
   const [ref, inView] = useInView<HTMLAnchorElement>({ threshold: 0.08 });
   const [wishlisted, setWishlisted] = useState(false);
   const router = useRouter();
-  /* Stagger: cap at 8, then cycle back so large grids still animate */
   const staggerClass = `stagger-${((index % 8) + 1)}`;
 
   const handleShare = async (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
+    e.preventDefault(); e.stopPropagation();
     const url = `${window.location.origin}/${game.id}`;
     try {
-      if (navigator.share) {
-        await navigator.share({ title: game.title, url });
-      } else {
-        await navigator.clipboard.writeText(url);
-        // Brief visual feedback via title attribute change is handled by tooltip
-      }
-    } catch {
-      // User cancelled or API unavailable — silently ignore
-    }
+      if (navigator.share) await navigator.share({ title: game.title, url });
+      else await navigator.clipboard.writeText(url);
+    } catch { /* silently ignore */ }
   };
 
   const handleWishlist = (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
+    e.preventDefault(); e.stopPropagation();
     setWishlisted((w) => !w);
   };
 
-  /* Play Now — go directly to the dedicated immersive play route */
   const handlePlay = (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
+    e.preventDefault(); e.stopPropagation();
     router.push(`/play/${game.id}`);
   };
 
@@ -89,7 +68,7 @@ export default function GameCard({ game, index = 0 }: { game: Game; index?: numb
       id={`game-card-${game.id}`}
       ref={ref}
       aria-label={`Play ${game.title}`}
-      className={`group block focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 rounded-2xl scroll-reveal ${staggerClass} ${inView ? "in-view" : ""} w-full`}
+      className={`group block focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 focus-visible:ring-offset-2 rounded-2xl scroll-reveal ${staggerClass} ${inView ? "in-view" : ""} w-full`}
     >
       <article
         className="
@@ -97,18 +76,17 @@ export default function GameCard({ game, index = 0 }: { game: Game; index?: numb
           relative flex flex-col overflow-hidden rounded-2xl
           bg-white dark:bg-gray-900
           border border-gray-200/90 dark:border-white/[0.08]
-          hover:border-indigo-400/40 dark:hover:border-indigo-400/40
+          hover:border-teal-400/35 dark:hover:border-teal-500/30
           shadow-[0_2px_12px_rgba(0,0,0,0.05)]
-          hover:shadow-[0_12px_32px_rgba(99,102,241,0.12)]
           transition-all duration-300
           h-full
         "
       >
-        {/* Top gradient accent bar */}
-        <div className="h-1 w-full bg-gradient-to-r from-indigo-500 via-violet-500 to-purple-500 opacity-80 group-hover/card:opacity-100 transition-opacity" />
+        {/* Top accent bar — teal to indigo */}
+        <div className="h-[3px] w-full bg-gradient-to-r from-teal-400 via-indigo-500 to-violet-500 opacity-70 group-hover/card:opacity-100 transition-opacity" />
 
-        {/* ── COVER IMAGE ──────────────────────────── */}
-        <div className="relative overflow-hidden bg-gray-100 dark:bg-gray-800 h-48 sm:h-52 transition-all duration-300">
+        {/* ── COVER IMAGE ── */}
+        <div className="relative overflow-hidden bg-gray-100 dark:bg-gray-800 h-48 sm:h-52">
           <Image
             src={src}
             alt={game.title}
@@ -117,111 +95,60 @@ export default function GameCard({ game, index = 0 }: { game: Game; index?: numb
             priority={index < 3}
             className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.06]"
           />
-
-          {/* Bottom gradient overlay for readability */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-black/5 to-transparent" />
-
-          {/* Category icon badge — top-left */}
-          <div className="absolute top-3 left-3 flex items-center gap-1.5 rounded-xl bg-black/50 backdrop-blur-md px-2.5 py-1.5 ring-1 ring-white/15">
-            <span className="text-sm leading-none" aria-hidden="true">{game.categoryIcon}</span>
-            <span className="text-[10px] font-bold uppercase tracking-wider text-white/90">
-              {game.category}
-            </span>
-          </div>
-
-          {/* Action buttons — top-right */}
-          <div className="absolute top-3 right-3 flex items-center gap-2">
-            {/* Share Button */}
-            <button
-              onClick={handleShare}
-              className="flex h-8 w-8 items-center justify-center rounded-full bg-black/40 text-white backdrop-blur-sm ring-1 ring-white/20 transition hover:bg-black/60 hover:scale-110 active:scale-95 cursor-pointer"
-              aria-label={`Share ${game.title}`}
-              title="Share this game"
-            >
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M7.217 10.907a2.25 2.25 0 1 0 0 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186 9.566-5.314m-9.566 7.5 9.566 5.314m0 0a2.25 2.25 0 1 0 3.935 2.186 2.25 2.25 0 0 0-3.935-2.186Zm0-12.814a2.25 2.25 0 1 0 3.933-2.185 2.25 2.25 0 0 0-3.933 2.185Z" />
-              </svg>
-            </button>
-            {/* Wishlist Button */}
-            <button
-              onClick={handleWishlist}
-              className="flex h-8 w-8 items-center justify-center rounded-full bg-black/40 backdrop-blur-sm ring-1 ring-white/20 transition hover:bg-black/60 hover:scale-110 active:scale-95 cursor-pointer"
-              aria-label={wishlisted ? `Remove ${game.title} from wishlist` : `Save ${game.title} to wishlist`}
-              title={wishlisted ? "Remove from wishlist" : "Save to wishlist"}
-            >
-              <svg
-                className={`w-4 h-4 transition-colors duration-200 ${wishlisted ? "text-rose-500" : "text-white"}`}
-                fill="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z" />
-              </svg>
-            </button>
-          </div>
+          {/* Gradient overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-black/0 to-transparent" />
         </div>
 
-        {/* ── CONTENT AREA ─────────────────────────────────── */}
+        {/* ── CONTENT AREA ── */}
         <div className="flex flex-1 flex-col gap-3 px-5 pb-5 pt-4">
-
-          {/* Title — 22px bold */}
-          <h3
-            className="font-bold leading-snug text-gray-900 dark:text-white text-lg sm:text-xl group-hover/card:text-indigo-600 dark:group-hover/card:text-indigo-400 transition-colors"
-          >
+          {/* Title */}
+          <h3 className="font-bold leading-snug text-gray-900 dark:text-white text-lg sm:text-xl group-hover/card:text-teal-600 dark:group-hover/card:text-teal-400 transition-colors duration-200">
             {game.title}
           </h3>
 
-          {/* Description — 16px body, 1.6 leading, max-width 600px */}
-          <p
-            className="text-sm sm:text-base leading-relaxed text-gray-500 dark:text-gray-400 line-clamp-3 flex-1"
-            style={{ lineHeight: "var(--leading-relaxed)" }}
-          >
+
+          {/* Description — clean single label, no emoji noise */}
+          <p className="text-sm leading-relaxed text-gray-500 dark:text-gray-400 line-clamp-2 flex-1">
             {game.description}
           </p>
 
-          {/* ── Stats row — 14px small text ── */}
-          <div className="flex flex-wrap items-center gap-x-3 gap-y-1 pt-0.5">
-            {/* Stars + rating number */}
+          {/* ── Stats row — muted, compact ── */}
+          <div className="flex items-center gap-x-3 gap-y-1 flex-wrap pt-0.5">
+            {/* Stars + rating */}
             <div className="flex items-center gap-1.5">
               <StarRow rate={game.rate} />
-              <span
-                className="font-bold text-gray-700 dark:text-gray-300 tabular-nums"
-                style={{ fontSize: "var(--text-sm)", lineHeight: "var(--leading-normal)" }}
-              >
-                {game.rate.toFixed(1)}
-              </span>
+              <span className="text-xs font-bold text-gray-700 dark:text-gray-300 tabular-nums">{game.rate.toFixed(1)}</span>
             </div>
-
-            <span className="text-gray-300 dark:text-gray-600" style={{ fontSize: "var(--text-sm)" }}>·</span>
-
-            {/* Play count */}
-            <span
-              className="flex items-center gap-1 text-gray-500 dark:text-gray-400"
-              style={{ fontSize: "var(--text-sm)", lineHeight: "var(--leading-normal)" }}
-            >
-              <svg className="w-3.5 h-3.5 shrink-0 text-indigo-500 dark:text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <span className="text-gray-300 dark:text-gray-600 text-xs">·</span>
+            {/* Plays */}
+            <span className="flex items-center gap-1 text-xs text-gray-500 dark:text-gray-400">
+              <svg className="w-3 h-3 shrink-0 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.347a1.125 1.125 0 0 1 0 1.972l-11.54 6.347a1.125 1.125 0 0 1-1.667-.986V5.653Z" />
               </svg>
-              <span className="font-semibold text-gray-700 dark:text-gray-300">{game.plays}</span> plays
+              <span className="font-semibold text-gray-600 dark:text-gray-300">{game.plays}</span>
             </span>
-
             <span className="text-gray-300 dark:text-gray-600 text-xs">·</span>
-
-            {/* Avg time */}
+            {/* Duration */}
             <span className="flex items-center gap-1 text-xs text-gray-500 dark:text-gray-400">
-              <svg className="w-3.5 h-3.5 shrink-0 text-indigo-500 dark:text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <svg className="w-3 h-3 shrink-0 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6l4 2m6-2a10 10 0 1 1-20 0 10 10 0 0 1 20 0Z" />
               </svg>
-              {game.avgTime} avg
+              {game.avgTime}
             </span>
           </div>
 
-          {/* ── Difficulty badge (content area) ── */}
-          <div className="flex items-center justify-between gap-3 pt-1">
-            <span
-              className={`inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider ${diff.bg} ${diff.text}`}
-            >
+          {/* Difficulty badge */}
+          <div className="flex items-center justify-between gap-2">
+            <span className={`inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider ${diff.bg} ${diff.text}`}>
               <span className={`h-1.5 w-1.5 rounded-full ${diff.dot}`} />
               {game.difficulty}
+            </span>
+            {/* Free badge */}
+            <span className="inline-flex items-center gap-1 rounded-lg px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider bg-teal-50 dark:bg-teal-500/10 text-teal-700 dark:text-teal-400">
+              <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+              </svg>
+              Free
             </span>
           </div>
 
@@ -233,15 +160,14 @@ export default function GameCard({ game, index = 0 }: { game: Game; index?: numb
               mt-auto w-full flex items-center justify-center gap-2
               rounded-xl py-3 px-5 min-h-[44px]
               text-sm font-bold text-white
-              bg-gradient-to-r from-indigo-600 to-violet-600
-              hover:from-indigo-500 hover:to-purple-600
-              shadow-[0_2px_10px_rgba(99,102,241,0.25)]
-              hover:shadow-[0_4px_16px_rgba(99,102,241,0.4)]
+              bg-gradient-to-r from-teal-500 to-indigo-600
+              hover:from-teal-400 hover:to-violet-600
+              shadow-[0_2px_12px_rgba(20,184,166,0.25)]
+              hover:shadow-[0_4px_20px_rgba(20,184,166,0.4)]
               transition-all duration-300 cursor-pointer
             "
             aria-label={`Play ${game.title} now`}
           >
-            {/* Play triangle */}
             <svg className="w-4 h-4 fill-current transition-transform duration-200 group-hover/btn:scale-110" viewBox="0 0 24 24" aria-hidden="true">
               <path d="M8 5v14l11-7z" />
             </svg>
