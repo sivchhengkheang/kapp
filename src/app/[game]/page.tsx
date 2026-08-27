@@ -204,7 +204,14 @@ export default function GameDetail() {
   const [shareToast, setShareToast] = useState(false);
   const [showStickyCTA, setShowStickyCTA] = useState(false);
   const [showAllGames, setShowAllGames] = useState(false);
+  const [highlightSection, setHighlightSection] = useState(false);
   const params = useParams<{ game: string }>();
+
+  const handleScrollToDownload = () => {
+    setHighlightSection(true);
+    setTimeout(() => setHighlightSection(false), 2500);
+  };
+
   const gameName = params?.game;
   const product = gameName ? PRODUCT_DATA.find((p) => p.id === gameName) : null;
   const router = useRouter();
@@ -288,7 +295,7 @@ export default function GameDetail() {
         {/* ── MOBILE APP STORE LAYOUT ── */}
         <div className="md:hidden flex flex-col bg-white dark:bg-gray-950 min-h-screen pb-10">
           {/* Header & Cover Image */}
-          <div className="relative w-full aspect-[4/3] bg-gray-100 dark:bg-gray-900">
+          <div className="relative w-full aspect-[5/2] bg-gray-100 dark:bg-gray-900">
             <Image src={coverSrc} alt={`${product.title} promotional banner`} fill priority className="object-cover" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
 
@@ -349,7 +356,7 @@ export default function GameDetail() {
           {/* Preview Section */}
           <div className="px-5 mb-8">
             <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">Preview</h2>
-            <div className="flex gap-4 overflow-x-auto snap-x [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] pb-2 -mx-5 px-5">
+            <div className="flex gap-4 overflow-x-auto snap-x [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] pb-2 pl-5  ">
               {[
                 { src: insiderSrc, caption: "Challenge Selection" },
                 { src: thumbnailSrc, caption: "Live Coding Challenge" },
@@ -384,7 +391,7 @@ export default function GameDetail() {
           <div className="px-5 mb-8">
             <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-1">Skills You'll Build</h2>
             <p className="text-xs text-gray-500 dark:text-gray-400 mb-4">Strengthen real, transferable skills.</p>
-            <div className="flex gap-3 overflow-x-auto snap-x [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] pb-2 -mx-5 px-5">
+            <div className="flex gap-3 overflow-x-auto snap-x [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] pb-2 -mr-5 pr-5">
               {skills.map((skill, i) => (
                 <div key={i} className={`snap-start shrink-0 w-[110px] flex flex-col items-center gap-2 rounded-2xl border px-3 py-4 text-center ${skill.color}`}>
                   <span className="text-2xl">{skill.icon}</span>
@@ -403,7 +410,7 @@ export default function GameDetail() {
                 <span className="text-sm font-bold">{product.rate.toFixed(1)}</span>
               </div>
             </div>
-            <div className="flex gap-4 overflow-x-auto snap-x [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] pb-4 -mx-5 px-5">
+            <div className="flex gap-4 overflow-x-auto snap-x [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] pb-4 -mr-5 pr-5">
               {testimonials.map((t, i) => (
                 <div key={i} className="snap-start shrink-0 w-[260px] flex flex-col gap-3 rounded-2xl bg-gray-50 dark:bg-gray-800/60 border border-gray-200/60 dark:border-white/[0.06] p-4">
                   <StarRow rate={t.rating} size="sm" />
@@ -437,7 +444,7 @@ export default function GameDetail() {
                   </button>
                 )}
               </div>
-              <div className="flex gap-4 overflow-x-auto snap-x [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] pb-4 -mx-5 px-5">
+              <div className="flex gap-4 overflow-x-auto snap-x [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] pb-4 -mr-5 pr-5">
                 {relatedGames.map((game) => {
                   const thumbSrc = (game.thumbnail || game.cover || "/cover1.png").replace(/^(?!\/)/, "/");
                   return (
@@ -446,10 +453,10 @@ export default function GameDetail() {
                       href={`/${game.id}`}
                       className="snap-start shrink-0 w-[140px] flex flex-col gap-2"
                     >
-                      <div className="relative aspect-square w-full rounded-2xl overflow-hidden shadow-sm border border-black/5 dark:border-white/10 bg-white dark:bg-gray-800">
+                      <div className="relative aspect-square w-full rounded-2xl overflow-hidden shadow-sm border border-black/5 dark:border-white/10 bg-white dark:bg-gray-800 ">
                         <Image src={thumbSrc} alt={game.title} fill className="object-cover" />
                       </div>
-                      <div className="px-1 pt-1">
+                      <div className="px-1 pt-1  ">
                         <p className="font-bold text-sm text-gray-900 dark:text-white leading-snug line-clamp-1">{game.title}</p>
                         <p className="text-[11px] text-gray-500 dark:text-gray-400 line-clamp-1">{game.category}</p>
                       </div>
@@ -558,7 +565,7 @@ export default function GameDetail() {
                       <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full bg-white/10 skew-x-[-20deg] transition-transform duration-500 ease-out pointer-events-none" />
                       <Play className="w-4 h-4 fill-current" /> Play in Browser
                     </button>
-                    <a href="#download-section" id="hero-download-cta" className="flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-[var(--radius)] font-bold text-sm text-white bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20 transition-all duration-200 hover:scale-[1.03] active:scale-[0.98]">
+                    <a href="#download-section" id="hero-download-cta" onClick={handleScrollToDownload} className="flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-[var(--radius)] font-bold text-sm text-white bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20 transition-all duration-200 hover:scale-[1.03] active:scale-[0.98]">
                       <Download className="w-5 h-5 shrink-0" /> Download Free
                     </a>
                   </div>
@@ -818,7 +825,7 @@ export default function GameDetail() {
                         return (
                           <div key={key}>
                             <a href={p?.releaseDetails?.download} target="_blank" rel="noopener noreferrer" id={`download-${key}-btn`}>
-                              <button className="w-full py-3 px-4 rounded-[var(--radius)] font-semibold text-sm flex items-center gap-3 transition-all duration-200 hover:scale-[1.01] active:scale-[0.99] bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-white/10 hover:shadow-[var(--shadow-sm)]">
+                              <button className={`relative w-full py-3 px-4 rounded-[var(--radius)] font-semibold text-sm flex items-center gap-3 transition-all duration-500 hover:scale-[1.01] active:scale-[0.99] bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-white/10 hover:shadow-[var(--shadow-sm)] ${highlightSection ? 'ring-1 ring-teal-500 dark:ring-teal-400 ring-offset-0 ring-offset-white dark:ring-offset-gray-900 animate-pulse [animation-duration:1s] shadow-lg' : ''}`}>
                                 <div className="p-1.5 rounded-md bg-gray-200 dark:bg-white/10 shrink-0">
                                   <Image src={icon} alt={iconAlt} width={18} height={18} />
                                 </div>
@@ -915,7 +922,7 @@ export default function GameDetail() {
                 </div>
 
                 {/* Leaderboard prompt card */}
-                <Link href="/leaderboard" id="game-detail-leaderboard-link" className="group block rounded-[var(--radius-lg)] bg-gradient-to-br from-teal-500 to-indigo-600 p-5 text-white shadow-[0_4px_20px_rgba(20,184,166,0.25)] hover:shadow-[0_6px_28px_rgba(20,184,166,0.38)] hover:-translate-y-0.5 transition-all duration-200">
+                {/* <Link href="/leaderboard" id="game-detail-leaderboard-link" className="group block rounded-[var(--radius-lg)] bg-gradient-to-br from-teal-500 to-indigo-600 p-5 text-white shadow-[0_4px_20px_rgba(20,184,166,0.25)] hover:shadow-[0_6px_28px_rgba(20,184,166,0.38)] hover:-translate-y-0.5 transition-all duration-200">
                   <div className="flex items-center gap-2 mb-2">
                     <Trophy className="w-5 h-5 text-yellow-300" />
                     <span className="font-black text-sm">Global Leaderboard</span>
@@ -924,7 +931,7 @@ export default function GameDetail() {
                   <div className="flex items-center gap-1 text-xs font-bold text-white/90">
                     View rankings <ChevronRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
                   </div>
-                </Link>
+                </Link> */}
               </div>
             </div>
           </div>
@@ -954,7 +961,7 @@ export default function GameDetail() {
               </div>
             </div>
             <div className="flex items-center gap-2.5 shrink-0">
-              <a href="#download-section" className="hidden sm:flex items-center justify-center gap-2 px-4 py-2.5 rounded-[var(--radius)] font-bold text-sm text-gray-700 dark:text-gray-200 bg-gray-100/80 dark:bg-white/5 hover:bg-gray-200 dark:hover:bg-white/10 transition-colors border border-gray-200/50 dark:border-white/5">
+              <a href="#download-section" onClick={handleScrollToDownload} className="hidden sm:flex items-center justify-center gap-2 px-4 py-2.5 rounded-[var(--radius)] font-bold text-sm text-gray-700 dark:text-gray-200 bg-gray-100/80 dark:bg-white/5 hover:bg-gray-200 dark:hover:bg-white/10 transition-colors border border-gray-200/50 dark:border-white/5">
                 <Download className="w-4 h-4" /> Download Free
               </a>
               <button onClick={() => router.push(`/play/${product.id}`)} className={`group flex items-center justify-center gap-2 px-6 py-2.5 rounded-[var(--radius)] font-bold text-sm transition-all hover:scale-[1.03] active:scale-[0.97] shadow-md ${brandBtnCls}`}>
@@ -966,16 +973,18 @@ export default function GameDetail() {
       </div>
 
       {/* Image Lightbox */}
-      {lightboxSrc && (
-        <div className="fixed inset-0 z-[80] flex items-center justify-center bg-black/90 backdrop-blur-sm p-4" onClick={() => setLightboxSrc(null)} role="dialog" aria-label="Image lightbox" aria-modal="true">
-          <button onClick={() => setLightboxSrc(null)} className="absolute top-5 right-5 z-[90] flex h-9 w-9 items-center justify-center rounded-full bg-white/10 hover:bg-white/20 text-white border border-white/15 transition-all duration-200 hover:scale-105" aria-label="Close lightbox">
-            <X className="w-4 h-4" />
-          </button>
-          <div className="relative max-w-4xl w-full rounded-[var(--radius-lg)] overflow-hidden shadow-2xl" style={{ maxHeight: "85vh" }} onClick={(e) => e.stopPropagation()}>
-            <Image src={lightboxSrc} alt="Screenshot enlarged" width={1280} height={720} className="w-full h-auto object-contain" />
+      {
+        lightboxSrc && (
+          <div className="fixed inset-0 z-[80] flex items-center justify-center bg-black/90 backdrop-blur-sm p-4" onClick={() => setLightboxSrc(null)} role="dialog" aria-label="Image lightbox" aria-modal="true">
+            <button onClick={() => setLightboxSrc(null)} className="absolute top-5 right-5 z-[90] flex h-9 w-9 items-center justify-center rounded-full bg-white/10 hover:bg-white/20 text-white border border-white/15 transition-all duration-200 hover:scale-105" aria-label="Close lightbox">
+              <X className="w-4 h-4" />
+            </button>
+            <div className="relative max-w-4xl w-full rounded-[var(--radius-lg)] overflow-hidden shadow-2xl" style={{ maxHeight: "85vh" }} onClick={(e) => e.stopPropagation()}>
+              <Image src={lightboxSrc} alt="Screenshot enlarged" width={1280} height={720} className="w-full h-auto object-contain" />
+            </div>
           </div>
-        </div>
-      )}
-    </div>
+        )
+      }
+    </div >
   );
 }

@@ -70,7 +70,7 @@ export function Footer() {
                 alt="KAPP Logo"
                 width={32}
                 height={32}
-                className="rounded-xl object-contain shadow-md transition-transform duration-200 group-hover:scale-105"
+                className="object-contain transition-transform duration-200 group-hover:scale-105"
               />
               <span className="font-black tracking-[-0.04em] text-xl text-gray-900 dark:text-white">
                 KAPP
