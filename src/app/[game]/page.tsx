@@ -297,7 +297,7 @@ export default function GameDetail() {
           {/* Header & Cover Image */}
           <div className="relative w-full aspect-[5/2] bg-gray-100 dark:bg-gray-900">
             <Image src={coverSrc} alt={`${product.title} promotional banner`} fill priority className="object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-white/80 via-white/20 to-transparent dark:from-black/70 dark:via-black/25 dark:to-transparent" />
 
             {/* Top Navigation Overlay */}
             <div className="absolute top-4 left-4 right-4 flex items-center justify-between z-10">
@@ -471,37 +471,36 @@ export default function GameDetail() {
         {/* ── DESKTOP LAYOUT (HIDDEN ON MOBILE) ── */}
         <div className="hidden md:block">
 
-          {/* ── METADATA TAG BAR ── */}
-          <section className="hidden md:block border-b border-gray-200 dark:border-white/[0.06] bg-white dark:bg-gray-900 shadow-[var(--shadow-sm)]">
-            <div className="mx-auto max-w-7xl px-5 py-3.5">
-              <div className="flex flex-wrap items-center gap-2">
-                {product.type?.map((t: { text: string; color: string }, i: number) => (
-                  <span key={i} className={`px-2.5 py-1 rounded-[var(--radius-sm)] text-[11px] font-bold uppercase tracking-wider ${t.color}`}>
-                    {t.text}
-                  </span>
-                ))}
-                <span className="hidden sm:block w-px h-4 bg-gray-200 dark:bg-white/10 mx-1" />
-                <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-[var(--radius-sm)] text-[11px] font-bold uppercase tracking-wider ${diff.bg} ${diff.text}`}>
-                  <span className={`h-1.5 w-1.5 rounded-full ${diff.dot}`} />
-                  {product.difficulty}
-                </span>
-                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-[var(--radius-sm)] text-[11px] font-bold uppercase tracking-wider bg-emerald-50 text-emerald-700 dark:bg-emerald-500/15 dark:text-emerald-300">
-                  <Wifi className="w-3 h-3" /> Offline Capable
-                </span>
-                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-[var(--radius-sm)] text-[11px] font-bold uppercase tracking-wider bg-blue-50 text-blue-700 dark:bg-blue-500/15 dark:text-blue-300">
-                  <Monitor className="w-3 h-3" /> Windows 10/11
-                </span>
-                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-[var(--radius-sm)] text-[11px] font-bold uppercase tracking-wider bg-emerald-50 text-emerald-700 dark:bg-emerald-500/15 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-500/30">
-                  <svg className="w-3 h-3" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                    <path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z" />
-                  </svg>
-                  KOOMPI / Linux
-                </span>
+          {/* ── BREADCRUMB BAR ── */}
+          <section className="hidden md:block border-b border-gray-200/80 dark:border-white/[0.06] bg-gray-50/80 dark:bg-gray-900/80 backdrop-blur-sm">
+            <div className="mx-auto max-w-7xl px-5 py-3">
+              <div className="flex items-center justify-between">
+                {/* Breadcrumb */}
+                <nav aria-label="Breadcrumb">
+                  <ol className="flex items-center gap-2 text-sm font-medium text-gray-500 dark:text-gray-400">
+                    <li>
+                      <Link href="/" className="hover:text-gray-900 dark:hover:text-white transition-colors">Home</Link>
+                    </li>
+                    <li aria-hidden="true">
+                      <ChevronRight className="w-3.5 h-3.5 text-gray-400 dark:text-gray-600" />
+                    </li>
+                    <li>
+                      <Link href="/#games-section" className="hover:text-gray-900 dark:hover:text-white transition-colors">Games</Link>
+                    </li>
+                    <li aria-hidden="true">
+                      <ChevronRight className="w-3.5 h-3.5 text-gray-400 dark:text-gray-600" />
+                    </li>
+                    <li className="text-gray-900 dark:text-white font-semibold" aria-current="page">
+                      {product.title}
+                    </li>
+                  </ol>
+                </nav>
+
                 {/* Share button */}
                 <button
                   onClick={handleShare}
                   id="game-detail-share-btn"
-                  className="ml-auto flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold border border-gray-200 dark:border-white/10 bg-white/80 dark:bg-white/5 text-gray-600 dark:text-gray-400 hover:border-teal-300 dark:hover:border-teal-500/40 hover:text-teal-700 dark:hover:text-teal-400 transition-all cursor-pointer"
+                  className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold border border-gray-200/80 dark:border-white/[0.08] bg-white dark:bg-white/[0.06] text-gray-500 dark:text-gray-400 hover:border-teal-400 dark:hover:border-teal-500/40 hover:text-teal-600 dark:hover:text-teal-400 transition-all cursor-pointer"
                   aria-label="Share this game"
                 >
                   <Share2 className="w-3.5 h-3.5" /> Share
@@ -512,41 +511,20 @@ export default function GameDetail() {
 
           {/* ── HERO BANNER ── */}
           <section className="mx-auto max-w-7xl px-5 pt-8 pb-0">
-            <nav aria-label="Breadcrumb" className="mb-4">
-              <ol className="flex items-center gap-2 text-sm font-medium text-gray-500 dark:text-gray-400">
-                <li>
-                  <Link href="/" className="hover:text-gray-900 dark:hover:text-white transition-colors">Home</Link>
-                </li>
-                <li aria-hidden="true">
-                  <ChevronRight className="w-3.5 h-3.5 text-gray-400 dark:text-gray-600" />
-                </li>
-                <li>
-                  <Link href="/#games-section" className="hover:text-gray-900 dark:hover:text-white transition-colors">Games</Link>
-                </li>
-                <li aria-hidden="true">
-                  <ChevronRight className="w-3.5 h-3.5 text-gray-400 dark:text-gray-600" />
-                </li>
-                <li className="text-gray-900 dark:text-white font-semibold" aria-current="page">
-                  {product.title}
-                </li>
-              </ol>
-            </nav>
 
             <div className="relative overflow-hidden rounded-[var(--radius-xl)] shadow-[var(--shadow-lg)]" style={{ minHeight: 420 }}>
               <div className="absolute inset-0">
                 <Image src={coverSrc} alt={`${product.title} promotional banner`} fill priority sizes="(max-width: 1280px) 100vw, 1280px" className="object-cover object-top" />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#f9fafb] via-[#f9fafb]/60 to-transparent dark:from-[#030712] dark:via-[#030712]/60 dark:to-transparent" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/35 to-black/5" />
-                <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/15 to-transparent dark:from-black/70 dark:via-black/20 dark:to-transparent" />
+                {/* Bottom-up dark fade for text legibility */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/5" />
+                {/* Left-to-right scrim for the text column */}
+                <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/20 to-transparent" />
               </div>
 
               <div className="relative z-10 px-8 pt-8 pb-10 flex flex-col h-full min-h-[420px]">
                 <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mt-auto">
                   <div className="flex-1 max-w-2xl">
-                    <div className="flex items-center gap-2 mb-3">
-                      <span className="text-lg" aria-hidden="true">{product.categoryIcon}</span>
-                      <span className="text-xs font-bold uppercase tracking-widest text-white/50">{product.category}</span>
-                    </div>
+
                     <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-white leading-tight">{product.title}</h1>
                     <p className="mt-3 text-base md:text-lg text-white/70 leading-relaxed max-w-xl">{product.subTitle}</p>
                     <div className="mt-4 flex items-center gap-4">
@@ -574,27 +552,7 @@ export default function GameDetail() {
             </div>
           </section>
 
-          {/* ── SOCIAL PROOF STATS BAR ── */}
-          <section className="mx-auto max-w-7xl px-5 mt-6">
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-              {[
-                { icon: <Users className="w-4 h-4 text-teal-500" />, value: product.plays, label: "Total Plays", color: "text-teal-600 dark:text-teal-400" },
-                { icon: <Star className="w-4 h-4 text-amber-500 fill-amber-400" />, value: `${product.rate.toFixed(1)} / 5`, label: "Player Rating", color: "text-amber-600 dark:text-amber-400" },
-                { icon: <Clock className="w-4 h-4 text-indigo-500" />, value: product.avgTime, label: "Avg. Session", color: "text-indigo-600 dark:text-indigo-400" },
-                { icon: <Trophy className="w-4 h-4 text-violet-500" />, value: "45+ countries", label: "Players worldwide", color: "text-violet-600 dark:text-violet-400" },
-              ].map((s, i) => (
-                <div key={i} className="flex items-center gap-3 rounded-2xl bg-white dark:bg-gray-900 border border-gray-200/70 dark:border-white/[0.07] px-4 py-3.5 shadow-[var(--shadow-sm)]">
-                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-gray-50 dark:bg-gray-800 ring-1 ring-gray-100 dark:ring-white/[0.06]">
-                    {s.icon}
-                  </div>
-                  <div>
-                    <p className={`text-base font-black ${s.color} leading-tight`}>{s.value}</p>
-                    <p className="text-[10px] font-medium text-gray-400 dark:text-gray-500">{s.label}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </section>
+
 
           {/* ── MAIN BODY ── */}
           <div className="mx-auto max-w-7xl px-5 py-10">
@@ -608,15 +566,7 @@ export default function GameDetail() {
                   <div className={`h-0.5 w-full ${accentBg}`} />
                   <div className="p-6 md:p-8">
                     <SectionHead accentBg={accentBg}>About This Game</SectionHead>
-                    <p className="text-base md:text-lg font-semibold text-gray-800 dark:text-gray-100 leading-snug mb-4">{product.subTitle}</p>
                     <p className="text-sm md:text-base text-gray-600 dark:text-gray-400 leading-relaxed mb-6">{product.description}</p>
-                    <p className="text-sm text-gray-500 dark:text-gray-500 leading-relaxed mb-8">
-                      Designed for learners of all ages, <strong className="text-gray-700 dark:text-gray-300">{product.title}</strong> is a{" "}
-                      <span className="font-medium">{product.difficulty.toLowerCase()}-difficulty</span> {product.category.toLowerCase()} game
-                      with an average session time of <span className="font-medium">{product.avgTime}</span>. With over{" "}
-                      <span className="font-medium">{product.plays} plays</span>, it has quickly become one of KOOMPI&apos;s
-                      most-loved educational tools — available for free both in-browser and as a native desktop app for Windows and Linux.
-                    </p>
 
                     {/* Learning objectives */}
                     <div className="rounded-[var(--radius)] bg-teal-50 dark:bg-teal-500/10 border border-teal-100 dark:border-teal-500/20 p-5">
@@ -650,28 +600,7 @@ export default function GameDetail() {
                       ))}
                     </div>
 
-                    {/* Progress encouragement bar */}
-                    <div className="mt-6 rounded-2xl bg-gradient-to-r from-teal-500 to-indigo-600 p-5 text-white">
-                      <div className="flex items-center gap-3 mb-3">
-                        <Zap className="w-5 h-5 text-yellow-300" />
-                        <p className="font-bold text-sm">Your skill growth trajectory</p>
-                      </div>
-                      <div className="space-y-2">
-                        {skills.slice(0, 2).map((skill, i) => (
-                          <div key={i} className="flex items-center gap-3">
-                            <span className="text-xs font-medium w-28 shrink-0 text-white/80">{skill.label}</span>
-                            <div className="flex-1 h-1.5 rounded-full bg-white/20">
-                              <div
-                                className="h-1.5 rounded-full bg-white"
-                                style={{ width: `${[72, 65][i]}%` }}
-                              />
-                            </div>
-                            <span className="text-xs font-bold text-white/90 w-8 shrink-0">{[72, 65][i]}%</span>
-                          </div>
-                        ))}
-                      </div>
-                      <p className="text-[11px] text-white/60 mt-3">Play more to unlock your full potential</p>
-                    </div>
+
                   </div>
                 </section>
 
@@ -701,15 +630,6 @@ export default function GameDetail() {
                         </div>
                       ))}
 
-                      <button onClick={() => router.push(`/play/${product.id}`)} id="gallery-play-browser-btn" className={`group relative aspect-video sm:col-span-2 mt-2 rounded-[var(--radius)] overflow-hidden bg-gray-900 dark:bg-gray-800 ring-1 ring-gray-200/60 dark:ring-white/[0.08] hover:ring-2 hover:ring-teal-500/50 transition-all duration-200 flex items-center justify-center`} aria-label="Play game in browser">
-                        <Image src={coverSrc} alt="" fill sizes="100vw" className="object-cover opacity-40 group-hover:opacity-50 transition-opacity duration-300" aria-hidden="true" />
-                        <div className="relative z-10 flex flex-col items-center gap-3">
-                          <div className={`w-14 h-14 rounded-full flex items-center justify-center shadow-xl group-hover:scale-110 transition-transform duration-300 ${brandBtnCls}`}>
-                            <Play className="w-7 h-7 fill-current" />
-                          </div>
-                          <span className="text-sm font-bold text-white">Play in Browser — Free</span>
-                        </div>
-                      </button>
                     </div>
                   </div>
                 </section>
@@ -744,14 +664,6 @@ export default function GameDetail() {
                       ))}
                     </div>
 
-                    {/* Aggregate trust signal */}
-                    <div className="mt-5 flex items-center gap-4 rounded-2xl bg-amber-50 dark:bg-amber-500/10 border border-amber-100 dark:border-amber-500/20 p-4">
-                      <div className="flex items-center gap-1">
-                        {[1, 2, 3, 4, 5].map(i => <Star key={i} className="w-4 h-4 text-amber-400 fill-amber-400" />)}
-                      </div>
-                      <p className="text-sm font-bold text-amber-800 dark:text-amber-300">{product.rate.toFixed(1)} average rating</p>
-                      <p className="text-xs text-amber-600 dark:text-amber-500 ml-auto font-medium">From {product.plays} players</p>
-                    </div>
                   </div>
                 </section>
 

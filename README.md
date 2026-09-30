@@ -1,4 +1,4 @@
-# KAPP — KOOMPI Game Learning Portal
+ce code a# KAPP — KOOMPI Game Learning Portal
 
 A **Next.js 16** interactive game-learning portal built by KOOMPI.
 Learners discover, filter, and launch educational games — all free, no account needed.

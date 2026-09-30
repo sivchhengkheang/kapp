@@ -29,13 +29,13 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const savedAvatar = typeof window !== "undefined" ? localStorage.getItem("kapp_avatar_id") : null;
     const savedGender = typeof window !== "undefined" ? localStorage.getItem("kapp_avatar_gender") as "male" | "female" | null : null;
 
-    setUser({
-      id: 'user-123',
-      username: 'Guest Player',
-      avatarId: savedAvatar !== null ? parseInt(savedAvatar, 10) : 0,
-      gender: savedGender ?? "male",
-    });
-    setToken('mock-jwt-token-xyz');
+    // setUser({
+    //   id: 'user-123',
+    //   username: 'Guest Player',
+    //   avatarId: savedAvatar !== null ? parseInt(savedAvatar, 10) : 0,
+    //   gender: savedGender ?? "male",
+    // });
+    // setToken('mock-jwt-token-xyz');
   }, []);
 
   const setAvatarId = (avatarId: number, gender?: "male" | "female") => {

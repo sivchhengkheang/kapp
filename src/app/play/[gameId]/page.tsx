@@ -6,12 +6,20 @@ import { PRODUCT_DATA } from "@/src/constants";
 import { AuthContext } from "@/src/context/AuthContext";
 import Image from "next/image";
 import NotFound from "../../not-found";
+import LoadingScreen from "@/src/components/LoadingScreen";
 
 /* ─── Icons ────────────────────────────────────────────────────────── */
 function IconArrowLeft({ className }: { className?: string }) {
   return (
     <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
       <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+    </svg>
+  );
+}
+function IconChevronLeft({ className }: { className?: string }) {
+  return (
+    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5} aria-hidden="true">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
     </svg>
   );
 }
@@ -51,30 +59,7 @@ function IconStar({ className, filled }: { className?: string; filled?: boolean 
   );
 }
 
-/* ─── Loading Screen ───────────────────────────────────────────────── */
-function LoadingScreen({ title, coverSrc }: { title: string; coverSrc: string }) {
-  return (
-    <div className="absolute inset-0 z-20 flex flex-col items-center justify-center bg-gray-950">
-      <div className="absolute inset-0 overflow-hidden">
-        <Image src={coverSrc} alt="" fill className="object-cover opacity-10 scale-110 blur-2xl" aria-hidden="true" sizes="100vw" />
-      </div>
-      <div className="relative z-10 flex flex-col items-center gap-6">
-        <div className="relative flex items-center justify-center">
-          <div className="w-16 h-16 rounded-full border-2 border-white/10" />
-          <div className="absolute w-16 h-16 rounded-full border-t-2 border-indigo-400 animate-spin" />
-          <div className="absolute w-10 h-10 rounded-full border-b-2 border-violet-400 animate-spin [animation-direction:reverse] [animation-duration:0.8s]" />
-        </div>
-        <div className="text-center">
-          <p className="text-xs font-bold uppercase tracking-[0.2em] text-indigo-400 mb-1">Loading Game</p>
-          <h1 className="text-xl font-black text-white">{title}</h1>
-        </div>
-        <div className="w-48 h-0.5 rounded-full bg-white/10 overflow-hidden">
-          <div className="h-full bg-gradient-to-r from-indigo-500 to-violet-500 animate-[progress_1.8s_ease-in-out_infinite]" />
-        </div>
-      </div>
-    </div>
-  );
-}
+
 
 /* ─── Panel data ───────────────────────────────────────────────────── */
 const PANEL_TABS = ["Info", "Controls", "Tips"] as const;
@@ -88,18 +73,18 @@ const CONTROLS_DEFAULT = [
 ];
 
 const TIPS_MAP: Record<string, string[]> = {
-  Coding:       ["Focus on accuracy before speed — mistakes cost more time.", "Practice daily for 10 min for the fastest WPM gains.", "Let your fingers learn patterns, not individual keys."],
-  Math:         ["Skip tough problems and return — time management wins.", "Round numbers mentally before calculating exactly.", "Daily 15-min sessions beat one long weekly grind."],
+  Coding: ["Focus on accuracy before speed — mistakes cost more time.", "Practice daily for 10 min for the fastest WPM gains.", "Let your fingers learn patterns, not individual keys."],
+  Math: ["Skip tough problems and return — time management wins.", "Round numbers mentally before calculating exactly.", "Daily 15-min sessions beat one long weekly grind."],
   "Mouse Skills": ["Keep your wrist relaxed — tension hurts precision.", "Use your whole arm for large movements, wrist for fine.", "Slow down first; speed comes naturally with accuracy."],
-  Logic:        ["Plan 2–3 moves ahead before committing.", "Work backwards from the goal state.", "Pause and breathe when stuck — fresh eyes see more."],
-  Puzzle:       ["Start from the corners and edges.", "Look for patterns, not just pieces.", "Use process of elimination ruthlessly."],
-  Typing:       ["Don't look at the keyboard — trust muscle memory.", "Keep a consistent rhythm rather than bursting.", "Short daily sessions beat long infrequent ones."],
+  Logic: ["Plan 2–3 moves ahead before committing.", "Work backwards from the goal state.", "Pause and breathe when stuck — fresh eyes see more."],
+  Puzzle: ["Start from the corners and edges.", "Look for patterns, not just pieces.", "Use process of elimination ruthlessly."],
+  Typing: ["Don't look at the keyboard — trust muscle memory.", "Keep a consistent rhythm rather than bursting.", "Short daily sessions beat long infrequent ones."],
 };
 
 const DIFF_BADGE: Record<string, string> = {
-  Easy:   "text-teal-400 bg-teal-500/15 border-teal-500/30",
+  Easy: "text-teal-400 bg-teal-500/15 border-teal-500/30",
   Medium: "text-amber-400 bg-amber-500/15 border-amber-500/30",
-  Hard:   "text-rose-400 bg-rose-500/15 border-rose-500/30",
+  Hard: "text-rose-400 bg-rose-500/15 border-rose-500/30",
 };
 
 /* ─── Star Row ─────────────────────────────────────────────────────── */
@@ -162,11 +147,10 @@ function InfoPanel({
           <button
             key={tab}
             onClick={() => setActiveTab(tab)}
-            className={`flex-1 py-1.5 rounded-lg text-[11px] font-bold transition-all duration-200 ${
-              activeTab === tab
-                ? "bg-indigo-500/25 text-indigo-300 border border-indigo-500/40"
-                : "text-white/35 hover:text-white/65 border border-transparent hover:border-white/10"
-            }`}
+            className={`flex-1 py-1.5 rounded-lg text-[11px] font-bold transition-all duration-200 ${activeTab === tab
+              ? "bg-indigo-500/25 text-indigo-300 border border-indigo-500/40"
+              : "text-white/35 hover:text-white/65 border border-transparent hover:border-white/10"
+              }`}
           >
             {tab}
           </button>
@@ -364,7 +348,7 @@ export default function PlayPage() {
   return (
     <div
       ref={containerRef}
-      className="relative w-full h-screen bg-gray-950 overflow-hidden flex flex-col"
+      className="relative w-full h-screen bg-gray-50 dark:bg-gray-950 overflow-hidden flex flex-col"
       onMouseMove={showHud}
     >
       {/* Loading */}
@@ -381,81 +365,15 @@ export default function PlayPage() {
            Desktop  → pinned top-center  (slides up on hide)
            Mobile   → pinned bottom-center (slides down on hide, thumb-friendly)
       ──────────────────────────────────────────────────────────────────── */}
-      <div
-        aria-label="Game controls"
-        className={`
-          absolute left-1/2 -translate-x-1/2 z-30
-          flex items-center gap-1.5 px-1.5 py-1.5
-          rounded-2xl
-          bg-[rgba(3,7,18,0.75)] backdrop-blur-2xl
-          border border-white/[0.09]
-          shadow-[0_8px_32px_rgba(0,0,0,0.55),inset_0_1px_0_rgba(255,255,255,0.06)]
-          transition-all duration-400 ease-[cubic-bezier(0.4,0,0.2,1)]
-          bottom-5 sm:bottom-auto sm:top-4
-          ${hudVisible
-            ? "opacity-100 translate-y-0"
-            : "opacity-0 pointer-events-none translate-y-4 sm:translate-y-0 sm:-translate-y-4"
-          }
-        `}
+      {/* Back Button */}
+      <button
+        id="exit-game-btn"
+        onClick={() => { showHud(); handleExit(); }}
+        className={`absolute left-4 top-4 z-30 group flex items-center justify-center w-11 h-11 rounded-full bg-white/80 dark:bg-white/[0.08] backdrop-blur-md hover:bg-white dark:hover:bg-white/[0.15] border-[1.5px] border-gray-300/80 dark:border-white/40 hover:border-gray-400 dark:hover:border-white/60 text-slate-800 dark:text-white/90 hover:text-slate-950 dark:hover:text-white shadow-md shadow-black/10 dark:shadow-lg transition-all duration-400 ease-[cubic-bezier(0.4,0,0.2,1)] hover:scale-105 active:scale-95 ${hudVisible ? "opacity-100 translate-y-0" : "opacity-0 pointer-events-none -translate-y-4"}`}
+        aria-label="Exit game"
       >
-        {/* Back */}
-        <button
-          id="exit-game-btn"
-          onClick={() => { showHud(); handleExit(); }}
-          className="group flex items-center gap-1.5 pl-2.5 pr-3 py-1.5 rounded-xl bg-white/[0.06] hover:bg-white/[0.13] border border-white/[0.09] hover:border-white/[0.22] text-white/75 hover:text-white text-xs font-semibold transition-all duration-200 hover:scale-[1.04] active:scale-[0.96]"
-          aria-label="Exit game"
-        >
-          <IconArrowLeft className="w-3.5 h-3.5 transition-transform duration-200 group-hover:-translate-x-0.5 shrink-0" />
-          <span className="hidden sm:inline leading-none">Back</span>
-        </button>
-
-        {/* Divider */}
-        <div className="w-px h-4 bg-white/[0.08]" />
-
-        {/* Game identity — desktop only */}
-        <div className="hidden sm:flex items-center gap-2 px-2.5 py-1 rounded-xl">
-          <span className="text-base leading-none">{product.categoryIcon}</span>
-          <span className="text-[11px] font-bold text-white/65 max-w-[100px] truncate leading-none">{product.title}</span>
-        </div>
-
-        {/* Live dot */}
-        <div className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-emerald-500/[0.12] border border-emerald-500/20">
-          <span className="relative flex h-1.5 w-1.5" aria-hidden="true">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-70" />
-            <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500" />
-          </span>
-          <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-400 hidden sm:block leading-none">Live</span>
-        </div>
-
-        {/* Divider */}
-        <div className="w-px h-4 bg-white/[0.08]" />
-
-        {/* Info toggle */}
-        <button
-          id="panel-toggle-btn"
-          onClick={() => { showHud(); setPanelOpen((v) => !v); }}
-          className={`flex h-8 w-8 items-center justify-center rounded-xl border transition-all duration-200 hover:scale-105 active:scale-95 ${
-            panelOpen
-              ? "bg-indigo-500/25 border-indigo-400/45 text-indigo-300"
-              : "bg-white/[0.06] border-white/[0.09] hover:bg-white/[0.13] hover:border-white/[0.22] text-white/60 hover:text-white"
-          }`}
-          aria-label="Toggle game info"
-          title="Game info"
-        >
-          <IconInfo className="w-4 h-4" />
-        </button>
-
-        {/* Fullscreen */}
-        <button
-          id="fullscreen-toggle-btn"
-          onClick={() => { showHud(); toggleFullscreen(); }}
-          className="flex h-8 w-8 items-center justify-center rounded-xl bg-white/[0.06] hover:bg-white/[0.13] border border-white/[0.09] hover:border-white/[0.22] text-white/60 hover:text-white transition-all duration-200 hover:scale-105 active:scale-95"
-          aria-label={isFullscreen ? "Exit fullscreen" : "Enter fullscreen"}
-          title={isFullscreen ? "Exit fullscreen" : "Enter fullscreen"}
-        >
-          {isFullscreen ? <IconMinimize className="w-4 h-4" /> : <IconMaximize className="w-4 h-4" />}
-        </button>
-      </div>
+        <IconChevronLeft className="w-5 h-5 transition-transform duration-200 group-hover:-translate-x-0.5 shrink-0 text-slate-800 dark:text-white" />
+      </button>
 
       {/* Game iframe */}
       <iframe

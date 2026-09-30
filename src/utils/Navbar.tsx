@@ -10,10 +10,12 @@ import { Avatar, AvatarPicker, AVATARS } from "./Avatar";
 
 /* ── Nav link definition ── */
 const NAV_LINKS = [
-  { label: "Home", href: "/", id: "nav-home" },
-  { label: "Start Learning", href: "/#games-section", id: "nav-browse" },
-  { label: "How It Works", href: "/about", id: "nav-how" },
-  // { label: "Leaderboard", href: "/leaderboard", id: "nav-leaderboard" },
+  // { label: "Home",         href: "/",               id: "nav-home"        },
+  { label: "Games",        href: "/#games-section", id: "nav-browse"      },
+  { label: "About",        href: "/about",          id: "nav-how"         },
+  { label: "Leaderboard",  href: "/leaderboard",    id: "nav-leaderboard" },
+  { label: "Privacy",      href: "/privacy",        id: "nav-privacy"     },
+  { label: "Terms",        href: "/terms",          id: "nav-terms"       },
 ] as const;
 
 /* ── Logo mark SVG / Favicon ── */
@@ -57,8 +59,17 @@ export default function Navbar() {
   const [isDark, setIsDark] = useState(false);
   const [activeHash, setActiveHash] = useState("");
   const [isAvatarPickerOpen, setIsAvatarPickerOpen] = useState(false);
+  const [navSearch, setNavSearch] = useState("");
+  const [navSearchFocused, setNavSearchFocused] = useState(false);
   const pathname = usePathname();
   const mobileMenuRef = useRef<HTMLDivElement>(null);
+
+  /* Broadcast search query to the game library via a custom event */
+  const handleNavSearch = (q: string) => {
+    window.dispatchEvent(new CustomEvent("navbar-search", { detail: { query: q } }));
+    const el = document.getElementById("games-section");
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
 
   const { user, setAvatarId } = useContext(AuthContext);
 
@@ -252,8 +263,94 @@ export default function Navbar() {
             ))}
           </nav>
 
-          {/* ── RIGHT ACTIONS (desktop) ── */}
+          {/* ── RIGHT ACTIONS (desktop): Search · Dark Mode · User ── */}
           <div className="hidden md:flex items-center gap-2.5">
+            {/* Search */}
+            <div className="relative w-72">
+              {/* Gradient glow ring */}
+              <div
+                className={`absolute -inset-[1.5px] rounded-2xl pointer-events-none transition-all duration-300 ${navSearchFocused ? "opacity-100" : "opacity-0"}`}
+                style={{ background: "linear-gradient(135deg, #14b8a6, #6366f1)" }}
+              />
+              <div className="relative w-full">
+                <svg
+                  className={`absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 pointer-events-none transition-all duration-200 ${navSearchFocused ? "text-teal-500 scale-110" : "text-gray-400 dark:text-gray-500"}`}
+                  fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.2}
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                </svg>
+                <input
+                  id="navbar-search"
+                  type="text"
+                  placeholder="Search games..."
+                  value={navSearch}
+                  onChange={(e) => { setNavSearch(e.target.value); handleNavSearch(e.target.value); }}
+                  onFocus={() => setNavSearchFocused(true)}
+                  onBlur={() => setTimeout(() => setNavSearchFocused(false), 150)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") handleNavSearch(navSearch);
+                    if (e.key === "Escape") { setNavSearch(""); handleNavSearch(""); (e.target as HTMLInputElement).blur(); }
+                  }}
+                  className={`w-full rounded-2xl border bg-white dark:bg-gray-900 pl-10 pr-9 py-2.5 text-sm outline-none transition-all duration-200 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 ${
+                    navSearchFocused
+                      ? "border-transparent shadow-[0_0_0_2px_#14b8a6,0_4px_20px_rgba(20,184,166,0.15)]"
+                      : "border-gray-200 dark:border-gray-700/80 shadow-sm hover:border-gray-300 dark:hover:border-gray-600"
+                  }`}
+                />
+                {navSearch ? (
+                  <button
+                    onClick={() => { setNavSearch(""); handleNavSearch(""); }}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-gray-500 dark:text-gray-300 hover:bg-teal-100 dark:hover:bg-teal-500/20 hover:text-teal-600 dark:hover:text-teal-400 transition-all cursor-pointer"
+                    aria-label="Clear search"
+                    onMouseDown={(e) => e.preventDefault()}
+                  >
+                    <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
+                    </svg>
+                  </button>
+                ) : !navSearchFocused ? (
+                  <kbd className="absolute right-3 top-1/2 -translate-y-1/2 inline-flex items-center px-1.5 py-0.5 rounded-md border border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-gray-800 text-[9px] font-mono text-gray-400 dark:text-gray-500 select-none">/</kbd>
+                ) : null}
+                {/* Suggestions dropdown */}
+                {navSearchFocused && navSearch.length > 0 && (
+                  <div className="absolute top-full right-0 mt-2 w-full z-[60] bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-white/[0.08] shadow-2xl overflow-hidden">
+                    <div className="flex items-center justify-between px-3.5 pt-3 pb-2">
+                      <p className="text-[10px] font-bold uppercase tracking-widest text-gray-400 dark:text-gray-500">Results</p>
+                      <span className="text-[10px] font-semibold text-teal-600 dark:text-teal-400 bg-teal-50 dark:bg-teal-500/10 px-1.5 py-0.5 rounded-md">Press ↵</span>
+                    </div>
+                    {["Typing", "Math", "Logic", "Coding", "Mouse", "Puzzle"]
+                      .filter(s => s.toLowerCase().includes(navSearch.toLowerCase()))
+                      .slice(0, 5)
+                      .map((s) => (
+                        <button
+                          key={s}
+                          onMouseDown={() => { setNavSearch(s); handleNavSearch(s); }}
+                          className="flex items-center gap-3 w-full px-3.5 py-2.5 text-sm text-gray-700 dark:text-gray-200 hover:bg-teal-50 dark:hover:bg-teal-500/10 hover:text-teal-700 dark:hover:text-teal-400 transition-colors text-left cursor-pointer group/item"
+                        >
+                          <span className="flex w-7 h-7 items-center justify-center rounded-xl bg-gray-100 dark:bg-gray-800 group-hover/item:bg-teal-100 dark:group-hover/item:bg-teal-500/20 transition-colors shrink-0">
+                            <svg className="w-3.5 h-3.5 text-gray-400 group-hover/item:text-teal-500 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                              <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                            </svg>
+                          </span>
+                          <span className="font-medium">{s}</span>
+                          <svg className="w-3.5 h-3.5 ml-auto text-gray-300 dark:text-gray-600 group-hover/item:text-teal-400 transition-colors shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="m9 18 6-6-6-6" />
+                          </svg>
+                        </button>
+                      ))}
+                    {["Typing", "Math", "Logic", "Coding", "Mouse", "Puzzle"].filter(s => s.toLowerCase().includes(navSearch.toLowerCase())).length === 0 && (
+                      <div className="px-3.5 py-4 text-sm text-gray-400 dark:text-gray-500 text-center">
+                        No suggestions for <span className="font-semibold text-gray-600 dark:text-gray-300">&ldquo;{navSearch}&rdquo;</span>
+                      </div>
+                    )}
+                    <div className="border-t border-gray-100 dark:border-white/[0.06] px-3.5 py-2 flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-teal-500 animate-pulse shrink-0" />
+                      <span className="text-[10px] text-gray-400 dark:text-gray-500">Filtering games live</span>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
             {/* Dark Mode Toggle */}
             <button
               onClick={toggleDarkMode}
@@ -311,48 +408,7 @@ export default function Navbar() {
                   </div>
                 )}
               </div>
-            ) : (
-              <>
-                {/* Sign In — soft outline */}
-                <button
-                  id="nav-signin-btn"
-                  onClick={() => openAuth("signin")}
-                  className={`
-                    flex items-center gap-1.5 rounded-xl border px-4 py-2.5 min-h-[44px]
-                    text-sm font-semibold transition-all duration-200
-                    hover:scale-[1.02] active:scale-[0.97]
-                    ${isSolid
-                      ? "border-gray-200 bg-transparent text-gray-700 hover:border-indigo-300 hover:text-indigo-600 hover:bg-indigo-50/50 dark:border-white/10 dark:text-gray-300 dark:hover:border-indigo-500/50 dark:hover:text-indigo-400 dark:hover:bg-indigo-500/10"
-                      : "border-gray-300 bg-white/50 text-gray-700 hover:bg-white hover:text-indigo-600 dark:border-white/25 dark:bg-white/8 dark:text-white/90 backdrop-blur-sm dark:hover:bg-white/15 dark:hover:border-white/40"
-                    }
-                  `}
-                >
-                  Sign In
-                </button>
-
-                {/* Create Account — filled */}
-                <button
-                  id="nav-signup-btn"
-                  onClick={() => openAuth("signup")}
-                  className="
-                    group relative overflow-hidden flex items-center gap-1.5
-                    rounded-xl bg-primary px-4 py-2.5 min-h-[44px]
-                    text-sm font-bold text-white
-                    transition-all duration-200
-                    hover:bg-primary-400 hover:scale-[1.02] active:scale-[0.97]
-                    shadow-[0_2px_8px_rgba(99,102,241,0.25)]
-                    hover:shadow-[0_4px_16px_rgba(99,102,241,0.4)]
-                  "
-                >
-                  {/* Shimmer */}
-                  <span
-                    className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-500 group-hover:translate-x-full"
-                    aria-hidden="true"
-                  />
-                  <span className="relative z-10">Create Account</span>
-                </button>
-              </>
-            )}
+            ) : null}
           </div>
 
           {/* ── MOBILE HAMBURGER ── */}
@@ -425,6 +481,28 @@ export default function Navbar() {
           </button>
         </div>
 
+        {/* Mobile search */}
+        <div className="px-4 pt-3 pb-1">
+          <div className="relative">
+            <svg
+              className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 dark:text-gray-500 pointer-events-none"
+              fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+            </svg>
+            <input
+              type="text"
+              placeholder="Search games..."
+              value={navSearch}
+              onChange={(e) => { setNavSearch(e.target.value); handleNavSearch(e.target.value); }}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") { handleNavSearch(navSearch); setIsMobileOpen(false); }
+              }}
+              className="w-full rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 pl-10 pr-4 py-2.5 text-sm outline-none focus:border-teal-500 focus:ring-2 focus:ring-teal-500/20 transition-all dark:text-white placeholder:text-gray-400"
+            />
+          </div>
+        </div>
+
         {/* Nav links */}
         <nav
           aria-label="Mobile navigation"
@@ -463,7 +541,7 @@ export default function Navbar() {
               <span className={`flex h-7 w-7 items-center justify-center rounded-lg text-base
                 ${isActive(href) ? "bg-indigo-100 dark:bg-indigo-500/20" : "bg-gray-100 dark:bg-white/[0.07]"}
               `}>
-                {["🏠", "🎮", "💡", "🏆"][NAV_LINKS.findIndex(l => l.id === id)]}
+                {["🎮", "💡", "🏆", "🔒", "📄"][NAV_LINKS.findIndex(l => l.id === id)]}
               </span>
               {label}
               {isActive(href) && (
@@ -527,47 +605,7 @@ export default function Navbar() {
                 You've played <strong className="text-gray-900 dark:text-white font-bold">4 games</strong> this week. Keep it up!
               </p>
             </div>
-          ) : (
-            <>
-              {/* Mobile CTA buttons */}
-              <button
-                id="mobile-signin-btn"
-                onClick={() => openAuth("signin")}
-                className="
-                  flex w-full items-center justify-center gap-2 rounded-xl
-                  border border-gray-200 dark:border-white/10
-                  bg-white dark:bg-white/5
-                  px-4 py-3 text-sm font-semibold
-                  text-gray-700 dark:text-gray-300
-                  hover:border-indigo-200 hover:text-indigo-600
-                  dark:hover:border-indigo-500/40 dark:hover:text-indigo-400
-                  transition-all duration-200
-                "
-              >
-                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15M12 9l-3 3m0 0 3 3m-3-3h12.75" />
-                </svg>
-                Sign In
-              </button>
-
-              <button
-                id="mobile-signup-btn"
-                onClick={() => openAuth("signup")}
-                className="
-                  mt-2 flex w-full items-center justify-center gap-2 rounded-xl
-                  bg-primary px-4 py-3 text-sm font-bold text-white
-                  hover:bg-primary-400 active:scale-[0.98]
-                  shadow-[0_2px_8px_rgba(99,102,241,0.25)]
-                  transition-all duration-200
-                "
-              >
-                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                </svg>
-                Create Account
-              </button>
-            </>
-          )}
+          ) : null}
         </nav>
 
         {/* Panel footer */}

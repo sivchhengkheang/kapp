@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 import { RippleButton } from "./RippleButton";
 
 /* Target release: 90 days from a fixed anchor date */
-const RELEASE_DATE = new Date("2026-09-30T00:00:00+07:00");
-const LAUNCH_DATE_LABEL = "September 30, 2026";
+const RELEASE_DATE = new Date("2027-01-01T00:00:00+07:00");
+const LAUNCH_DATE_LABEL = "January 1, 2027";
 
 /* Progress: days elapsed / total days of development window */
 const DEV_START = new Date("2026-04-01T00:00:00+07:00");
@@ -14,7 +14,7 @@ const TOTAL_DAYS = Math.round(
 );
 
 function useCountdown(target: Date) {
-  const [time, setTime] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+  const [time, setTime] = useState<{ days: number; hours: number; minutes: number; seconds: number } | null>(null);
 
   useEffect(() => {
     const calc = () => {
@@ -27,6 +27,7 @@ function useCountdown(target: Date) {
       };
     };
 
+    // Set immediately on mount (client-only) to avoid SSR zero-flash
     setTime(calc());
     const id = setInterval(() => setTime(calc()), 1_000);
     return () => clearInterval(id);
@@ -60,7 +61,7 @@ const UPCOMING_FEATURES = [
 ];
 
 export default function ComingSoonSection() {
-  const { days, hours, minutes, seconds } = useCountdown(RELEASE_DATE);
+  const countdown = useCountdown(RELEASE_DATE);
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -112,7 +113,7 @@ export default function ComingSoonSection() {
           >
             🚀 Multiplayer Battles{" "}
             <span className="bg-gradient-to-r from-violet-400 to-indigo-400 bg-clip-text text-transparent">
-              Coming July 2026
+              Coming {LAUNCH_DATE_LABEL}
             </span>
           </h2>
           <p className="text-base sm:text-lg leading-relaxed text-gray-600 dark:text-gray-400">
@@ -122,14 +123,31 @@ export default function ComingSoonSection() {
         </div>
 
         {/* ── Countdown ── */}
-        <div className="flex items-start gap-3 sm:gap-5">
-          <TimeBlock value={days} label="Days" />
-          <span className="mt-4 sm:mt-5 text-2xl font-black text-gray-300 dark:text-white/30">:</span>
-          <TimeBlock value={hours} label="Hours" />
-          <span className="mt-4 sm:mt-5 text-2xl font-black text-gray-300 dark:text-white/30">:</span>
-          <TimeBlock value={minutes} label="Minutes" />
-          <span className="mt-4 sm:mt-5 text-2xl font-black text-gray-300 dark:text-white/30">:</span>
-          <TimeBlock value={seconds} label="Seconds" />
+        <div className="flex items-start gap-3 sm:gap-5" aria-live="polite" aria-label="Countdown to launch">
+          {countdown === null ? (
+            /* Skeleton while waiting for client hydration */
+            Array.from({ length: 4 }).map((_, i) => (
+              <div key={i} className="flex flex-col items-center gap-2">
+                <div className="h-16 w-16 sm:h-20 sm:w-20 rounded-2xl bg-white/40 dark:bg-white/[0.06] animate-pulse" />
+                <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-gray-300 dark:text-white/20">—</span>
+              </div>
+            ))
+          ) : countdown.days === 0 && countdown.hours === 0 && countdown.minutes === 0 && countdown.seconds === 0 ? (
+            <div className="flex items-center gap-3 rounded-2xl bg-violet-500/15 border border-violet-400/25 px-6 py-4">
+              <span className="text-2xl">🎉</span>
+              <p className="text-sm font-bold text-violet-300">Launch day is here! Stay tuned.</p>
+            </div>
+          ) : (
+            <>
+              <TimeBlock value={countdown.days} label="Days" />
+              <span className="mt-4 sm:mt-5 text-2xl font-black text-gray-300 dark:text-white/30">:</span>
+              <TimeBlock value={countdown.hours} label="Hours" />
+              <span className="mt-4 sm:mt-5 text-2xl font-black text-gray-300 dark:text-white/30">:</span>
+              <TimeBlock value={countdown.minutes} label="Minutes" />
+              <span className="mt-4 sm:mt-5 text-2xl font-black text-gray-300 dark:text-white/30">:</span>
+              <TimeBlock value={countdown.seconds} label="Seconds" />
+            </>
+          )}
         </div>
 
         {/* ── Progress bar ── */}
